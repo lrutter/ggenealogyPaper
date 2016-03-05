@@ -111,10 +111,9 @@ In addition, popular graph drawing software such as \proglang{GraphViz} and \pro
     \label{fig:Graph}
 \end{figure}
 
+\section{Soybean Genealogy Dataset}
 
-\section{Demonstration Dataset}
-
-The available data used in the current demonstration of the software is a data frame structure that contains 412 rows, each representing a direct parent-child relationship between a pair of soybean varieties. In total, there are 230 unique soybean varieties present. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the developmental years, as well as the copy number variants, single nucleotide polymorphisms, protein content, and yield, of each of the soybeans.
+The \proglang{ggenealogy} package comes with two example datasets, one comprises a soybean genealogy and the other comprises an academic statistician genealogy. We will introduce both example datasets in this paper to demonstrate some of the tools available in the software. We start with the soybean genealogy, which is available in a data frame structure with 412 rows, each representing a direct parent-child relationship between a pair of soybean varieties. In total, there are 230 unique soybean varieties in the dataset. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the developmental years, as well as the copy number variants, single nucleotide polymorphisms, protein content, and yield, of each of the soybeans.
 
 In this context, the software could ideally be used by bioinformaticians, geneticists, and agronomists who wish to study how soybean varieties are related. By referencing the visualization of the genealogical tree, these scientists may better understand genetic testing results - in this particular dataset, in terms of copy number variants, single nucleotide polymorphisms, protein content, and yield - and use that knowledge in future breeding sessions.
 
@@ -362,6 +361,36 @@ Here we generate a distance matrix for a set of 10 varieties, setting the x-labe
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that 10 may be a comparatively large degree in this same dataset.
 
+\section{Academic Genealogy of Statisticians Dataset}
+
+In addition to the soybean genealogy, the \proglang{ggenealogy} package also comes with an academic genealogy of statisticians. To develop this later dataset, we contacted the Mathematics Genealogy Project, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}, \citealt{sql}).
+
+Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in statistics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). This process resulted in 8995 entries, which we further reduced by only retaining those entries that contained an advisor who was also in the field ``Statistics". For each of the remaining 3293 entries, we only maintained 6 of the variables. This process resulted in the second example dataset provided in the \proglang{ggenealogy} package
+
+
+This later example dataset is available in a data frame structure that contains 3293 rows, each which corresponds to a parent-child relationship, where the child is an individual who received a graduate-level academic degree in statistics. The parent is the advisor 
+
+
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> data(statGeneal)
+R> dim(statGeneal)
+\end{CodeInput}
+\begin{CodeOutput}
+[1] 3293    6
+\end{CodeOutput}
+\begin{CodeInput}
+R> colnames(statGeneal)
+\end{CodeInput}
+\begin{CodeOutput}
+[1] "child"   "parent"  "year"    "country" "school"  "thesis"
+\end{CodeOutput}
+\end{CodeChunk}
+
+which is available in a data frame structure with 412 rows, each representing a direct parent-child relationship between a pair of soybean varieties. In total, there are 230 unique soybean varieties in the dataset. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the developmental years, as well as the copy number variants, single nucleotide polymorphisms, protein content, and yield, of each of the soybeans.
+
+
 \section{Conclusions}
 
 The \pkg{ggenealogy} package offers various plotting tools that can assist those studying genealogical lineages in the data exploration phases, as well as in preparing publication-suitable images. As each plot comes with its pros and cons, we recommended for users to explore several visualization tools. If users are simultaneously using similar packages, we in particular recommend using the \code{plotAncDes()} function. This plot allows users to view generation counts of a variety of interest in a manner that is not as readily available in similar software packages (\citealt{ape}).
@@ -370,8 +399,15 @@ The \pkg{ggenealogy} package offers various plotting tools that can assist those
 
 Incorporation of the Shiny application (\citealt{shiny}) would allow users to examine \pkg{ggenealogy} tools in a more interactive way. The reactive programming would save them the time of using command-line for each change of input as well as the inefficiency of rerunning code. We also look forward to testing this package on additional genealogical data sets (\citealt{mgp}). Exploring several datasets with our software will allow us to fix remaining bugs, and provide us further insight into how to make our tools available for a flexible set of data inputs.
 
+\begin{figure}%[h]
+    \centering
+    \includegraphics[width=\textwidth]{dCox.png}
+    \caption{plot7}
+    \label{fig:dCox}
+\end{figure}
+
 \section*{Acknowledgments} % Lindsay added
 
-\bibliography{foo}
+\bibliography{article}
 
 \end{document}
