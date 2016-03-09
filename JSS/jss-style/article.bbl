@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{13}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -45,6 +45,14 @@ Hymowitz T, Newell C, Carmer S (1977).
 \bibitem[{Mathematics Genealogy Project()}]{mgp}
 Mathematics Genealogy Project (2016).
 \newblock \urlprefix\url{http://www.genealogy.math.ndsu.nodak.edu}.
+
+\bibitem[{PostgreSQL({\natexlab{a}})}]{psql}
+PostgreSQL (2016{\natexlab{a}}).
+\newblock \urlprefix\url{http://www.postgresql.org/}.
+
+\bibitem[{PostgreSQL({\natexlab{b}})}]{sql}
+PostgreSQL (2016{\natexlab{b}}).
+\newblock \urlprefix\url{http://www.postgresql.org/}.
 
 \bibitem[{RStudio(2014)}]{shiny}
 RStudio I (2014).
