@@ -1,4 +1,4 @@
-\begin{thebibliography}{11}
+\begin{thebibliography}{13}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -46,6 +46,10 @@ Hymowitz T, Newell C, Carmer S (1977).
 Mathematics Genealogy Project (2016).
 \newblock \urlprefix\url{http://www.genealogy.math.ndsu.nodak.edu}.
 
+\bibitem[{PostgreSQL()}]{psql}
+PostgreSQL (2016).
+\newblock \urlprefix\url{http://www.postgresql.org/}.
+
 \bibitem[{RStudio(2014)}]{shiny}
 RStudio I (2014).
 \newblock \emph{\pkg{shiny}: State Linked Micromap Plots}.
@@ -78,5 +82,11 @@ Wickham H (2009).
 \newblock \emph{\pkg{ggplot2}: Elegant Graphics for Data Analysis}.
 \newblock Springer-Verlag, New York, NY.
 \newblock \urlprefix\url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[{Wickham and Francois(2015)}]{dplyr}
+Wickham H, Francois R (2015).
+\newblock \emph{dplyr: A Grammar of Data Manipulation}.
+\newblock R package version 0.4.3,
+  \urlprefix\url{https://CRAN.R-project.org/package=dplyr}.
 
 \end{thebibliography}
