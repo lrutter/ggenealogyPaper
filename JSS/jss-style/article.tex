@@ -123,13 +123,13 @@ In addition, popular graph drawing software such as \proglang{GraphViz} and \pro
 
 \section{Example Datasets}
 
-The \proglang{ggenealogy} package comes with two example datasets, one comprises a soybean genealogy and the other comprises an academic statistician genealogy. We will introduce both example datasets in this paper to demonstrate some of the tools available in the software. We start with the soybean genealogy, which is available in a data frame structure with 412 rows, each representing a direct parent-child relationship between a pair of soybean varieties. In total, there are 230 unique soybean varieties in the dataset. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the developmental years, as well as the copy number variants, single nucleotide polymorphisms, protein content, and yield, of each of the soybeans.
+The \proglang{ggenealogy} package comes with two example datasets, one comprises a soybean genealogy and the other comprises an academic statistician genealogy. We will introduce both example datasets in this paper to demonstrate some of the tools available in the software.
 
-In this context, the software could ideally be used by bioinformaticians, geneticists, and agronomists who wish to study how soybean varieties are related. By referencing the visualization of the genealogical tree, these scientists may better understand genetic testing results - in this particular dataset, in terms of copy number variants, single nucleotide polymorphisms, protein content, and yield - and use that knowledge in future breeding sessions.
+\subsection{Soybean Genealogy}
 
-\section{Generating a Graphical Object}
+We start with the soybean genealogy, which is available as a data frame structure with 412 rows, each representing a direct parent-child relationship between a pair of soybean varieties. In total, there are 230 unique soybean varieties in the dataset. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the developmental years, copy number variants, single nucleotide polymorphisms, and protein content and yield for each of the soybeans.
 
-Most functions in the software package require an input parameter of a graph structure. Therefore, as a preprocessing step, we must first convert our original data frame structure into a graph structure. Below, we read in the \proglang{R} data file \code{sbGeneal} that is included in the package as a sample data set of soybean genealogy.
+In this context, the software could ideally be used by agronomists who wish to study how soybean varieties are related. By referencing the visualization of the genealogical structure, these scientists may better understand genetic testing results - in this particular dataset, in terms of copy number variants, single nucleotide polymorphisms, and protein content and yield - and use that knowledge in future breeding sessions.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -146,6 +146,35 @@ R> str(sbGeneal)
  $ parent      : chr  "Hutcheson" "Dunfield" NA "A.K." ...
 \end{CodeOutput}
 \end{CodeChunk}
+
+\subsection{Academic Genealogy of Statisticians}
+
+In addition to the soybean genealogy, the \proglang{ggenealogy} package also comes with an academic genealogy of statisticians. To develop this later dataset, we contacted the Mathematics Genealogy Project, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
+
+Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in mathematics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). Furthermore, we only retained entries that had an advisor if that advisor was also in the field of ``Statistics". This process resulted in 8995 entries, which we reduced to 8166 entries by removing duplicate entries. With the final data frame of 8995 entries, we only maintained 6 of the original 26 variables.
+
+This process resulted in the second example dataset provided in the \proglang{ggenealogy} package. This dataset is structured as a data frame that contains 8166 rows, each of which corresponds to a parent-child relationship, where both the child and the parent received postbaccalaureate degrees in statistics, and the parent was the academic advisor to the child. The columns of the dataset provide information about the year the child obtained the degree, the country and school from which the child obtained the degree, and the thesis title of the degree awarded to the child.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> data(statGeneal)
+R> dim(statGeneal)
+\end{CodeInput}
+\begin{CodeOutput}
+[1] 8166    6
+\end{CodeOutput}
+\begin{CodeInput}
+R> colnames(statGeneal)
+\end{CodeInput}
+\begin{CodeOutput}
+[1] "child"   "parent"  "year"    "country" "school"  "thesis"
+\end{CodeOutput}
+\end{CodeChunk}
+
+\section{Generating a Graphical Object}
+
+Most functions in the software package require an input parameter of a graph structure. Therefore, as a preprocessing step, we must first convert our original data frame structure into a graph structure. Below, we read in the \proglang{R} data file \code{sbGeneal} that is included in the package as a sample data set of soybean genealogy.
+
 
 We now convert it into an \pkg{igraph} object (\citealt{igraph}) \code{sbIG} using the function \code{dfToIG()}.
 
@@ -372,27 +401,7 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
 
 \section{Academic Genealogy of Statisticians}
 
-In addition to the soybean genealogy, the \proglang{ggenealogy} package also comes with an academic genealogy of statisticians. To develop this later dataset, we contacted the Mathematics Genealogy Project, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
 
-Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in statistics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). Furthermore, we only retained those entries that, if they contained an advisor, then that advisor was also in the field ``Statistics". This process resulted in 8995 entries, which we reduced to 8166 entries by removing duplicate entries. With the final data frame of 8995 entries, we only maintained 6 of the variables.
-
-This process resulted in the second example dataset provided in the \proglang{ggenealogy} package. This dataset is structured as a data frame that contains 8166 rows, each of which corresponds to a parent-child relationship, where both the child and the parent received postbaccalaureate degrees in statistics, and the parent was the academic advisor to the child. The columns of the dataset provide information about the year the child obtained the degree, the country and school from which the child obtained the degree, and the thesis title of the degree awarded to the child.
-
-\begin{CodeChunk}
-\begin{CodeInput}
-R> data(statGeneal)
-R> dim(statGeneal)
-\end{CodeInput}
-\begin{CodeOutput}
-[1] 8166    6
-\end{CodeOutput}
-\begin{CodeInput}
-R> colnames(statGeneal)
-\end{CodeInput}
-\begin{CodeOutput}
-[1] "child"   "parent"  "year"    "country" "school"  "thesis"
-\end{CodeOutput}
-\end{CodeChunk}
 
 %\section{Plotting Ancestors and Descendants by Generation}
 
