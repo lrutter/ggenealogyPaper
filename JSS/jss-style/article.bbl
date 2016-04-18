@@ -1,4 +1,4 @@
-\begin{thebibliography}{12}
+\begin{thebibliography}{13}
 \newcommand{\enquote}[1]{``#1''}
 \providecommand{\natexlab}[1]{#1}
 \providecommand{\url}[1]{\texttt{#1}}
@@ -63,6 +63,14 @@ Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, Amin N,
 \newblock \enquote{Cytoscape: a software environment for integrated models of
   biomolecular interaction networks.}
 \newblock \emph{Genome Research}, \textbf{13}(11), 2498--2504.
+
+\bibitem[{Sievert \emph{et~al.}(2016)Sievert, Parmer, Hocking, Chamberlain,
+  Ram, Corvellec, and Despouy}]{plotly}
+Sievert C, Parmer C, Hocking T, Chamberlain S, Ram K, Corvellec M, Despouy P
+  (2016).
+\newblock \emph{plotly: Create Interactive Web Graphics via 'plotly.js'}.
+\newblock R package version 3.4.13,
+  \urlprefix\url{https://CRAN.R-project.org/package=plotly}.
 
 \bibitem[{Therneau \emph{et~al.}(2015)Therneau, Daniel, Sinnwell, and
   Atkinson}]{kin}

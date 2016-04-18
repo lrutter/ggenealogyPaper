@@ -19,7 +19,7 @@
 
 %% an abstract and keywords
 \Abstract{
-  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The software package is currently available on the Comprehensive R Archive Network.}
+  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The software package is currently available on the Comprehensive \proglang{R} Archive Network.}
 
 \Keywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, \proglang{R}}
 \Plainkeywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, R} %% without formatting
@@ -141,6 +141,7 @@ We can load the example dataset of soybean genealogy (\code{sbGeneal}) and exami
 
 \begin{CodeChunk}
 \begin{CodeInput}
+R> install.packages("ggenealogy")
 R> library("ggenealogy")
 R> data(sbGeneal)
 R> str(sbGeneal)
@@ -454,13 +455,13 @@ We see from Figure \ref{fig:dCox} that Sir David Cox had 42 children, many of th
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> length(getChild("Peter Bloomfield", geneal))
+R> length(getChild("Peter Bloomfield", statGeneal))
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 26
 \end{CodeOutput}
 \begin{CodeInput}
-R> nrow(getDescendants("Peter Bloomfield", geneal, gen = 100))
+R> nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 49
@@ -517,7 +518,8 @@ The text labels are so numerous in Figure \ref{fig:plotCBText} that simply tryin
 \begin{CodeInput}
 R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = 4,
   pathNodeSize = 4, nodeLabel=FALSE) + ggplot2::theme(axis.text = ggplot2::
-  element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
+  element_text(size = 12), axis.title = ggplot2::element_text(size = 12)) + 
+  ggplot2::xlab(1850, 2025)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -528,7 +530,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = 4,
     \label{fig:plotCBNoText}
 \end{figure}
 
-In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of statistics degree acquisitions.
+In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of statistics degree acquisitions. This figure is interactive with the use of Plotly (\citealt{plotly}).
 
 \section{Future Avenues}
 
@@ -539,8 +541,6 @@ The \pkg{ggenealogy} visualization tool \code{plotPathOnAll()} is suitable as a 
 \section{Conclusions}
 
 The \pkg{ggenealogy} package offers various plotting tools that can assist those studying genealogical lineages in the data exploration phases, as well as in preparing publication-suitable images. As each plot comes with its pros and cons, we recommended for users to explore several visualization tools. If users are simultaneously using similar packages, we in particular recommend using the \code{plotAncDes()} function. This plot allows users to view generation counts of a variety of interest in a manner that is not as readily available in similar software packages.
-
-
 
 \section*{Acknowledgments}
 
