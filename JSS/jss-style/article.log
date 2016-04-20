@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 APR 2016 12:49
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 APR 2016 14:34
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -573,16 +573,7 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 12 []
  []
 
-[12] <degMatrix.png, id=208, 349.305pt x 289.08pt>
-File: degMatrix.png Graphic file (type png)
- <use degMatrix.png>
-Package pdftex.def Info: degMatrix.png used on input line 399.
-(pdftex.def)             Requested size: 221.32687pt x 183.16676pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-
+[12]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 13
  []
@@ -592,10 +583,13 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.407 
-       <./Lee.png>]
-Underfull \vbox (badness 1472) has occurred while \output is active []
+l.393 \end{Code}
+                 <./Lee.png>] <degMatrix.png, id=215, 349.305pt x 289.08pt>
+File: degMatrix.png Graphic file (type png)
 
+<use degMatrix.png>
+Package pdftex.def Info: degMatrix.png used on input line 399.
+(pdftex.def)             Requested size: 221.32687pt x 183.16676pt.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 14 []
@@ -606,22 +600,17 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.418 >R indVec <- indVec[which(indVec != "", )]
-                                                 <./degMatrix.png>]
-<dCox.png, id=229, 779.91376pt x 1187.43625pt>
+l.413 
+       <./degMatrix.png>] <dCox.png, id=230, 779.91376pt x 1187.43625pt>
 File: dCox.png Graphic file (type png)
- <use dCox.png>
+
+<use dCox.png>
 Package pdftex.def Info: dCox.png used on input line 449.
 (pdftex.def)             Requested size: 442.65375pt x 673.9467pt.
 
 
 LaTeX Warning: Float too large for page by 76.67067pt on input line 452.
 
-<pathCB.png, id=231, 607.26875pt x 422.57875pt>
-File: pathCB.png Graphic file (type png)
- <use pathCB.png>
-Package pdftex.def Info: pathCB.png used on input line 486.
-(pdftex.def)             Requested size: 442.65375pt x 308.035pt.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 15
@@ -637,8 +626,14 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.490 
-       <./dCox.png>]
+l.472 
+       <./dCox.png>] <pathCB.png, id=242, 607.26875pt x 422.57875pt>
+File: pathCB.png Graphic file (type png)
+
+<use pathCB.png>
+Package pdftex.def Info: pathCB.png used on input line 486.
+(pdftex.def)             Requested size: 442.65375pt x 308.035pt.
+
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 17
  []
@@ -648,8 +643,8 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.494 
-       <./pathCB.png>] <plotCBText.png, id=253, 691.58376pt x 405.515pt>
+l.492 
+       <./pathCB.png>] <plotCBText.png, id=254, 691.58376pt x 405.515pt>
 File: plotCBText.png Graphic file (type png)
 
 <use plotCBText.png>
@@ -665,8 +660,8 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.516 
-       <./plotCBText.png>] <plotCBNoText.png, id=263, 691.58376pt x 405.515pt>
+l.514 
+       <./plotCBText.png>] <plotCBNoText.png, id=264, 691.58376pt x 405.515pt>
 File: plotCBNoText.png Graphic file (type png)
 
 <use plotCBNoText.png>
@@ -682,22 +677,17 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.538 
-       <./plotCBNoText.png>] (./article.bbl
+l.534 
+       <./plotCBNoText.png>]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 20 []
  []
 
-[20]
+[20] (./article.bbl
 LaTeX Font Info:    Font shape `T1/aer/b/it' in size <10.95> not available
 (Font)              Font shape `T1/aer/bx/it' tried instead on input line 49.
 )
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
+Underfull \hbox (badness 10000) in paragraph at lines 553--553
 
  []
 
@@ -707,35 +697,40 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [21]
-Underfull \hbox (badness 10000) in paragraph at lines 551--551
+Underfull \hbox (badness 10000) in paragraph at lines 553--553
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 553--553
 
  []
 
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 551.
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 551.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 553.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 553.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 22 []
  []
 
 [22]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 551.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 553.
  (./article.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 551.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 551.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 553.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 553.
 Package rerunfilecheck Info: File `article.out' has not changed.
 (rerunfilecheck)             Checksum: 9DD5E4E2937144B533F72B0FD07A1A9F;1291.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 551.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 553.
  ) 
 Here is how much of TeX's memory you used:
- 7061 strings out of 493089
- 103952 string characters out of 6134842
- 190052 words of memory out of 5000000
- 10320 multiletter control sequences out of 15000+600000
+ 7057 strings out of 493089
+ 103899 string characters out of 6134842
+ 188949 words of memory out of 5000000
+ 10317 multiletter control sequences out of 15000+600000
  57646 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 36i,9n,34p,1177b,473s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 36i,9n,34p,1177b,465s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
 }{/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/local/te
 xlive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmb10.pfb></usr/local/texl
@@ -753,10 +748,10 @@ e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
 /2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
 2015/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/20
 15/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on article.pdf (22 pages, 1351840 bytes).
+Output written on article.pdf (22 pages, 1351240 bytes).
 PDF statistics:
- 390 PDF objects out of 1000 (max. 8388607)
- 325 compressed objects within 4 object streams
- 75 named destinations out of 1000 (max. 500000)
+ 388 PDF objects out of 1000 (max. 8388607)
+ 323 compressed objects within 4 object streams
+ 74 named destinations out of 1000 (max. 500000)
  173 words of extra memory for PDF output out of 10000 (max. 10000000)
 
