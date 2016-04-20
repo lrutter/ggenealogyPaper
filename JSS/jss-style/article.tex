@@ -63,11 +63,11 @@
   URL: \url{https://github.com/dicook/}\\
 
   Michelle Graham\\
-  USDA-Agriculture Research Service, Corn, Insects and Crop Genetics Research Unit\\
+  USDA-Agriculture Research Service, Corn Insects and Crop Genetics Research Unit\\
   Department of Agronomy, Iowa State University\\
-  1575 Agronomy Building\\
+  1565 Agronomy Building\\
   Ames, IA, 50011, United States of America\\
-  E-mail: \email{magraham@iastate.edu}
+  E-mail: \email{michelle.graham@ars.usda.gov}
 }
 
 %% It is also possible to add a telephone and fax number
@@ -94,7 +94,7 @@ Genealogy is the study of parent-child relationships. By tracing through parent-
 
 Genealogical structures can also serve as informative tools outside of a strict biological sense. For instance, we can trace mentoring relationships between students and dissertation supervisors with the use of academic genealogies. This can allow us to understand the position of one member in the larger historical picture of academia, and to accurately preserve past relationships for the knowledge of future generations. Similarly, linguistic genealogies can be used to decipher the historical changes of vocabulary and grammatical features across related languages. In short, there is a diverse array of disciplines that can elicit useful information about features of interest by using genealogical data.
 
-In all these examples, the genealogical relationships can be represented visually. Access to various types of plotting tools can allow scientists and others to more efficiently and accurately explore features of interest across the genealogy. We introduce here a developing visualization toolkit that is intended to assist users in their exploration and analysis of genealogical structures. In this paper, we will demonstrate the main tools of this software package \pkg{ggenealogy} using two example genealogical datasets, one of soybean cultivars (\citealt{soybean}) and the other of academic mathematicians (\citealt{mgp}).
+In all these examples, the genealogical relationships can be represented visually. Access to various types of plotting tools can allow scientists and others to more efficiently and accurately explore features of interest across the genealogy. We introduce here a developing visualization toolkit that is intended to assist users in their exploration and analysis of genealogical structures. In this paper, we demonstrate the main tools of the software package \pkg{ggenealogy} using two example genealogical datasets, one of soybean cultivars (\citealt{soybean}) and the other of academic mathematicians (\citealt{mgp}).
 
 \section{Available Software}
 
@@ -102,9 +102,9 @@ Publishing in the open source \proglang{R} statistical programming language allo
 
 The \proglang{R} package \proglang{pedigree} is named after the standardized chart used to study human family lines, and sometimes used to select breeding of animals, such as show dogs (\citealt{ped}). This package does provide tools that perform methods on parent-child datasets, such as rapidly determining the generation count for each member in the pedigree. However, it does not provide any visualization tools.
 
-Another \proglang{R} package called \proglang{kinship2} does produce basic pedigree charts (\citealt{kin}). In Figure \ref{fig:kinshipFig}, we provide an example pedigree chart from the \proglang{kinship2} package vignette. This pedigree chart adheres to the standard set of symbols used for visualizing genealogical structures: Males are represented with squares and females with circles. Parents are connected to each other by horizontal lines, and to their children by vertical lines. Siblings are connected by horizontal sibship lines. Even though this standard pedigree chart creates powerful charts that can be applied across many applications, it cannot provide unequivocal information in situations where inter-generational cross-breeding occurs, as is often the case in agronomical genealogical lineages.
+Another \proglang{R} package called \proglang{kinship2} does produce basic pedigree charts (\citealt{kin}). In Figure \ref{fig:kinshipFig}, we provide an example pedigree chart from the \proglang{kinship2} package vignette. This pedigree chart adheres to the standard set of symbols used for visualizing genealogical structures: Males are represented with squares and females with circles. Parents are connected to each other by horizontal lines, and to their children by vertical lines. Siblings are connected by horizontal sibship lines. Even though this standard pedigree chart creates powerful charts that can be applied across many applications, it cannot provide unequivocal information in situations where inter-generational breeding occurs, as is often the case in agronomic genealogical lineages.
 
-We demonstrate how the standardized pedigree charts in the \proglang{kinship2} package generate ambiguous results in such scenarios by superimposing a hypothetical inter-generational cross-breeding case in Figure \ref{fig:kinshipFig}. In that figure, each generation is defined by its position on the vertical axis, with the first generation containing individuals 201 and 202. We superimposed green-highlighted individual 215 onto the pedigree chart for explanatory purposes. Its parents are individuals 201 and 206, which are from generations one and two, respectively, and have a parent-child relationship between themselves. As an offspring of a parent-child relationship, individual 215 is both a second and third generation individual. Hence, individual 215 should be displayed in both second and third generational positions on the vertical axis. However, standard pedigree tools only allow for an individual to be displayed once. As a result, in special cases where inter-generational cross-breading occurs, such as in agronomical applications, standardized tools for visualizing genealogical information cannot non-ambiguously portray the genealogical dataset.
+We demonstrate how the standardized pedigree charts in the \proglang{kinship2} package generate ambiguous results in such scenarios by superimposing a hypothetical inter-generational breeding case in Figure \ref{fig:kinshipFig}. In that figure, each generation is defined by its position on the vertical axis, with the first generation containing individuals 201 and 202. We superimposed green-highlighted individual 215 onto the pedigree chart for explanatory purposes. Its parents are individuals 201 and 206, which are from generations one and two, respectively, and have a parent-child relationship between themselves. As an offspring of a parent-child relationship, individual 215 is both a second and third generation individual. Hence, individual 215 should be displayed in both second and third generational positions on the vertical axis. However, standard pedigree tools only allow for an individual to be displayed once. As a result, in special cases where inter-generational breading occurs, such as in agronomic applications, standardized tools for visualizing genealogical information ambiguously portray the genealogical dataset.
 
 \begin{figure}[H]
     \centering
@@ -113,7 +113,7 @@ We demonstrate how the standardized pedigree charts in the \proglang{kinship2} p
     \label{fig:kinshipFig}
 \end{figure}
 
-In addition, popular graph drawing software such as \proglang{GraphViz} and \proglang{Cytoscape} can be used to visualize genealogical structures (\citealt{graphvizCit}, \citealt{cytoscapeCit}). Graphs are defined as objects with sets of nodes and edges, where sets indicate that their comprised elements cannot be repeated. In other words, graphical structures do not allow for repeated nodes, and hence, as is the case with the aforementioned \proglang{R} packages, these popular graph plotting software cannot precisely portray the genealogical dataset in cases of inter-generational cross-breeding.
+In addition, popular graph drawing software such as \proglang{GraphViz} and \proglang{Cytoscape} can be used to visualize genealogical structures (\citealt{graphvizCit}, \citealt{cytoscapeCit}). Graphs are defined as objects with sets of nodes and edges, where sets indicate that their comprised elements cannot be repeated. In other words, graphical structures do not allow for repeated nodes, and hence, as is the case with the aforementioned \proglang{R} packages, these popular graph plotting software cannot precisely portray the genealogical dataset in cases of inter-generational breeding.
 
 We again illustrate this problem in Figure \ref{fig:Graph} with an example genealogy using popular graph drawing software like \proglang{GraphViz} and \proglang{Cytoscape}. Here, generation count is denoted by the vertical axis. As was shown in Figure \ref{fig:kinshipFig}, here too we superimpose a green node that has parents from two different generations. This green node is both a second and third generation individual, and should be displayed in both corresponding generation positions on the vertical axis. However, standard graph visualization tools only allow for a given node to be displayed once. As a result, this green node must be ambiguously positioned in either the second or third generation position; in the figure, it is denoted as a third generation individual. In Section \ref{remedy}, we will demonstrate \pkg{ggenealogy} plots that can remedy these problems.
 
@@ -131,11 +131,11 @@ The \pkg{ggenealogy} package comes with two example datasets, one comprises a so
 
 \subsection{Soybean Genealogy}
 
-We start with the soybean genealogy, which is available as a data frame structure with 390 rows and five columns. Each row contains information about a particular child soybean variety, including the name of the child, its protein yield, the year it was developed, whether or not its developmental year was imputed, and the name of its parent. Excepting the column that indicates the name of the child, the other four columns can have missing values (NA). As a result, while each row does contain information about a particular child soybean variety, whether or not a given row also contains information about a parent-child relationship between a pair of soybeans depends on whether or not the parent column has a missing value.
+We start with the soybean genealogy, which is available as a data frame structure with 390 rows and five columns. These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They contain information on the copy number variants, single nucleotide polymorphisms, and protein content for each of the varieties, although we removed that information for a succinct example dataset. In this context, the software could ideally be used by agronomists who wish to study how soybean varieties are related. By referencing the visualization of the genealogical structure, these scientists may better understand genetic testing results - in this particular dataset, in terms of copy number variants, single nucleotide polymorphisms, protein content, and yield - and use that knowledge in future breeding decisions.
+
+Each row contains information about a particular child soybean variety, including the name of the child, its yield, the year it was released, whether or not its release year was imputed, and the name of its parent. While the name of the child is required, the other four columns can have missing values (which are represented in \proglang{R} with the symbol NA for ``not available"). As a result, while each row does contain information about a particular child soybean variety, whether or not a given row also contains information about a parent-child relationship between a pair of soybeans depends on whether or not the parent column has a missing value.
 
 In total, there are 230 soybean varieties in the dataset, 206 of which are children and 165 of which are parents. There are soybeans that are both children and parents. Of the children, 156 have two parents, 28 have one parent, and 22 have zero parents. There are 340 parent-child relationships in the dataset.
-
-These data were collected from field trials, genetic studies, and United States Department of Agriculture (USDA) bulletins, and date as early as the first decade of the 1900s. They also contain information on the copy number variants, single nucleotide polymorphisms, and protein content for each of the soybeans, although we removed that information for a succinct example dataset. In this context, the software could ideally be used by agronomists who wish to study how soybean varieties are related. By referencing the visualization of the genealogical structure, these scientists may better understand genetic testing results - in this particular dataset, in terms of copy number variants, single nucleotide polymorphisms, and protein content and yield - and use that knowledge in future breeding sessions.
 
 We can load the example dataset of soybean genealogy (\code{sbGeneal}) and examine its structure. 
 
@@ -158,13 +158,13 @@ R> str(sbGeneal)
 
 \subsection{Academic Genealogy of Statisticians}
 
-The \pkg{ggenealogy} package also comes with an academic genealogy of statisticians; this dataset is in the form of a data frame with 8165 rows and six columns. Each row contains information about a particular child who received a graduate-level academic degree in statistics, including the name of the child, the year the child obtained the degree, the country and school from which the child obtained the degree, the thesis title of the degree awarded to the child, and the name of its parent. There are no missing values for the country and school from which the child received its degree or the name of the child; however, some of the years contain missing values (NA), and some of the parent and thesis names contain empty strings (``"). As a result, while each row does contain information about a particular child, whether or not a row also contains information about a parent-child relationship between a pair of academic statisticians depends on whether or not the parent column has an empty string.
+The \pkg{ggenealogy} package also comes with an academic genealogy of statisticians; this dataset is in the form of a data frame with 8165 rows and six columns. To develop this later dataset, we contacted the \citealt{mgp}, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
+
+Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in mathematics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). Furthermore, we only retained entries that had a parent if that parent was also in the field of ``Statistics". Hence, in our parent-child relationships, both the child and the parent received postbaccalaureate degrees in statistics, and the parent was the academic advisor to the child. This process resulted in 8995 entries, which we reduced to 8165 entries by removing duplicate entries. With the final data frame of 8165 entries, we only maintained six of the original 26 variables. 
+
+Each row of the final data frame contains information about a particular child who received a graduate-level academic degree in statistics, including the name of the child, the year the child obtained the degree, the country and school from which the child obtained the degree, the thesis title of the degree awarded to the child, and the name of its parent. There are no missing values for the country and school from which the child received its degree or the name of the child; however, some of the years contain missing values (NA), and some of the parent and thesis names contain empty strings (``"). As a result, while each row does contain information about a particular child, whether or not a row also contains information about a parent-child relationship between a pair of academic statisticians depends on whether or not the parent column has an empty string.
  
 In total, there are 7122 individuals in the dataset, 7122 of which are children and 872 of which are parents. Every parent is also a child, but not every child is also a parent. Of the children, two have four parents, ten have three parents, 226 have two parents, 2801 have one parent, and 4083 have no parents. There are 3291 parent-child relationships in the dataset.
-
-To develop this later dataset, we contacted the \citealt{mgp}, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
-
-Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in mathematics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). Furthermore, we only retained entries that had a parent if that parent was also in the field of ``Statistics". Hence, in our parent-child relationships, both the child and the parent received postbaccalaureate degrees in statistics, and the parent was the academic advisor to the child. This process resulted in 8995 entries, which we reduced to 8165 entries by removing duplicate entries. With the final data frame of 8165 entries, we only maintained 6 of the original 26 variables. 
 
 We can load the example dataset of academic genealogy of statisticians (\code{statGeneal}) and examine its structure. 
 
@@ -249,7 +249,7 @@ $logN
 
 \section{Plotting a Shortest Path}
 
-With soybean lineages, it may be useful for agronomists to track how two varieties are related to each other via parent-child relationships. Then, any dramatic changes in protein yield and other measures of interest between the two varieties can be traced across their genetic timeline. The \pkg{ggenealogy} package allows users to select two varieties of interest, and determine the shortest pathway of parent-child relationships between them, using the \code{getPath()} function. This will return a list that contains the variety names and their years in the path.
+With soybean lineages, it may be useful for soybean breeders to track how two varieties are related to each other via parent-child relationships. Then, any dramatic changes in yield and other measures of interest between the two varieties can be traced across their genetic timeline. The \pkg{ggenealogy} package allows users to select two varieties of interest, and determine the shortest pathway of parent-child relationships between them, using the \code{getPath()} function. This will return a list that contains the variety names and their years in the path.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -278,9 +278,9 @@ R> plotPath(pathTN)
     \label{fig:pathTNZB}
 \end{figure}
 
-This produces a visual that informs users of all the varieties involved in the shortest path between the two varieties of interest (see left half of Figure \ref{fig:pathTNZB}). In this plot, the years of all varieties involved in the path are indicated on the horizontal axis, while the vertical axis has no meaning other than to simply to display the labels evenly spaced vertically. The shortest path between varieties \code{Tokyo} and \code{Narow} is composed of a unidirectional series of parent-child relationships, with \code{Tokyo} as the starting ancestor in the early 1900s, \code{Narow} as the most recent descendent in the mid 1980s, and three varieties in between.
+This produces a visual that informs users of all the varieties involved in the shortest path between the two varieties of interest (see left half of Figure \ref{fig:pathTNZB}). In this plot, the release year of all varieties involved in the path are indicated on the horizontal axis, while the vertical axis has no meaning other than to simply to display the labels evenly spaced vertically. The shortest path between varieties \code{Tokyo} and \code{Narow} is composed of a unidirectional series of parent-child relationships, with \code{Tokyo} as the starting ancestor in the early 1900s, \code{Narow} as the most recent descendent in the mid 1980s, and three varieties in between.
 
-Next, we can run the same set of functions on a different pair of varieties. First, a call to the \pkg{ggenealogy} function \code{getYear()} indicates that variety \code{Bedford} was developed in 1978 and variety \code{Zane} in 1985.
+Next, we can run the same set of functions on a different pair of varieties. First, a call to the \pkg{ggenealogy} function \code{getYear()} indicates that variety \code{Bedford} was released in 1978 and variety \code{Zane} in 1985.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -304,9 +304,9 @@ R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal)
 R> plotPath(pathBZ)
 \end{Code}
 
-The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was developed in the mid 1940s.
+The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
 
-Furthermore, as determined by the figure, for both \code{Zane} and \code{Bedford}, there are four varieties of unidirectional parent-child relationships between each of them and their common ancestor \code{D55-4090}. Hence, any feature of interest that differentiates \code{Zane} and \code{Bedford} (protein yield, disease resistance, etc.) can also be examined across these two separate lineage histories.
+Furthermore, as determined by the figure, for both \code{Zane} and \code{Bedford}, there are four varieties of unidirectional parent-child relationships between each of them and their common ancestor \code{D55-4090}. Hence, any feature of interest that differentiates \code{Zane} and \code{Bedford} (protein content, yield, disease resistance, etc.) can also be examined across these two separate lineage histories.
 
 \section{Superimposing Shortest Path on Tree}
 
@@ -327,15 +327,15 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:3, pathEdgeCol = "red",
     \label{fig:plotTNBin3}
 \end{figure}
 
-In the code above, syntax from the \pkg{ggplot2} package was appended to the \code{plotPathOnAll()} function; this can be done for most \pkg{ggenealogy} functions (\citealt{ggplot2}). While the first three explicit parameters have been introduced earlier in this paper, the fourth parameter (\code{binVector}) requires some explanation. The motivation of the \code{plotPathOnAll()} function is to write node labels on a plot, with the center of each node label constricted on the horizontal axis to its quantitative variable of interest (in this case, developmental year). As is the case for the plots before, the vertical axis has no meaning other than providing a plotting area in which to draw the node labels. Unfortunately, for large datasets, this motivation can be a difficult task because the text labels of the varieties can overlap if they are assigned a similar y coordinate, have a similar year (x coordinate), and have long text labels (width of x coordinate).
+In the code above, syntax from the \pkg{ggplot2} package was appended to the \code{plotPathOnAll()} function; this can be done for most \pkg{ggenealogy} functions (\citealt{ggplot2}). While the first three explicit parameters have been introduced earlier in this paper, the fourth parameter (\code{binVector}) requires some explanation. The motivation of the \code{plotPathOnAll()} function is to write node labels on a plot, with the center of each node label constricted on the horizontal axis to its quantitative variable of interest (in this case, year of release). As is the case for the plots before, the vertical axis has no meaning other than providing a plotting area in which to draw the node labels. Unfortunately, for large datasets, this motivation can be a difficult task because the text labels of the varieties can overlap if they are assigned a similar y coordinate, have a similar year (x coordinate), and have long text labels (width of x coordinate).
 
 For each variety, the x coordinate (year) and width of the x coordinate (text label width) cannot be altered, as they provide useful information. However, for each variety, the y coordinate is arbitrary. Hence, in an attempt to mitigate text overlapping, the \code{plotPathOnAll()} function does not randomly assign the y coordinate. Instead, it allows users to partially control the y coordinates with a user-determined number of bins (\code{binVector}).
 
-If the user decides to produce a plot using three bins, as in the example code above, then the varieties are all grouped into three bins based on their year values. In other words, there will be bin 1 (the ``oldest bin") which includes the one-third of varieties with the oldest developmental years, bin 2 (the ``middle bin"), and bin 3 (the ``youngest bin"). Then, in order to decrease text overlap, the consecutively increasing y-axis coordinates are alternatively assigned to the three bins (For example: bin 1, bin 2, bin 3, bin 1, bin 2, bin 3, ...) repeatedly until all varieties are addressed. This algorithm means that for any pair of varieties within a given bin, there are exactly two other varieties vertically separating them.
+If the user decides to produce a plot using three bins, as in the example code above, then the varieties are all grouped into three bins based on their year values. In other words, there will be bin 1 (the ``oldest bin") which includes the one-third of varieties with the oldest years of release, bin 2 (the ``middle bin"), and bin 3 (the ``youngest bin"). Then, in order to decrease text overlap, the consecutively increasing y-axis coordinates are alternatively assigned to the three bins (For example: bin 1, bin 2, bin 3, bin 1, bin 2, bin 3, ...) repeatedly until all varieties are addressed. This algorithm means that for any pair of varieties within a given bin, there are exactly two other varieties vertically separating them.
 
 In the code above, \code{binVector} was assigned a value of 3, and \code{pathEdgeCol} was assigned a value of ``red". Additionally, we specified a size of 2.5 for the non-path node test using the \code{nodeSize} parameter, and a size of 4 for the path node text using the \code{pathNodeSize} parameter. There are several other parameters in the \code{plotPathOnAll()} function, which can be read in more detail using the help command.
 
-This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not on the path of interest are thin and gray by default, whereas edges on the path of interest are bolded by default. We also see that variety labels in the path of interest are boldfaced by default. Figure \ref{fig:plotTNBin3} presents useful information: We immediately gather that the path of interest does span most of the years of the data structure. In fact, \code{Tokyo} appears to be the oldest variety in the dataset, and \code{Narow} appears to be one of the youngest varieties. We can also determine that the majority of varieties appear to have development years between 1950 and 1970.
+This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not on the path of interest are thin and gray by default, whereas edges on the path of interest are bolded by default. We also see that variety labels in the path of interest are boldfaced by default. Figure \ref{fig:plotTNBin3} presents useful information: We immediately gather that the path of interest does span most of the years of the data structure. In fact, \code{Tokyo} appears to be the oldest variety in the dataset, and \code{Narow} appears to be one of the youngest varieties. We can also determine that the majority of varieties were released between 1950 and 1970.
 
 However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the noticeably distinct bins, whereas almost all text labels are overlapping, thereby decreasing their readability. To force text labels into these spaces, the user may consider using a larger number of bins. Hence, we next examine a bin size of 6 to create Figure \ref{fig:plotTNBin6}.
 
@@ -351,7 +351,7 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:6, pathEdgeCol =
     \label{fig:plotTNBin6}
 \end{figure}
 
-We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We can also confirm what we saw in the previous plot that indeed most varieties have development years between 1950 and 1970, and any textual overlap is confined to this range of years.
+We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We can also confirm what we saw in the previous plot that indeed most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
 
 \section{Plotting Ancestors and Descendants by Generation}
 \label{remedy}
@@ -373,7 +373,7 @@ The right side of Figure \ref{fig:Lee} is not an output plot of \pkg{ggenealogy}
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{Lee}
-    \caption{Left: All ancestors and descendants of the variety Lee are shown in this ggenealogy plot. Right: We now attempt to mimic the blue paths in the ggenealogy plot on the left, only now nodes cannot be repeated. The parenthetical numbers above each node represents the set of generation counts that node is away from the center node Lee. The presence of red parentheses indicate that the plot on the right cannot unambiguously display the example soybean genealogy in the way that the ggenealogy plot on the left can accomplish.}
+    \caption{Left: All ancestors and descendants of the variety Lee are shown in this ggenealogy plot. Right: We now attempt to mimic the blue paths in the ggenealogy plot on the left, only now nodes cannot be repeated. The parenthetical numbers above each node represents the set of generation counts that node is away from the center node Lee. The presence of red parentheses indicate that the plot on the right ambiguously display the example soybean genealogy in the way that the ggenealogy plot on the left can accomplish.}
     \label{fig:Lee}
 \end{figure}
 
@@ -403,13 +403,13 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
 
 \section{Academic Genealogy of Statisticians}
 
-The \pkg{ggenealogy} package comes with two example datasets, and while we have introduced the agronomical genealogy, we have yet to introduce the academic genealogy. As was demonstrated in Section \ref{exData}, every parent in the academic genealogy is also a child, and some children in the academic genealogy have more than two parents. Neither of these features was the case in the agronomical genealogy. Additionally, the academic genealogy is much larger than the agronomical genealogy. Some of these differences may affect how one would approach \pkg{ggenealogy} plotting tools. For this reason, we will now demonstrate some of the \pkg{ggenealogy} plotting tools we already introduced, only now applied to the academic genealogy. 
+The \pkg{ggenealogy} package comes with two example datasets, and while we have introduced the plant breeding genealogy, we have yet to introduce the academic genealogy. As was demonstrated in Section \ref{exData}, every parent in the academic genealogy is also a child, and some children in the academic genealogy have more than two parents. Neither of these features was the case in the plant breeding genealogy. Additionally, the academic genealogy is much larger than the plant breeding genealogy. Some of these differences may affect how one would approach \pkg{ggenealogy} plotting tools. For this reason, we will now demonstrate some of the \pkg{ggenealogy} plotting tools we already introduced, only now applied to the academic genealogy. 
 
-The ability to plot ancestors and descendants by generation was demonstrated using the agronomical genealogy in Figure \ref{fig:Lee}. As we believe this is the most novel plotting tool in the \pkg{ggenealogy} package, we will test it again here using the academic genealogy.
+The ability to plot ancestors and descendants by generation was demonstrated using the plant breeding genealogy in Figure \ref{fig:Lee}. As we believe this is the most novel plotting tool in the \pkg{ggenealogy} package, we will test it again here using the academic genealogy.
 
-We need to choose a central individual of interest in order to create this plot. Perhaps we can use the academic statistician in the dataset that has the largest number of descendants. To determine the name of this individual, below we use the \pkg{ggenealogy} function \code{getNode()} to create a vector \code{indVec} that contains the names of all individuals in the dataset. We then use the \pkg{dplyr} package to apply the \pkg{ggenealogy} function \code{getDescendants()} on each individual in the \code{indVec} vector (\citealt{dplyr}). We set the parameter \code{gen} to a conservatively large value of 100 as this dataset is unlikely to have any individuals with more than 100 generations of descendants.
+We need to choose a central individual of interest in order to create this plot. Perhaps we can use the academic statistician in the dataset that has the largest number of ``descendants". To determine the name of this individual, below we use the \pkg{ggenealogy} function \code{getNode()} to create a vector \code{indVec} that contains the names of all individuals in the dataset. We then use the \pkg{dplyr} package to apply the \pkg{ggenealogy} function \code{getDescendants()} on each individual in the \code{indVec} vector (\citealt{dplyr}). We set the parameter \code{gen} to a conservatively large value of 100 as this dataset is unlikely to have any individuals with more than 100 generations of ``descendants".
 
-After that, we can generate a table to examine all values of descendant counts in the dataset, along with the number of individuals who have each of those values of descendant counts. Of the 8165 individuals in this dataset, 6252 of them have zero descendants, 322 of them have one descendant, and 145 of them have two descendants. There are only 17 individuals who have more than 30 descendants, and there is one individual who has the largest value of 159 descendants. We determine that this individual is the prominent British statistician Sir David Cox, who is known for the Box-Cox transformation and Cox processes, as well as for mentoring many younger researchers who later became notable statisticians themselves.
+After that, we can generate a table to examine all values of ``descendant" counts in the dataset, along with the number of individuals who have each of those values of ``descendant" counts. Of the 8165 individuals in this dataset, 6252 of them have zero ``descendants", 322 of them have one ``descendant", and 145 of them have two ``descendants". There are only 17 individuals who have more than 30 ``descendants", and there is one individual who has the largest value of 159 ``descendants". We determine that this individual is the prominent British statistician Sir David Cox, who is known for the Box-Cox transformation and Cox processes, as well as for mentoring many younger researchers who later became notable statisticians themselves.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -438,7 +438,7 @@ David Cox
 \end{CodeOutput}
 \end{CodeChunk}
 
-We can now visualize how these 159 descendants are related to Sir David Cox by calling the \code{plotAncDes()} function of \pkg{ggenealogy}, similar to what we did to generate Figure \ref{fig:Lee}. As such, we create Figure \ref{fig:dCox} using the code below.
+We can now visualize how these 159 ``descendants" are related to Sir David Cox by calling the \code{plotAncDes()} function of \pkg{ggenealogy}, similar to what we did to generate Figure \ref{fig:Lee}. As such, we create Figure \ref{fig:dCox} using the code below.
 
 \begin{CodeInput}
 R> plotAncDes("David Cox", statGeneal, mAnc = 6, mDes = 6, vCol = "blue")
@@ -447,11 +447,11 @@ R> plotAncDes("David Cox", statGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 \begin{figure}%[h]
     \centering
     \includegraphics[width=\textwidth]{dCox.png}
-    \caption{The 159 academic statistician descendants of Sir David Cox.}
+    \caption{The 159 academic statistician ``descendants" of Sir David Cox.}
     \label{fig:dCox}
 \end{figure}
 
-We see from Figure \ref{fig:dCox} that Sir David Cox had 42 children, many of them becoming notable statisticians themselves, such as Basilio Pereira, Valerie Isham, Gauss Cordeiro, Peter McCullagh, and Henry Wynn. Of his children, the one who produced the most children of their own was Peter Bloomfield, who has 26 children and 49 descendants. In total, Sir David Cox had five generations of academic statistics mentees in this dataset.
+We see from Figure \ref{fig:dCox} that Sir David Cox had 42 ``children", many of them becoming notable statisticians themselves, such as Basilio Pereira, Valerie Isham, Gauss Cordeiro, Peter McCullagh, and Henry Wynn. Of his ``children", the one who produced the most ``children" of their own was Peter Bloomfield, who has 26 ``children" and 49 ``descendants". In total, Sir David Cox had five generations of academic statistics mentees in this dataset.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -468,7 +468,7 @@ R> nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 \end{CodeOutput}
 \end{CodeChunk}
 
-At this point, it would be insightful to examine a more detailed view of one of the longest strings of parent-child relationships between Sir David Cox and one of the two individuals who are his fifth generation descendants. We do so with the code below, choosing his fifth generation descendant to be Petra Buzkova.
+At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir David Cox and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be Petra Buzkova.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -484,11 +484,11 @@ R> plotPath(pathCB) + ggplot2::theme(axis.text = ggplot2::element_text(size
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{pathCB}
-    \caption{The shortest path between Sir David Cox and one of his fifth generation descendants, Petra Buzkova.}
+    \caption{The shortest path between Sir David Cox and one of his fifth generation ``descendants", Petra Buzkova.}
     \label{fig:pathCB}
 \end{figure}
 
-This code results in Figure \ref{fig:pathCB}. We see that the shortest path between Sir David Cox and Petra Buzkova is strictly composed of five unidirectional parent-child relationships that span about 55 years. We see that the time difference between when an advisor and student earned their degrees is not consistent across this path: The three statisticians who earned their degrees earliest in this path span more than about 30 years in degree acquisition, whereas the three statisticians who earned their degrees later in this path only span less than about ten years in degree acquisition.
+This code results in Figure \ref{fig:pathCB}. We see that the shortest path between Sir David Cox and Petra Buzkova is strictly composed of five unidirectional ``parent-child" relationships that span about 55 years. We see that the time difference between when an advisor and student earned their degrees is not consistent across this path: The three statisticians who earned their degrees earliest in this path span more than 30 years in degree acquisition, whereas the three statisticians who earned their degrees later in this path only span less than ten years in degree acquisition.
 
 We also notice in Figure \ref{fig:pathCB} that Sir David Cox received his statistics degree in about 1950, and Petra Buzkova received her statistics degree in about 2005. This genealogy only contains historical information about obtained degrees, and does not project into the future. Hence, we can be assured that Petra Buzkova is one of the younger individuals in the dataset, at least in the sense that the youngest individual could only have received his or her degree ten years after Petra Buzkova. However, we cannot be assured that Sir David Cox is one of the oldest individuals in the dataset. As such, it would be informative to superimpose this path of interest onto the entire dataset, using the \code{plotPathOnAll()} function of the \pkg{ggenealogy} package, as we did for the soybean genealogy in Figures \ref{fig:plotTNBin3} and \ref{fig:plotTNBin6}.
 
@@ -510,7 +510,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200) + ggplot2::
     \label{fig:plotCBText}
 \end{figure}
 
-We see from the resulting Figure \ref{fig:plotCBText} that almost all text labels for individuals who received their graduate-level statistics degrees between 1950 and 2015 are undecipherable. We also see that the year Sir David Cox acquired his statistics degree is somewhere in the later half of the variable year for this dataset, as the oldest dates for statistics degree acquisitions in this dataset occur around 1860. However, the number of individuals who are documented as receiving their statistics degrees between 1860 and 1950 are few enough so that their text labels are somewhat readable.
+We see from the resulting Figure \ref{fig:plotCBText} that almost all text labels for individuals who received their graduate-level statistics degrees between 1950 and 2015 are undecipherable. We also see that the year Sir David Cox acquired his statistics degree is somewhere in the later half of the variable year for this dataset, as the oldest dates for acquisition of statistics degrees in this dataset occur around 1860. However, the number of individuals who are documented as receiving their statistics degrees between 1860 and 1950 are few enough so that their text labels are somewhat readable.
 
 The text labels are so numerous in Figure \ref{fig:plotCBText} that simply trying different values for the input parameter \code{binVector} will not solve the text overlapping problem. Instead, one approach we can try is to reconstruct the plot using the same \pkg{ggenealogy} function \code{plotPathOnAll()}, only now specifying a value of \code{TRUE} for the input parameter \code{nodeLabel}. As is further detailed in the help manual of the function, doing so will generate a plot where only text labels for individuals on the path of interest are labeled; all other individual labels are represented as dots. We provide the code for this below, which results in Figure \ref{fig:plotCBNoText}.
 
@@ -530,7 +530,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = 4,
     \label{fig:plotCBNoText}
 \end{figure}
 
-In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of statistics degree acquisitions. This figure is interactive with the use of Plotly (\citealt{plotly}).
+In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees. This figure is interactive with the use of Plotly (\citealt{plotly}).
 
 \section{Future Avenues}
 
@@ -544,7 +544,7 @@ The \pkg{ggenealogy} package offers various plotting tools that can assist those
 
 \section*{Acknowledgments}
 
-The authors are grateful for the financial support from the United Soybean Board, North Central Soybean Research Program, the Iowa Soybean Association, the NSF Plant Genome Research Program (award number 0820642), and the USDA-Agricultural Research Service.
+The authors thank Drs. James E. Spect and Randy C. Shoemaker for helpful discussions of soybean genealogy. In addition, the authors are grateful for the financial support from the United Soybean Board (Project 1204), The North Central Soybean Research Program, the NSF Plant Genome Research Program (award number 0820642), and the USDA-ARS CRIS Project 3625-21220-005-00D. The USDA is an equal opportunity provider and employer. Mention of trade names or commercial products in this article is solely for the purpose of providing specific information and does not imply recommendation or endorsement by the U.S. Department of Agriculture.
 
 \bibliography{article}
 
