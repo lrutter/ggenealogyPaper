@@ -36,17 +36,20 @@ Hymowitz T, Newell C, Carmer S (1977).
 \newblock International Soybean Series, College of Agriculture, University of
   Illinois at Urbana-Champaign, Urbana, IL.
 
-\bibitem[{Mathematics Genealogy Project()}]{mgp}
-Mathematics Genealogy Project (2016).
-\newblock \urlprefix\url{http://www.genealogy.math.ndsu.nodak.edu}.
+\bibitem[{North Dakota State University and American Mathematical
+  Society()}]{mgp}
+North Dakota State University and American Mathematical Society (2010).
+\newblock \emph{The Mathematics Genealogy Project}.
+\newblock Archived Web Site. Retrieved from the Library of Congress, Accessed
+  on March 6, 2015, \urlprefix\url{http://www.genealogy.math.ndsu.nodak.edu}.
 
 \bibitem[{PostgreSQL()}]{psql}
 PostgreSQL (2016).
 \newblock \urlprefix\url{http://www.postgresql.org/}.
 
-\bibitem[{RStudio(2014)}]{shiny}
-RStudio I (2014).
-\newblock \emph{\pkg{shiny}: State Linked Micromap Plots}.
+\bibitem[{{RStudio, Inc}(2014)}]{shiny}
+{RStudio, Inc} (2014).
+\newblock \emph{\pkg{shiny: Web Application Framework for R}}.
 \newblock \proglang{R} package version 0.10.2.1,
   \urlprefix\url{http://CRAN.R-project.org/package=shiny}.
 
