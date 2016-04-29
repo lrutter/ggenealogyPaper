@@ -268,7 +268,7 @@ $yearVertices
 The returned path object can then be plotted using the \code{plotPath()} function.
 
 \begin{Code}
-R> plotPath(pathTN, fontFace = 2)
+R> plotPath(pathTN)
 \end{Code}
 
 \begin{figure}[h]
@@ -468,22 +468,22 @@ R> nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 \end{CodeOutput}
 \end{CodeChunk}
 
-At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir David Cox and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be Petra Buzkova.
+At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir David Cox and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be Petra Buzkova. We set the \code{fontFace} variable of the \code{plotPath()} to a value of 4, indicating we wish to boldface and italicize the two varieties of interest.
 
 \begin{CodeChunk}
 \begin{CodeInput}
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
   isDirected = FALSE)
-R> plotPath(pathCB) + ggplot2::theme(axis.text = ggplot2::element_text(size
-  = 12), axis.title = ggplot2::element_text(size = 12)) +
-  ggplot2::scale_x_continuous(breaks = seq(1940, 2010, by = 10))
+R> plotPath(pathCB, fontFace = 4) + ggplot2::theme(axis.text =
+   ggplot2::element_text(size = 10), axis.title =
+   ggplot2::element_text(size = 10))
 \end{CodeInput}
 \end{CodeChunk}
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{pathCB}
+    \includegraphics[width=0.7\textwidth]{pathCB}
     \caption{The shortest path between Sir David Cox and one of his fifth generation ``descendants", Petra Buzkova.}
     \label{fig:pathCB}
 \end{figure}
@@ -496,10 +496,10 @@ We can achieve this using the below code. After trial and error, we use a \code{
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200) + ggplot2::
-  scale_x_continuous(limits = c(1850, 2030)) + ggplot2::theme(axis.text =
-  ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size
-  = 12))
+R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200) +
+   ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
+   ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
+   (expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -512,14 +512,15 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200) + ggplot2::
 
 We see from the resulting Figure \ref{fig:plotCBText} that almost all text labels for individuals who received their graduate-level statistics degrees between 1950 and 2015 are undecipherable. We also see that the year Sir David Cox acquired his statistics degree is somewhere in the later half of the variable year for this dataset, as the oldest dates for acquisition of statistics degrees in this dataset occur around 1860. However, the number of individuals who are documented as receiving their statistics degrees between 1860 and 1950 are few enough so that their text labels are somewhat readable.
 
-The text labels are so numerous in Figure \ref{fig:plotCBText} that simply trying different values for the input parameter \code{binVector} will not solve the text overlapping problem. Instead, one approach we can try is to reconstruct the plot using the same \pkg{ggenealogy} function \code{plotPathOnAll()}, only now specifying a value of \code{TRUE} for the input parameter \code{nodeLabel}. As is further detailed in the help manual of the function, doing so will generate a plot where only text labels for individuals on the path of interest are labeled; all other individual labels are represented as dots. We provide the code for this below, which results in Figure \ref{fig:plotCBNoText}.
+The text labels are so numerous in Figure \ref{fig:plotCBText} that simply trying different values for the input parameter \code{binVector} will not solve the text overlapping problem. Instead, one approach we can try is to reconstruct the plot using the same \pkg{ggenealogy} function \code{plotPathOnAll()}, only now specifying variables to render the size (2.5) and color (default of black) of the text for nodes that are on the path of interest to be more noticeable than the size (0.5) and color (dark gray) of the text for nodes thare not on the path of interest. Moreover, we can make the edges that are not on the path of interest to be represented in a less noticeable color (light gray) than the edges that are on the path of interest (default of black). The variable names and options for these aesthetics is further detailed in the help manual of the function. We provide one example code that alters the defaults of the text color and sizes of nodes and edges below, which results in Figure \ref{fig:plotCBNoText}.
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = 4,
-  pathNodeSize = 4, nodeLabel=FALSE) + ggplot2::theme(axis.text = ggplot2::
-  element_text(size = 12), axis.title = ggplot2::element_text(size = 12)) + 
-  ggplot2::xlab(1850, 2025)
+R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
+   pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
+   ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
+   ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
+   (expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
 
