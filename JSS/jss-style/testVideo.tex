@@ -1,13 +1,10 @@
-\documentclass[article,shortnames]{jss}
-\usepackage[3D]{movie15}
-\usepackage{animate}
+\documentclass[12pt,landscape]{article}
+\usepackage[]{media9}
 
 \begin{document}
-
-\begin{figure*}[htp]
-\centerline{\includemovie[poster={movies/initial-overview.png}, text={(initial-overview.mp4)}]{400pt}{300pt}{movies/initial-overview.mp4}}
-\caption{Video illustrating the basic structure of the app. (Also see \url{https://vimeo.com/141751127}.)}
-\label{overview}
-\end{figure*}
+%\includemedia[width=1.0\textwidth, addresource=./Videos/myVideoH.mp4, flashvars={source=./Videos/myVideoH.mp4, &autoPlay=true}]{\includegraphics{./pathCB.png}}{VPlayer9.swf}
+\includemedia[width=1.0\textwidth, addresource=./Videos/myVideoH.mp4, flashvars={source=./Videos/myVideoH.mp4, &autoPlay=true}]{\includegraphics{./pathCB.png}}{VPlayer9.swf}
 
 \end{document}
+
+%VPlayer.swf or VPlayer9.swf
