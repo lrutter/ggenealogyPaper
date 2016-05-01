@@ -1,0 +1,89 @@
+\begin{thebibliography}{12}
+\newcommand{\enquote}[1]{``#1''}
+\providecommand{\natexlab}[1]{#1}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\expandafter\ifx\csname urlstyle\endcsname\relax
+  \providecommand{\doi}[1]{doi:\discretionary{}{}{}#1}\else
+  \providecommand{\doi}{doi:\discretionary{}{}{}\begingroup
+  \urlstyle{rm}\Url}\fi
+\providecommand{\eprint}[2][]{\url{#2}}
+
+\bibitem[{Coster(2013)}]{ped}
+Coster A (2013).
+\newblock \emph{pedigree: Pedigree functions}.
+\newblock R package version 0.4,
+  \urlprefix\url{https://CRAN.R-project.org/package=pedigree}.
+
+\bibitem[{Csardi and Nepusz(2006)}]{igraph}
+Csardi G, Nepusz T (2006).
+\newblock \enquote{The \pkg{igraph} Software Package for Complex Network
+  Research.}
+\newblock \emph{InterJournal, Complex Systems}, \textbf{1695}.
+\newblock \urlprefix\url{http://igraph.sf.net}.
+
+\bibitem[{Gansner and North(2000)}]{graphvizCit}
+Gansner ER, North SC (2000).
+\newblock \enquote{An open graph visualization system and its applications to
+  software engineering.}
+\newblock \emph{Software - Practice and Experience}, \textbf{30}(11),
+  1203--1233.
+
+\bibitem[{Hymowitz \emph{et~al.}(1977)Hymowitz, Newell, and Carmer}]{soybean}
+Hymowitz T, Newell C, Carmer S (1977).
+\newblock \emph{Pedigrees of Soybean Cultivars Released in the United States
+  and Canada}.
+\newblock International Soybean Series, College of Agriculture, University of
+  Illinois at Urbana-Champaign, Urbana, IL.
+
+\bibitem[{North Dakota State University and American Mathematical
+  Society()}]{mgp}
+North Dakota State University and American Mathematical Society (2010).
+\newblock \emph{The Mathematics Genealogy Project}.
+\newblock Archived Web Site. Retrieved from the Library of Congress, Accessed
+  on March 6, 2015, \urlprefix\url{http://www.genealogy.math.ndsu.nodak.edu}.
+
+\bibitem[{PostgreSQL()}]{psql}
+PostgreSQL (2016).
+\newblock \urlprefix\url{http://www.postgresql.org/}.
+
+\bibitem[{{RStudio, Inc}(2014)}]{shiny}
+{RStudio, Inc} (2014).
+\newblock \emph{\pkg{shiny: Web Application Framework for R}}.
+\newblock \proglang{R} package version 0.10.2.1,
+  \urlprefix\url{http://CRAN.R-project.org/package=shiny}.
+
+\bibitem[{Rutter \emph{et~al.}(2015)Rutter, Vanderplas, and Cook}]{ggen}
+Rutter L, Vanderplas S, Cook D (2015).
+\newblock \emph{ggenealogy: Visualization Tools for Genealogical Data}.
+\newblock R package version 0.1.0,
+  \urlprefix\url{https://CRAN.R-project.org/package=ggenealogy}.
+
+\bibitem[{Shannon \emph{et~al.}(2003)Shannon, Markiel, Ozier, Baliga, Wang,
+  Ramage, Amin, Schwikowski, and Ideker}]{cytoscapeCit}
+Shannon P, Markiel A, Ozier O, Baliga NS, Wang JT, Ramage D, Amin N,
+  Schwikowski B, Ideker T (2003).
+\newblock \enquote{Cytoscape: a software environment for integrated models of
+  biomolecular interaction networks.}
+\newblock \emph{Genome Research}, \textbf{13}(11), 2498--2504.
+
+\bibitem[{Therneau \emph{et~al.}(2015)Therneau, Daniel, Sinnwell, and
+  Atkinson}]{kin}
+Therneau T, Daniel S, Sinnwell J, Atkinson E (2015).
+\newblock \emph{kinship2: Pedigree Functions}.
+\newblock R package version 1.6.4,
+  \urlprefix\url{https://CRAN.R-project.org/package=kinship2}.
+
+\bibitem[{Wickham(2009)}]{ggplot2}
+Wickham H (2009).
+\newblock \emph{\pkg{ggplot2}: Elegant Graphics for Data Analysis}.
+\newblock Springer-Verlag, New York, NY.
+\newblock \urlprefix\url{http://had.co.nz/ggplot2/book}.
+
+\bibitem[{Wickham and Francois(2015)}]{dplyr}
+Wickham H, Francois R (2015).
+\newblock \emph{dplyr: A Grammar of Data Manipulation}.
+\newblock R package version 0.4.3,
+  \urlprefix\url{https://CRAN.R-project.org/package=dplyr}.
+
+\end{thebibliography}
