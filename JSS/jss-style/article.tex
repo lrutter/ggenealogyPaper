@@ -2,6 +2,20 @@
 \usepackage{float}
 \usepackage[]{media9}
 
+\usepackage{tcolorbox}% http://ctan.org/pkg/tcolorbox
+\definecolor{frameCol}{rgb}{0.122, 0.435, 0.698}% Rule colour
+\definecolor{bgndCol}{rgb}{.66,.66,.66}% Rule colour
+\makeatletter
+\newcommand{\mybox}[1]{%
+  \setbox0=\hbox{#1}%
+  \setlength{\@tempdima}{\dimexpr\wd0+13pt}%
+  \begin{tcolorbox}[colframe=frameCol,colback=bgndCol,boxrule=0.5pt,arc=4pt,
+      left=6pt,right=6pt,top=6pt,bottom=6pt,boxsep=0pt,width=\@tempdima]
+    #1
+  \end{tcolorbox}
+}
+\makeatother
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %% declarations for jss.cls %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -546,7 +560,10 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
 
 \begin{figure}[H]
     \centering
-    \includemedia[width=1.0\textwidth, addresource=animateGen.mov, deactivate=onclick, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}
+    \includemedia[label = v1, playbutton=none, width=1.0\textwidth, addresource=animateGen.mov, activate=pageopen, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}
+    \mediabutton[
+mediacommand=v1:playPause,
+]{\mybox{Play/Pause}}
     \caption{Upon clicking on this figure twice, a short video demonstrating the animation features for this function can be viewed. Please note that to properly view this video, the PDF version of this paper must be opened in Adobe Acrobat Reader DC, which can be downloaded free of charge.}
     \label{fig:plotAnimate}
 \end{figure}
