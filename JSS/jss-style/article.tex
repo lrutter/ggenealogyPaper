@@ -123,7 +123,7 @@ We demonstrate how the standardized pedigree charts in the \proglang{kinship2} p
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.65\textwidth]{kinshipFig}
+    \fbox{\includegraphics[width=0.65\textwidth]{kinshipFig}}
     \caption{Example pedigree chart from the \proglang{kinship2} package, where the vertical axis denotes generation count. We superimposed green-highlighted individual 215 for explanatory purposes. As an offspring of a parent-child relationship, individual 215 is both a second and third generation individual. Hence, it should be displayed twice on the vertical axis, once for each of its generation counts. However, standard pedigree tools only allow for an individual to be displayed once, leading to ambiguous portrayal of the genealogical dataset.}
     \label{fig:kinshipFig}
 \end{figure}
@@ -134,7 +134,7 @@ We again illustrate this problem in Figure \ref{fig:Graph} with an example genea
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.6\textwidth]{Graph}
+    \fbox{\includegraphics[width=0.6\textwidth]{Graph}}
     \caption{Example genealogical display using popular graph software like \proglang{GraphViz} and \proglang{Cytoscape}, with generation count denoted by the vertical axis. As was shown in Figure \ref{fig:kinshipFig}, the green node has parents from two different generations, and hence must be ambiguously positioned as one of two generation counts.}
     \label{fig:Graph}
 \end{figure}
@@ -288,7 +288,7 @@ R> plotPath(pathTN)
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=\textwidth]{pathTNZB}
+    \fbox{\includegraphics[width=\textwidth]{pathTNZB}}
     \caption{Left: The shortest path between varieties Tokyo and Narow is strictly composed of a unidirectional sequence of parent-child relationships. Right: The shortest path between varieties Zane and Bedford is not strictly composed of unidirectional parent-child relationships; they instead have a cousin-like relationship.}
     \label{fig:pathTNZB}
 \end{figure}
@@ -337,7 +337,7 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:3, pathEdgeCol = "red",
 
 \begin{figure}%[h]
     \centering
-    \includegraphics[width=\textwidth]{plotTNBin3}
+    \fbox{\includegraphics[width=\textwidth]{plotTNBin3}}
     \caption{The shortest path between Tokyo and Narow, superimposed over the data structure, using a bin size of 3.}
     \label{fig:plotTNBin3}
 \end{figure}
@@ -361,7 +361,7 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:6, pathEdgeCol =
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{plotTNBin6}
+    \fbox{\includegraphics[width=\textwidth]{plotTNBin6}}
     \caption{The shortest path between Tokyo and Narow, superimposed over the data structure, using a bin size of 6.}
     \label{fig:plotTNBin6}
 \end{figure}
@@ -385,7 +385,7 @@ This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} h
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{LeeAD3}
+    \fbox{\includegraphics[width=\textwidth]{LeeAD3}}
     \caption{Top: All ancestors and descendants of the variety Lee are shown in this ggenealogy plot. Bottom: We now attempt to mimic the blue paths in the ggenealogy plot on the top, only now nodes cannot be repeated. The parenthetical numbers above each node represents the set of generation counts that node is away from the center node Lee. The presence of red parentheses indicate that the plot on the bottom ambiguously display the example soybean genealogy in the way that the ggenealogy plot on the top can accomplish.}
     \label{fig:Lee}
 \end{figure}
@@ -411,7 +411,7 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.5\textwidth]{degMatrix}
+    \fbox{\includegraphics[width=0.5\textwidth]{degMatrix}}
     \caption{The shortest path degree matrix between ten varieties of interest.}
     \label{fig:degMatrix}
 \end{figure}
@@ -461,7 +461,7 @@ R> plotAncDes("David Cox", statGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 
 \begin{figure}%[h]
     \centering
-    \includegraphics[width=\textwidth]{dCox.png}
+    \fbox{\includegraphics[width=\textwidth]{dCox.png}}
     \caption{The 159 academic statistician ``descendants" of Sir David Cox.}
     \label{fig:dCox}
 \end{figure}
@@ -498,7 +498,7 @@ R> plotPath(pathCB, fontFace = 4) + ggplot2::theme(axis.text =
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=0.7\textwidth]{pathCB}
+    \fbox{\includegraphics[width=0.7\textwidth]{pathCB}}
     \caption{The shortest path between Sir David Cox and one of his fifth generation ``descendants", Petra Buzkova.}
     \label{fig:pathCB}
 \end{figure}
@@ -520,7 +520,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200) +
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{plotCBText}
+    \fbox{\includegraphics[width=\textwidth]{plotCBText}}
     \caption{The shortest path between Sir David Cox and Petra Buzkova, superimposed over the data structure, using a bin size of 200.}
     \label{fig:plotCBText}
 \end{figure}
@@ -541,14 +541,14 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
 
 \begin{figure}[H]
     \centering
-    \includegraphics[width=\textwidth]{plotCBNoText}
+    \fbox{\includegraphics[width=\textwidth]{plotCBNoText}}
     \caption{The shortest path between Sir David Cox and Petra Buzkova, superimposed over the data structure, using a bin size of 200. Individuals on the shortest path are labeled in large and black text and connected by dark green edges; all other individuals are labeled in small and gray text and connected by light gray edges.}
     \label{fig:plotCBNoText}
 \end{figure}
 
 In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
 
-We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. A short video demonstration of these interactive features can be viewed upon clicking on Figure \ref{fig:plotAnimate}. 
+We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. A short video demonstration of these interactive features can be viewed below. 
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -560,11 +560,9 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
 
 \begin{figure}[H]
     \centering
-    \includemedia[label = v1, playbutton=none, width=1.0\textwidth, addresource=animateGen.mov, activate=pageopen, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}
-    \mediabutton[
-mediacommand=v1:playPause,
-]{\mybox{Play/Pause}}
-    \caption{Upon clicking on this figure twice, a short video demonstrating the animation features for this function can be viewed. Please note that to properly view this video, the PDF version of this paper must be opened in Adobe Acrobat Reader DC, which can be downloaded free of charge.}
+    \fbox{\includemedia[label = v1, playbutton=none, width=1.0\textwidth, addresource=animateGen.mov, activate=pageopen, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}}
+    \mediabutton[mediacommand=v1:playPause,]{\mybox{Play/Pause}}
+    \caption{A short video demonstrating the animation features for this function. Please note that to properly view this video, the PDF version of this document must be opened in Adobe Acrobat Reader DC (version >=9), which can be downloaded free of charge. This video can only be viewed on Windows or Mac OS X platforms; it cannot be viewed on mobile devices.}
     \label{fig:plotAnimate}
 \end{figure}
 
