@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  17 MAY 2016 10:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  20 MAY 2016 13:51
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1124,18 +1124,12 @@ File: t1aett.fd 1997/11/16 Font definitions for T1/aett.
 )
 LaTeX Font Info:    Try loading font information for TS1+aett on input line 165
 .
+LaTeX Font Info:    No file TS1aett.fd. on input line 165.
 
-(/Library/Frameworks/R.framework/Resources/share/texmf/tex/latex/ts1aett.fd
-File: ts1aett.fd 
-)
-LaTeX Font Info:    Try loading font information for TS1+cmtt on input line 165
-.
 
-(/usr/local/texlive/2015/texmf-dist/tex/latex/base/ts1cmtt.fd
-File: ts1cmtt.fd 2014/09/29 v2.5h Standard LaTeX font definitions
-)
-LaTeX Font Info:    Font shape `TS1/aett/m/n' in size <10.95> not available
-(Font)              Font shape `TS1/cmtt/m/n' tried instead on input line 165.
+LaTeX Font Warning: Font shape `TS1/aett/m/n' undefined
+(Font)              using `TS1/cmr/m/n' instead
+(Font)              for symbol `textquotesingle' on input line 165.
 
 
 Package xcolor Warning: Incompatible color definition on input line 176.
@@ -1489,6 +1483,9 @@ Package xcolor Warning: Incompatible color definition on input line 551.
 Package xcolor Warning: Incompatible color definition on input line 551.
 
 
+Package xcolor Warning: Incompatible color definition on input line 551.
+
+
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 20 []
  []
@@ -1500,7 +1497,7 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
                                                   \fi \fi 
 l.552 
        <./plotCBNoText.png>]
-<./plotCBNoText.png, id=289, 592.2125pt x 397.485pt>
+<./plotCBNoText.png, id=290, 592.2125pt x 397.485pt>
 File: ./plotCBNoText.png Graphic file (type png)
  <use ./plotCBNoText.png>
 Package pdftex.def Info: ./plotCBNoText.png used on input line 563.
@@ -1530,9 +1527,8 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.573 W
-       e also aim to incorporate plotting tools that can examine not only qu...
- <./plotCBNoText.png>]
+l.572 
+       <./plotCBNoText.png>]
 
 Package xcolor Warning: Incompatible color definition on input line 575.
 
@@ -1546,6 +1542,9 @@ Package xcolor Warning: Incompatible color definition on input line 575.
 Package xcolor Warning: Incompatible color definition on input line 575.
 
 (./article.bbl
+LaTeX Font Info:    Font shape `T1/aer/b/it' in size <10.95> not available
+(Font)              Font shape `T1/aer/bx/it' tried instead on input line 14.
+
 
 Package xcolor Warning: Incompatible color definition on input line 16.
 
@@ -1567,8 +1566,6 @@ Package xcolor Warning: Incompatible color definition on input line 44.
 
 Package xcolor Warning: Incompatible color definition on input line 48.
 
-LaTeX Font Info:    Font shape `T1/aer/b/it' in size <10.95> not available
-(Font)              Font shape `T1/aer/bx/it' tried instead on input line 52.
 
 Package xcolor Warning: Incompatible color definition on input line 54.
 
@@ -1576,13 +1573,16 @@ Package xcolor Warning: Incompatible color definition on input line 54.
 Package xcolor Warning: Incompatible color definition on input line 60.
 
 
-Package xcolor Warning: Incompatible color definition on input line 75.
+Package xcolor Warning: Incompatible color definition on input line 76.
 
 
-Package xcolor Warning: Incompatible color definition on input line 81.
+Package xcolor Warning: Incompatible color definition on input line 83.
 
 
-Package xcolor Warning: Incompatible color definition on input line 87.
+Package xcolor Warning: Incompatible color definition on input line 89.
+
+
+Package xcolor Warning: Incompatible color definition on input line 95.
 
 )
 
@@ -1597,6 +1597,15 @@ Underfull \hbox (badness 10000) in paragraph at lines 587--587
  []
 
 
+Underfull \vbox (badness 2310) has occurred while \output is active []
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/aer/m/n/10.95 23
+ []
+
+[23]
+
 Package xcolor Warning: Incompatible color definition on input line 587.
 
 
@@ -1607,12 +1616,6 @@ Underfull \hbox (badness 10000) in paragraph at lines 587--587
 
  []
 
-
-Overfull \hbox (10.94998pt too wide) has occurred while \output is active
-[] \T1/aer/m/n/10.95 23
- []
-
-[23]
 
 Package xcolor Warning: Incompatible color definition on input line 587.
 
@@ -1645,21 +1648,30 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 Package atenddvi Info: Last page = 24.
 [24]
+*************************************************
+* media9 warning: "rerun"
+* 
+* Rerun to get media labels right!
+*************************************************
 Package atveryend Info: Empty hook `BeforeClearDocument' on input line 587.
 Package atveryend Info: Executing hook `AfterLastShipout' on input line 587.
- (./article.aux)
+(./article.aux)
 Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 587.
 Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 587.
 Package rerunfilecheck Info: File `article.out' has not changed.
-(rerunfilecheck)             Checksum: 9DD5E4E2937144B533F72B0FD07A1A9F;1291.
+(rerunfilecheck)             Checksum: 319E70513B90D203F6D25D400BA130B2;1291.
+
+
+LaTeX Font Warning: Some font shapes were not available, defaults substituted.
+
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 587.
  ) 
 Here is how much of TeX's memory you used:
- 26368 strings out of 493089
- 525797 string characters out of 6134842
- 557689 words of memory out of 5000000
- 29338 multiletter control sequences out of 15000+600000
- 57646 words of font info for 95 fonts, out of 8000000 for 9000
+ 26353 strings out of 493089
+ 525115 string characters out of 6134842
+ 557862 words of memory out of 5000000
+ 29327 multiletter control sequences out of 15000+600000
+ 57689 words of font info for 95 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
  62i,9n,73p,10348b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
 {/usr/local/texlive/2015/texmf-dist/fonts/enc/dvips/cm-super/cm-super-ts1.enc
@@ -1669,20 +1681,21 @@ ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx12.pfb></usr/local/texliv
 e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxsl10.pfb></usr/local/texli
 ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmbxti10.pfb></usr/local/texl
-ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsltt10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texliv
-e/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive
-/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/
-2015/texmf-dist/fonts/type1/public/cm-super/sftt1095.pfb></usr/local/texlive/20
-15/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on article.pdf (24 pages, 16215800 bytes).
+ive/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb></usr/local/texli
+ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsl10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmsltt10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmss10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmssi10.pfb></usr/local/texlive
+/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/local/texlive/
+2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2
+015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/201
+5/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
+Output written on article.pdf (24 pages, 16214335 bytes).
 PDF statistics:
- 426 PDF objects out of 1000 (max. 8388607)
- 351 compressed objects within 4 object streams
- 77 named destinations out of 1000 (max. 500000)
+ 433 PDF objects out of 1000 (max. 8388607)
+ 357 compressed objects within 4 object streams
+ 78 named destinations out of 1000 (max. 500000)
  246 words of extra memory for PDF output out of 10000 (max. 10000000)
 
