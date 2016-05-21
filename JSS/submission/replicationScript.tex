@@ -1,0 +1,64 @@
+\documentclass{article}
+\parindent 0pt
+\title{Replication Script to JSS Submission}
+\usepackage{Sweave}
+\begin{document}
+
+\author{Lindsay Rutter, Susan VanderPlas, Dianne Cook, Michelle A. Graham}
+\date{\today}
+\maketitle
+\input{replicationScript-concordance}
+\tableofcontents
+
+%%%%%%%%%%%%%%%
+%% Section 2 %%
+%%%%%%%%%%%%%%%
+\section*{2. Available software}
+
+The two figures in this section of the paper were not produced using source code from our ggenealogy package. Instead, they were produced from external software for demonstration purposes.
+
+%%%%%%%%%%%%%%%
+%% Section 3 %%
+%%%%%%%%%%%%%%%
+\section*{3. Example datasets}
+
+First, we can load and examine the structure of the soybean genealogy example dataset (called sbGeneal):
+
+\begin{Schunk}
+\begin{Sinput}
+> rm(list=)
+> library("ggenealogy")
+> data("sbGeneal")
+> str(sbGeneal)
+\end{Sinput}
+\begin{Soutput}
+'data.frame':	390 obs. of  5 variables:
+ $ child       : chr  "5601T" "Adams" "A.K." "A.K. (Harrow)" ...
+ $ year        : num  1981 1948 1910 1912 1968 ...
+ $ yield       : int  NA 2734 NA 2665 NA 2981 2887 2817 NA NA ...
+ $ year.imputed: logi  TRUE FALSE TRUE FALSE FALSE FALSE ...
+ $ parent      : chr  "Hutcheson" "Dunfield" NA "A.K." ...
+\end{Soutput}
+\end{Schunk}
+
+After that, we can load and examine the structure of the academic statistician genealogy example dataset (called statGeneal):
+
+\begin{Schunk}
+\begin{Sinput}
+> data("statGeneal")
+> dim(statGeneal)
+\end{Sinput}
+\begin{Soutput}
+[1] 8165    6
+\end{Soutput}
+\begin{Sinput}
+> colnames(statGeneal)
+\end{Sinput}
+\begin{Soutput}
+[1] "child"   "parent"  "year"    "country" "school"  "thesis" 
+\end{Soutput}
+\end{Schunk}
+
+Convert sbGeneal into igraph object:
+
+\end{document}
