@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  12 JUL 2016 20:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015) (preloaded format=pdflatex 2015.5.24)  13 JUL 2016 20:54
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1144,10 +1144,10 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 
 [5]
 
-Package xcolor Warning: Incompatible color definition on input line 200.
+Package xcolor Warning: Incompatible color definition on input line 210.
 
 
-Package xcolor Warning: Incompatible color definition on input line 200.
+Package xcolor Warning: Incompatible color definition on input line 210.
 
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
@@ -1159,57 +1159,61 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 7
  []
 
-[7] <pathTNZB.png, id=163, 636.9396pt x 398.9304pt>
+[7] <pathTNZB.png, id=162, 636.9396pt x 398.9304pt>
 File: pathTNZB.png Graphic file (type png)
  <use pathTNZB.png>
-Package pdftex.def Info: pathTNZB.png used on input line 272.
+Package pdftex.def Info: pathTNZB.png used on input line 285.
 (pdftex.def)             Requested size: 442.65375pt x 277.2406pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 272--273
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 285--286
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 277.
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package xcolor Warning: Incompatible color definition on input line 290.
+
+
+Package xcolor Warning: Incompatible color definition on input line 316.
 
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 8 []
  []
 
-[8pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
-has been already used, duplicate ignored
+[8]
 
-\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
-                                                  \fi \fi 
-l.278 
-       <./pathTNZB.png>]
-
-Package xcolor Warning: Incompatible color definition on input line 303.
-
-
-Package xcolor Warning: Incompatible color definition on input line 311.
+Package xcolor Warning: Incompatible color definition on input line 324.
 
 
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 9
  []
 
-[9] <plotTNBin3.png, id=180, 693.59125pt x 405.515pt>
+[9pdfTeX warning (ext4): destination with the same identifier (name{figure.3}) 
+has been already used, duplicate ignored
+
+\AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
+                                                  \fi \fi 
+l.325 
+       <./pathTNZB.png>] <plotTNBin3.png, id=179, 693.59125pt x 405.515pt>
 File: plotTNBin3.png Graphic file (type png)
- <use plotTNBin3.png>
-Package pdftex.def Info: plotTNBin3.png used on input line 321.
+
+<use plotTNBin3.png>
+Package pdftex.def Info: plotTNBin3.png used on input line 334.
 (pdftex.def)             Requested size: 442.65375pt x 258.81093pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 321--322
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 334--335
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 326.
+Package xcolor Warning: Incompatible color definition on input line 339.
 
 
-Package xcolor Warning: Incompatible color definition on input line 326.
+Package xcolor Warning: Incompatible color definition on input line 339.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1221,19 +1225,19 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.331 
+l.342 
        <./plotTNBin3.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 334.
+Package xcolor Warning: Incompatible color definition on input line 347.
 
 
-Package xcolor Warning: Incompatible color definition on input line 334.
+Package xcolor Warning: Incompatible color definition on input line 347.
 
 
-Package xcolor Warning: Incompatible color definition on input line 336.
+Package xcolor Warning: Incompatible color definition on input line 349.
 
 
-Package xcolor Warning: Incompatible color definition on input line 336.
+Package xcolor Warning: Incompatible color definition on input line 349.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1243,27 +1247,27 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [11] <plotTNBin6.png, id=198, 693.59125pt x 405.515pt>
 File: plotTNBin6.png Graphic file (type png)
  <use plotTNBin6.png>
-Package pdftex.def Info: plotTNBin6.png used on input line 347.
+Package pdftex.def Info: plotTNBin6.png used on input line 360.
 (pdftex.def)             Requested size: 442.65375pt x 258.81093pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 347--348
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 360--361
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 352.
+Package xcolor Warning: Incompatible color definition on input line 365.
 
 
-Package xcolor Warning: Incompatible color definition on input line 352.
+Package xcolor Warning: Incompatible color definition on input line 365.
 
 
-Package xcolor Warning: Incompatible color definition on input line 359.
+Package xcolor Warning: Incompatible color definition on input line 372.
 
 
-Package xcolor Warning: Incompatible color definition on input line 359.
+Package xcolor Warning: Incompatible color definition on input line 372.
 
 
-Package xcolor Warning: Incompatible color definition on input line 367.
+Package xcolor Warning: Incompatible color definition on input line 380.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1277,20 +1281,20 @@ s been already used, duplicate ignored
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.368 
+l.381 
        <./plotTNBin6.png>] <LeeAD.png, id=209, 536.2434pt x 381.1038pt>
 File: LeeAD.png Graphic file (type png)
 
 <use LeeAD.png>
-Package pdftex.def Info: LeeAD.png used on input line 371.
+Package pdftex.def Info: LeeAD.png used on input line 384.
 (pdftex.def)             Requested size: 442.65375pt x 314.60059pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 371--372
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 384--385
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 376.
+Package xcolor Warning: Incompatible color definition on input line 389.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1302,31 +1306,31 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.377 
+l.390 
        <./LeeAD.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 380.
-
-
 Package xcolor Warning: Incompatible color definition on input line 393.
 
 
-Package xcolor Warning: Incompatible color definition on input line 393.
+Package xcolor Warning: Incompatible color definition on input line 406.
+
+
+Package xcolor Warning: Incompatible color definition on input line 406.
 
 <degMatrix.png, id=221, 349.305pt x 289.08pt>
 File: degMatrix.png Graphic file (type png)
  <use degMatrix.png>
-Package pdftex.def Info: degMatrix.png used on input line 397.
+Package pdftex.def Info: degMatrix.png used on input line 410.
 (pdftex.def)             Requested size: 221.32687pt x 183.16676pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
 
-Package xcolor Warning: Incompatible color definition on input line 404.
+Package xcolor Warning: Incompatible color definition on input line 417.
 
 
-Package xcolor Warning: Incompatible color definition on input line 406.
+Package xcolor Warning: Incompatible color definition on input line 419.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1335,10 +1339,10 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 [14]
 
-Package xcolor Warning: Incompatible color definition on input line 408.
+Package xcolor Warning: Incompatible color definition on input line 421.
 
 
-Package xcolor Warning: Incompatible color definition on input line 408.
+Package xcolor Warning: Incompatible color definition on input line 421.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1350,34 +1354,34 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.428 ...1    1    2    1    1    1    1    1    1
+l.441 ...1    1    2    1    1    1    1    1    1
                                                    <./degMatrix.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 439.
-
-
-Package xcolor Warning: Incompatible color definition on input line 439.
-
-<dCox.png, id=241, 779.91376pt x 1187.43625pt>
-File: dCox.png Graphic file (type png)
- <use dCox.png>
-Package pdftex.def Info: dCox.png used on input line 447.
-(pdftex.def)             Requested size: 442.65375pt x 673.9467pt.
-
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 447--448
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 80.07066pt on input line 450.
+Package xcolor Warning: Incompatible color definition on input line 452.
 
 
 Package xcolor Warning: Incompatible color definition on input line 452.
 
+<dCox.png, id=241, 779.91376pt x 1187.43625pt>
+File: dCox.png Graphic file (type png)
+ <use dCox.png>
+Package pdftex.def Info: dCox.png used on input line 460.
+(pdftex.def)             Requested size: 442.65375pt x 673.9467pt.
+
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 460--461
+ [][] 
+ []
+
+
+LaTeX Warning: Float too large for page by 80.07066pt on input line 463.
+
+
+Package xcolor Warning: Incompatible color definition on input line 465.
+
 <pathCB.png, id=243, 454.69875pt x 397.485pt>
 File: pathCB.png Graphic file (type png)
  <use pathCB.png>
-Package pdftex.def Info: pathCB.png used on input line 485.
+Package pdftex.def Info: pathCB.png used on input line 498.
 (pdftex.def)             Requested size: 309.85626pt x 270.86847pt.
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1394,22 +1398,22 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.489 
+l.502 
        <./dCox.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 490.
+Package xcolor Warning: Incompatible color definition on input line 503.
 
 
-Package xcolor Warning: Incompatible color definition on input line 492.
+Package xcolor Warning: Incompatible color definition on input line 505.
 
 
-Package xcolor Warning: Incompatible color definition on input line 492.
+Package xcolor Warning: Incompatible color definition on input line 505.
 
 
-Package xcolor Warning: Incompatible color definition on input line 492.
+Package xcolor Warning: Incompatible color definition on input line 505.
 
 
-Package xcolor Warning: Incompatible color definition on input line 494.
+Package xcolor Warning: Incompatible color definition on input line 507.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1421,26 +1425,26 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.502 \end{CodeInput}
+l.515 \end{CodeInput}
                       <./pathCB.png>]
 <plotCBText.png, id=266, 691.58376pt x 405.515pt>
 File: plotCBText.png Graphic file (type png)
  <use plotCBText.png>
-Package pdftex.def Info: plotCBText.png used on input line 507.
+Package pdftex.def Info: plotCBText.png used on input line 520.
 (pdftex.def)             Requested size: 442.65375pt x 259.55963pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 507--508
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 520--521
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 512.
+Package xcolor Warning: Incompatible color definition on input line 525.
 
 
-Package xcolor Warning: Incompatible color definition on input line 514.
+Package xcolor Warning: Incompatible color definition on input line 527.
 
 
-Package xcolor Warning: Incompatible color definition on input line 514.
+Package xcolor Warning: Incompatible color definition on input line 527.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1452,32 +1456,32 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.520 ...ot2::element_text(size = 8), axis.title =
+l.533 ...ot2::element_text(size = 8), axis.title =
                                                    <./plotCBText.png>]
 <plotCBNoText.png, id=277, 592.2125pt x 397.485pt>
 File: plotCBNoText.png Graphic file (type png)
  <use plotCBNoText.png>
-Package pdftex.def Info: plotCBNoText.png used on input line 528.
+Package pdftex.def Info: plotCBNoText.png used on input line 541.
 (pdftex.def)             Requested size: 442.65375pt x 297.11226pt.
 
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 528--529
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 541--542
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 533.
+Package xcolor Warning: Incompatible color definition on input line 546.
 
 
-Package xcolor Warning: Incompatible color definition on input line 535.
+Package xcolor Warning: Incompatible color definition on input line 548.
 
 
-Package xcolor Warning: Incompatible color definition on input line 535.
+Package xcolor Warning: Incompatible color definition on input line 548.
 
 
-Package xcolor Warning: Incompatible color definition on input line 535.
+Package xcolor Warning: Incompatible color definition on input line 548.
 
 
-Package xcolor Warning: Incompatible color definition on input line 535.
+Package xcolor Warning: Incompatible color definition on input line 548.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1489,27 +1493,27 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.536 
+l.549 
        <./plotCBNoText.png>]
 <./plotCBNoText.png, id=290, 592.2125pt x 397.485pt>
 File: ./plotCBNoText.png Graphic file (type png)
  <use ./plotCBNoText.png>
-Package pdftex.def Info: ./plotCBNoText.png used on input line 547.
+Package pdftex.def Info: ./plotCBNoText.png used on input line 560.
 (pdftex.def)             Requested size: 354.12434pt x 237.69223pt.
 \g__file_internal_ior=\read4
 <<VPlayer.swf>><<animateGen.mov>>
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 547--549
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 560--562
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 555.
+Package xcolor Warning: Incompatible color definition on input line 568.
 
 
-Package xcolor Warning: Incompatible color definition on input line 555.
+Package xcolor Warning: Incompatible color definition on input line 568.
 
 
-Package xcolor Warning: Incompatible color definition on input line 555.
+Package xcolor Warning: Incompatible color definition on input line 568.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1521,19 +1525,19 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 \AtBegShi@Output ...ipout \box \AtBeginShipoutBox 
                                                   \fi \fi 
-l.556 
+l.569 
        <./plotCBNoText.png>]
 
-Package xcolor Warning: Incompatible color definition on input line 559.
+Package xcolor Warning: Incompatible color definition on input line 572.
 
 
-Package xcolor Warning: Incompatible color definition on input line 559.
+Package xcolor Warning: Incompatible color definition on input line 572.
 
 
-Package xcolor Warning: Incompatible color definition on input line 559.
+Package xcolor Warning: Incompatible color definition on input line 572.
 
 
-Package xcolor Warning: Incompatible color definition on input line 559.
+Package xcolor Warning: Incompatible color definition on input line 572.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1576,13 +1580,13 @@ Package xcolor Warning: Incompatible color definition on input line 95.
 
 )
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--573
+Underfull \hbox (badness 10000) in paragraph at lines 586--586
 
  []
 
@@ -1595,40 +1599,40 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 573--573
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 573.
-
-
-Package xcolor Warning: Incompatible color definition on input line 573.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 573--573
+Underfull \hbox (badness 10000) in paragraph at lines 586--586
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
+
+
+Package xcolor Warning: Incompatible color definition on input line 586.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 586--586
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 573.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 586.
 
-Package xcolor Warning: Incompatible color definition on input line 573.
-
-
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
-Package xcolor Warning: Incompatible color definition on input line 573.
+Package xcolor Warning: Incompatible color definition on input line 586.
+
+
+Package xcolor Warning: Incompatible color definition on input line 586.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1637,23 +1641,18 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 Package atenddvi Info: Last page = 24.
 [24]
-*************************************************
-* media9 warning: "rerun"
-* 
-* Rerun to get media labels right!
-*************************************************
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 573.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 573.
-(./article.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 573.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 573.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 586.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 586.
+ (./article.aux)
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 586.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 586.
 Package rerunfilecheck Info: File `article.out' has not changed.
 (rerunfilecheck)             Checksum: 319E70513B90D203F6D25D400BA130B2;1291.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 573.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 586.
  ) 
 Here is how much of TeX's memory you used:
  26353 strings out of 493089
@@ -1681,7 +1680,7 @@ ve/2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb></usr/local/texlive
 2015/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/local/texlive/2
 015/texmf-dist/fonts/type1/public/cm-super/sfrm1095.pfb></usr/local/texlive/201
 5/texmf-dist/fonts/type1/urw/zapfchan/uzcmi8a.pfb>
-Output written on article.pdf (24 pages, 16214485 bytes).
+Output written on article.pdf (24 pages, 16214385 bytes).
 PDF statistics:
  433 PDF objects out of 1000 (max. 8388607)
  357 compressed objects within 4 object streams

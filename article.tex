@@ -34,7 +34,7 @@
 
 %% an abstract and keywords
 \Abstract{
-  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The software package is currently available on the Comprehensive \proglang{R} Archive Network.}
+  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The latest stable package version is available in source and binary form on the Comprehensive \proglang{R} Archive Network.}
 
 \Keywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, \proglang{R}}
 \Plainkeywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, R} %% without formatting
@@ -174,10 +174,13 @@ R> str(sbGeneal)
 The \pkg{ggenealogy} package also comes with an academic genealogy of statisticians; this dataset is in the form of a data frame with 8165 rows and six columns. To develop this later dataset, we contacted the \citealt{mgp}, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
 
 Each entry in the database contained 26 variables pertaining to an individual who received a graduate-level academic degree in mathematics. One of these variables was called ``msc" (Mathematics Subject Classification), and we selected only those entries that contained a value of 62 for this variable (coded as ``Statistics"). Furthermore, we only retained entries that had a parent if that parent was also in the field of ``Statistics". Hence, in our parent-child relationships, both the child and the parent received postbaccalaureate degrees in statistics, and the parent was the academic advisor to the child. This process resulted in 8995 entries, which we reduced to 8165 entries by removing duplicate entries. With the final data frame of 8165 entries, we only maintained six of the original 26 variables. 
+
 Each row of the final data frame contains information about a particular child who received a graduate-level academic degree in statistics, including the name of the child, the year the child obtained the degree, the country and school from which the child obtained the degree, the thesis title of the degree awarded to the child, and the name of its parent. There are no missing values for the country and school from which the child received its degree or the name of the child; however, some of the years contain missing values (NA), and some of the parent and thesis names contain empty strings (``"). As a result, while each row does contain information about a particular child, whether or not a row also contains information about a parent-child relationship between a pair of academic statisticians depends on whether or not the parent column has an empty string.
  
 In total, there are 7122 individuals in the dataset, 7122 of which are children and 872 of which are parents. Every parent is also a child, but not every child is also a parent. Of the children, two have four parents, ten have three parents, 226 have two parents, 2801 have one parent, and 4083 have no parents. There are 3291 parent-child relationships in the dataset.
+
 We can load the example dataset of academic genealogy of statisticians (\code{statGeneal}) and examine its structure. 
+
 \begin{CodeChunk}
 \begin{CodeInput}
 R> data("statGeneal")
@@ -193,12 +196,19 @@ R> colnames(statGeneal)
 [1] "child"   "parent"  "year"    "country" "school"  "thesis"
 \end{CodeOutput}
 \end{CodeChunk}
+
 \section{Genealogical input format}
+
 As is the case with both example data files introduced above, \pkg{ggenealogy} requires that the genealogy input file is a data frame structure with at least two columns. One column must be labeled ``child", and each case in that column must be of type character. The other column must be labeled ``parent," and each case in that column must either be of type character, type NA, or type ``". At this point, any \pkg{ggenealogy} plot that only requires information about parent-child relationships can be used.
+
 However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third column. In both example data files, this column is labeled ``year," and each case in that column can either be of type numeric, type NA, or type ``". At this point, any \pkg{ggenealogy} plot can be used.
+
 \section{Generating a graphical object}
+
 Most functions in the \pkg{ggenealogy} software package require an input parameter of a graph structure. Therefore, as a preprocessing step, we must first convert our original data frame structure into a graph structure. Below, we read in the \proglang{R} data file \code{sbGeneal} that is included in the package as a sample data set of soybean genealogy.
-We now convert it into an \pkg{igraph} object (\citealt{igraph}) \code{sbIG} using the function \code{dfToIG()}.
+
+We now convert it into an \pkg{igraph} object (\citealt{igraph}) \code{sbIG} using the function 
+\code{dfToIG()}.
 \begin{CodeChunk}
 \begin{CodeInput}
 R> sbIG <- dfToIG(sbGeneal)
@@ -219,7 +229,9 @@ IGRAPH UNW- 230 340 --
 + ... omitted several edges
 \end{CodeOutput}
 \end{CodeChunk}
+
 There are many statistics about the \code{sbGeneal} dataset that we may wish to know that cannot easily be obtained through images and tables. The package function \code{getBasicStatistics()} can be called, using the \code{sbIG} object as input. This will return a list of common graph theoretical measurements regarding the genealogical structure. For instance, is the whole structure connected? If not, how many separated components does it contain? In addition to these statistics, the \code{getBasicStatistics()} function will also return the number of nodes, the number of edges, the average path length, the graph diameter, and other graph theoretical information.
+
 \begin{CodeChunk}
 \begin{CodeInput}
 R> getBasicStatistics(sbIG)
