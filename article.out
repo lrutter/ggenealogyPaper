@@ -1,14 +1,16 @@
 \BOOKMARK [1][-]{Section.0.Introduction.1}{Introduction}{}% 1
 \BOOKMARK [1][-]{Section.1.Available software.1}{Available software}{}% 2
-\BOOKMARK [1][-]{Section.2.Example datasets.1}{Example datasets}{}% 3
-\BOOKMARK [2][-]{Subsection.3.0.Soybean genealogy.2}{Soybean genealogy}{Section.2.Example datasets.1}% 4
-\BOOKMARK [2][-]{Subsection.3.1.Academic genealogy of statisticians.2}{Academic genealogy of statisticians}{Section.2.Example datasets.1}% 5
-\BOOKMARK [1][-]{Section.3.Genealogical input format.1}{Genealogical input format}{}% 6
-\BOOKMARK [1][-]{Section.4.Generating a graphical object.1}{Generating a graphical object}{}% 7
-\BOOKMARK [1][-]{Section.5.Plotting a shortest path.1}{Plotting a shortest path}{}% 8
-\BOOKMARK [1][-]{Section.6.Superimposing shortest path on tree.1}{Superimposing shortest path on tree}{}% 9
-\BOOKMARK [1][-]{Section.7.Plotting ancestors and descendants by generation.1}{Plotting ancestors and descendants by generation}{}% 10
-\BOOKMARK [1][-]{Section.8.Plotting distance matrix.1}{Plotting distance matrix}{}% 11
-\BOOKMARK [1][-]{Section.9.Academic genealogy of statisticians.1}{Academic genealogy of statisticians}{}% 12
-\BOOKMARK [1][-]{Section.10.Future avenues.1}{Future avenues}{}% 13
-\BOOKMARK [1][-]{Section.11.Conclusions.1}{Conclusions}{}% 14
+\BOOKMARK [1][-]{Section.2.Package overview.1}{Package overview}{}% 3
+\BOOKMARK [1][-]{Section.3.Example datasets.1}{Example datasets}{}% 4
+\BOOKMARK [2][-]{Subsection.4.0.Soybean genealogy.2}{Soybean genealogy}{Section.3.Example datasets.1}% 5
+\BOOKMARK [2][-]{Subsection.4.1.Academic genealogy of statisticians.2}{Academic genealogy of statisticians}{Section.3.Example datasets.1}% 6
+\BOOKMARK [1][-]{Section.4.Genealogical input format.1}{Genealogical input format}{}% 7
+\BOOKMARK [1][-]{Section.5.Generating a graphical object.1}{Generating a graphical object}{}% 8
+\BOOKMARK [1][-]{Section.6.Plotting a shortest path.1}{Plotting a shortest path}{}% 9
+\BOOKMARK [1][-]{Section.7.Superimposing shortest path on tree.1}{Superimposing shortest path on tree}{}% 10
+\BOOKMARK [1][-]{Section.8.Plotting ancestors and descendants by generation.1}{Plotting ancestors and descendants by generation}{}% 11
+\BOOKMARK [1][-]{Section.9.Plotting distance matrix.1}{Plotting distance matrix}{}% 12
+\BOOKMARK [1][-]{Section.10.Academic genealogy of statisticians.1}{Academic genealogy of statisticians}{}% 13
+\BOOKMARK [2][-]{Subsection.11.0.Interaction.2}{Interaction}{Section.10.Academic genealogy of statisticians.1}% 14
+\BOOKMARK [1][-]{Section.11.Future avenues.1}{Future avenues}{}% 15
+\BOOKMARK [1][-]{Section.12.Conclusions.1}{Conclusions}{}% 16

@@ -139,6 +139,12 @@ We again illustrate this problem in Figure \ref{fig:Graph} with an example genea
     \label{fig:Graph}
 \end{figure}
 
+\section{Package overview}
+
+We will now provide a brief overview of the functionality of the \pkg{ggenealogy} package before going into more detail with examples later in this paper. With the \pkg{ggenealogy} package, users can convert genealogical data into graph structures. This allows for users to efficiently traverse, analyze, and elicit graph theoretical measurements on genealogical lineages (see Section \ref{ggo}). These capabilities were developed by building upon the \pkg{igraph} software (\citealt{igraph}).
+
+Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical data in multiple ways. Users can obtain and plot the shortest path between two nodes of interest constrained on a variable of interest (see Section \ref{psp}), superimpose a shortest path between two nodes of interest with the entire genealogical structure constrained on a variable of interest (see Section \ref{sspt}), plot the ancestors and descendants of a node of interest constrained on generation count (see Section \ref{remedy}), and plot distance matrices based on a variable of interest (see Section \ref{pdm}). Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
+
 \section{Example datasets}
 \label{exData}
 
@@ -204,10 +210,11 @@ As is the case with both example data files introduced above, \pkg{ggenealogy} r
 However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third column. In both example data files, this column is labeled ``year," and each case in that column can either be of type numeric, type NA, or type ``". At this point, any \pkg{ggenealogy} plot can be used.
 
 \section{Generating a graphical object}
+\label{ggo}
 
 Most functions in the \pkg{ggenealogy} software package require an input parameter of a graph structure. Therefore, as a preprocessing step, we must first convert our original data frame structure into a graph structure. Below, we read in the \proglang{R} data file \code{sbGeneal} that is included in the package as a sample data set of soybean genealogy.
 
-We now convert it into an \pkg{igraph} object (\citealt{igraph}) \code{sbIG} using the function 
+We now convert it into an \pkg{igraph} object \code{sbIG} using the function 
 \code{dfToIG()}.
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -258,6 +265,7 @@ $logN
 \end{CodeChunk}
 
 \section{Plotting a shortest path}
+\label{psp}
 
 With soybean lineages, it may be useful for soybean breeders to track how two varieties are related to each other via parent-child relationships. Then, any dramatic changes in yield and other measures of interest between the two varieties can be traced across their genetic timeline. The \pkg{ggenealogy} package allows users to select two varieties of interest, and determine the shortest pathway of parent-child relationships between them, using the \code{getPath()} function. This will return a list that contains the variety names and their years in the path.
 
@@ -318,6 +326,7 @@ The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickl
 Furthermore, as determined by the figure, for both \code{Zane} and \code{Bedford}, there are four varieties of unidirectional parent-child relationships between each of them and their common ancestor \code{D55-4090}. Hence, any feature of interest that differentiates \code{Zane} and \code{Bedford} (protein content, yield, disease resistance, etc.) can also be examined across these two separate lineage histories.
 
 \section{Superimposing shortest path on tree}
+\label{sspt}
 
 Now that we can create path objects, we may wish to know how those paths are positioned compared to the entire genealogical lineage. For instance, of the documented soybean cultivar lineage varieties, where does the shortest path between two varieties of interest exist? Are these two varieties older compared to the overall data structure? Are they newer? Or, do they span the entire structure, and represent two extreme ends of documented time points?
 
@@ -336,7 +345,7 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:3, pathEdgeCol = "red",
     \label{fig:plotTNBin3}
 \end{figure}
 
-In the code above, syntax from the \pkg{ggplot2} package was appended to the \code{plotPathOnAll()} function; this can be done for most \pkg{ggenealogy} functions (\citealt{ggplot2}). While the first three explicit parameters have been introduced earlier in this paper, the fourth parameter (\code{binVector}) requires some explanation. The motivation of the \code{plotPathOnAll()} function is to write node labels on a plot, with the center of each node label constricted on the horizontal axis to its quantitative variable of interest (in this case, year of release). As is the case for the plots before, the vertical axis has no meaning other than providing a plotting area in which to draw the node labels. Unfortunately, for large datasets, this motivation can be a difficult task because the text labels of the varieties can overlap if they are assigned a similar y coordinate, have a similar year (x coordinate), and have long text labels (width of x coordinate).
+In the code above, syntax from the \pkg{ggplot2} package was appended to the \code{plotPathOnAll()} function; this can be done for most \pkg{ggenealogy} functions. While the first three explicit parameters have been introduced earlier in this paper, the fourth parameter (\code{binVector}) requires some explanation. The motivation of the \code{plotPathOnAll()} function is to write node labels on a plot, with the center of each node label constricted on the horizontal axis to its quantitative variable of interest (in this case, year of release). As is the case for the plots before, the vertical axis has no meaning other than providing a plotting area in which to draw the node labels. Unfortunately, for large datasets, this motivation can be a difficult task because the text labels of the varieties can overlap if they are assigned a similar y coordinate, have a similar year (x coordinate), and have long text labels (width of x coordinate).
 
 For each variety, the x coordinate (year) and width of the x coordinate (text label width) cannot be altered, as they provide useful information. However, for each variety, the y coordinate is arbitrary. Hence, in an attempt to mitigate text overlapping, the \code{plotPathOnAll()} function does not randomly assign the y coordinate. Instead, it allows users to partially control the y coordinates with a user-determined number of bins (\code{binVector}).
 
@@ -389,6 +398,7 @@ This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} h
 The bottom plot of Figure \ref{fig:Lee} is not an output plot of \pkg{ggenealogy}. Instead, it was simply created for didactic purposes. Here, the paths that were manually highlighted in blue in the top plot produced by \pkg{ggenealogy} are shown again, only now nodes cannot be repeated. The parenthetical number above each node represents the set of generation counts distancing that node from the center node \code{Lee}; green parentheses indicate that the node could be successfully placed in one horizontal position, but red parentheses indicate that the node could not be successfully placed in one horizontal position. We see that node \code{TN89-39} cannot simultaneously be represented as both a third and fourth descendent of node \code{Lee}, and node \code{5601T} cannot simultaneously be represented as a third, fourth, and fifth descendent of node \code{Lee}. Hence, without allowing nodes to repeat, this dataset cannot be presented in the graph on the bottom as it can be in the \pkg{ggenealogy} graph on the top. This is a current limitation in other genealogy and graphical software that \pkg{ggenealogy} can now provide.
 
 \section{Plotting distance matrix}
+\label{pdm}
 
 It may also be of interest to generate matrices where the colors indicates a variable between all pairwise combinations of inputted varieties. The package \pkg{ggenealogy} also provides a function \code{plotDegMatrix()} for that purpose. We can demonstrate this function with the variable being the shortest path degree between a given pair of varieties. The shortest path degree is calculated as the smallest number of parent-child edges needed to traverse between two varieties of interest. For instance, in Figure \ref{fig:pathTNZB}, the shortest path degree between \code{Tokyo} and \code{Narow} is four and the shortest path degree between \code{Bedford} and \code{Zane} is ten.
 
@@ -544,6 +554,9 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
 \end{figure}
 
 In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and Petra Buzkova, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
+
+\subsection{Plotting animation}
+\label{interaction}
 
 We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. This interactive functionality comes from methods in the \pkg{plotly} package (\citealt{plotly}). A short video demonstration of these interactive features can be viewed below. 
 
