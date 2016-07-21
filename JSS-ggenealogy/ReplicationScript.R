@@ -1,5 +1,5 @@
 # Load and examine the structure of the example soybean genealogy dataset (called sbGeneal)
-rm(list=)
+rm(list=ls())
 library("devtools")
 load_all("SourceCode")
 library("ggenealogy")
