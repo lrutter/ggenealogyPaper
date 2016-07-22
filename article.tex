@@ -147,6 +147,8 @@ Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical
 
 Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in demonstrative code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
 
+\clearpage
+
 \section{Example datasets}
 \label{exData}
 
@@ -364,8 +366,6 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:6, pathEdgeCol =
 +    "seagreen2", nodeSize = 1, pathNodeSize = 3)
 \end{Code}
 
-\clearpage
-
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=\textwidth]{plotTNBin6}}
@@ -373,14 +373,12 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, binVector = 1:6, pathEdgeCol =
     \label{fig:plotTNBin6}
 \end{figure}
 
-We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We can also confirm what we saw in the previous plot that indeed most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
+We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We also confirm what we saw in the previous plot that most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
 
 \section{Plotting ancestors and descendants by generation}
 \label{remedy}
 
-The most novel visual function in \pkg{ggenealogy}, \code{plotAncDes()} allows users to view the ancestors and descendants of a given variety. The inputted variety is highlighted in the center of the plot, ancestors are displayed to the left of the center, and descendants are displayed to the right of the center. The further from the center that a variety is located, the more generations that variety is distanced from the centered variety of interest.
-
-This particular \pkg{ggenealogy} tool is unique because most available genealogy and graph visualization software do not allow for repeated labels. It is a useful tool because, as was demonstrated in Figures \ref{fig:kinshipFig} and \ref{fig:Graph}, some genealogical datasets require repeated node labels if they are to be visualized by generation counts. Indeed, our example soybean genealogy is one such dataset.
+The most novel visual function in \pkg{ggenealogy}, \code{plotAncDes()} allows users to view the ancestors and descendants of a given variety. The inputted variety is highlighted in the center of the plot, ancestors are displayed to the left of the center, and descendants are displayed to the right of the center. The further from the center that a variety is located, the more generations that variety is distanced from the centered variety of interest. This particular \pkg{ggenealogy} tool is uniquely beneficial because most genealogy and graph visualization software do not allow for repeated node labels even though some genealogical datasets require repeated node labels in order to be visualized by generation counts (as was shown in Figures \ref{fig:kinshipFig} and \ref{fig:Graph}).
 
 To demonstrate this tool, we will create a plot of the ancestors and descendants of the variety \code{Lee}. We specify that the maximum number of ancestor and descendant generations are both 6, and that the text of the variety of interest is highlighted in blue:
 
@@ -388,12 +386,12 @@ To demonstrate this tool, we will create a plot of the ancestors and descendants
 R> plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 \end{Code}
 
-This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} has 3 generations of ancestors and 5 generations of descendants. We also notice that some varieties are repeated in the plot, which is a unique feature provided by \pkg{ggenealogy}. For example, the variety \code{5601T} is represented four times - once as a third generation descendant of \code{Lee}, once as a fourth generation descendant of \code{Lee}, and twice as a fifth generation descendant of \code{Lee}. The variety \code{5601T} was repeated multiple times because there are multiple paths between \code{Lee} and \code{5601T}. For explanation purposes, all paths between \code{Lee} and \code{5601T} were manually highlighted in blue.
+This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} has 3 generations of ancestors and 5 generations of descendants. We also notice that some varieties are repeated, which is a unique feature provided by \pkg{ggenealogy}. For example, the variety \code{5601T} is represented four times - once as a third generation descendant of \code{Lee}, once as a fourth generation descendant of \code{Lee}, and twice as a fifth generation descendant of \code{Lee}. The variety \code{5601T} was repeated multiple times because there are multiple paths between \code{Lee} and \code{5601T}. For explanation purposes, all paths between \code{Lee} and \code{5601T} were manually highlighted in blue.
 
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=\textwidth]{LeeAD}}
-    \caption{Top: All ancestors and descendants of the variety \code{Lee} are shown in this \pkg{ggenealogy} plot. Bottom: This plot was constructed manually outside of the \pkg{ggenealogy} plot for didactic purposes. It mimics the blue paths in the \pkg{ggenealogy} plot on the top, only now nodes cannot be repeated. The parenthetical numbers above each node represents the set of generation counts that node is away from the center node \code{Lee}. The presence of red parentheses indicate that the plot on the bottom ambiguously display the example soybean genealogy in the way that the \pkg{ggenealogy} plot on the top can accomplish.}
+    \caption{Top: All ancestors and descendants of the variety \code{Lee} are shown in this \pkg{ggenealogy} plot. Bottom: For didactic purposes, this plot was constructed manually outside of the \pkg{ggenealogy} package. It mimics the blue paths in the \pkg{ggenealogy} plot on the top, only now nodes cannot be repeated. The parenthetical numbers above each node represents the set of generation counts that node is away from the center node \code{Lee}. The presence of red parentheses indicate that the plot on the bottom ambiguously display the example soybean genealogy in the way that the \pkg{ggenealogy} plot on the top can accomplish.}
     \label{fig:Lee}
 \end{figure}
 
@@ -557,7 +555,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, binVector = 1:200, nodeSize = .5,
 
 In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and \code{Petra Buzkova}, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
 
-\subsection{Plotting animation}
+\subsection{Interactive plotting functions}
 \label{interaction}
 
 We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. This interactive functionality comes from methods in the \pkg{plotly} package (\citealt{plotly}). A short video demonstration of these interactive features can be viewed below. 

@@ -64,6 +64,7 @@ nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 
 # It would be of interest now to examine the shortest path between Sir David Cox and one of his newest "descendants" Petra Buzkova. To do so, we first need to obtain the corresponding igraph object of the example academic statistican genealogy dataset.
 statIG <- dfToIG(statGeneal)
+pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal, isDirected = FALSE)
 
 # After doing so, we can now determine the shortest path between Sir David Cox and Petra Buzkova, and plot it.
 plotPath(pathCB, fontFace = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
