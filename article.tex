@@ -174,9 +174,9 @@ R> str(sbGeneal)
 \begin{CodeOutput}
 'data.frame':	390 obs. of  5 variables:
  $ child       : chr  "5601T" "Adams" "A.K." "A.K. (Harrow)" ...
- $ year        : num  1981 1948 1910 1912 1968 ...
+ $ date        : num  1981 1948 1910 1912 1968 ...
  $ yield       : int  NA 2734 NA 2665 NA 2981 2887 2817 NA NA ...
- $ year.imputed: logi  TRUE FALSE TRUE FALSE FALSE FALSE ...
+ $ date.imputed: logi  TRUE FALSE TRUE FALSE FALSE FALSE ...
  $ parent      : chr  "Hutcheson" "Dunfield" NA "A.K." ...
 \end{CodeOutput}
 \end{CodeChunk}
@@ -203,7 +203,7 @@ R> dim(statGeneal)
 R> colnames(statGeneal)
 \end{CodeInput}
 \begin{CodeOutput}
-[1] "child"   "parent"  "year"    "country" "school"  "thesis"
+[1] "child"   "parent"  "date"    "country" "school"  "thesis" 
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -211,7 +211,7 @@ R> colnames(statGeneal)
 
 As is the case with both example data files introduced above, \pkg{ggenealogy} requires that the genealogy input file is a data frame structure with at least two columns. One column must be labeled ``child", and each case in that column must be of type character. The other column must be labeled ``parent," and each case in that column must either be of type character, type NA, or type ``". At this point, any \pkg{ggenealogy} plot that only requires information about parent-child relationships can be used.
 
-However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column can be of type numeric, type NA, or type ``". In both example data files, this column is labeled ``year,". However, we would like to emphasize that the name of quantitative variable column to be plotted is user-specified. For instance, should the data of interest contain time-related values on a shorter scale than years (such as days or months), then the column could be named ``day" or ``month". This flexibilitiy allows for more diverse datasets to easily be examined with the package.
+However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column can be of type numeric, type NA, or type ``". In both example data files, this column is labeled ``date," and each case in that column can be of type numeric, type NA, or type ``". At this point, any \pkg{ggenealogy} plot can be used.
 
 \section{Generating a graphical object}
 \label{ggo}
@@ -281,8 +281,8 @@ R> pathTN
 \begin{CodeOutput}
 $pathVertices
 [1] "Tokyo"    "Volstate" "Jackson"  "R66-873"  "Narow"   
-$yearVertices
-[1] "1907"   "1942"   "1954.5" "1971.5" "1985" 
+$dateVertices
+[1] "1907"   "1942"   "1954.5" "1971.5" "1985"  
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -301,17 +301,17 @@ R> plotPath(pathTN)
 
 This produces a visual that informs users of all the varieties involved in the shortest path between the two varieties of interest (see left half of Figure \ref{fig:pathTNZB}). In this plot, the release year of all varieties involved in the path are indicated on the horizontal axis, while the vertical axis has no meaning other than to simply to display the labels evenly spaced vertically. The shortest path between varieties \code{Tokyo} and \code{Narow} is composed of a unidirectional series of parent-child relationships, with \code{Tokyo} as the starting ancestor in the early 1900s, \code{Narow} as the most recent descendent in the mid 1980s, and three varieties in between.
 
-Next, we can run the same set of functions on a different pair of varieties. First, a call to the \pkg{ggenealogy} function \code{getYear()} indicates that variety \code{Bedford} was released in 1978 and variety \code{Zane} in 1985.
+Next, we can run the same set of functions on a different pair of varieties. First, a call to the \pkg{ggenealogy} function \code{getDate()} indicates that variety \code{Bedford} was released in 1978 and variety \code{Zane} in 1985.
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> getYear("Bedford", sbGeneal)
+R> getDate("Bedford", sbGeneal)
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 1978
 \end{CodeOutput}
 \begin{CodeInput}
-R> getYear("Zane", sbGeneal)
+R> getDate("Zane", sbGeneal)
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 1985
@@ -337,7 +337,7 @@ Now that we can create path objects, we may wish to know how those paths are pos
 There is a function available in the \pkg{ggenealogy} package \code{plotPathOnAll()} that can allow users to quickly visualize their path of interest superimposed over all varieties and edges present in the whole data structure. Here we will produce a plot of the shortest path between varieties \code{Tokyo} and \code{Narow} across the entire dataset, as is displayed in Figure \ref{fig:plotTNBin3}.
 
 \begin{Code}
-R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 1:3, pathEdgeCol = "red",
+R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 3, pathEdgeCol = "red",
 +    nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::
 +    element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
 \end{Code}
@@ -362,8 +362,8 @@ This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not o
 However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the noticeably distinct bins, whereas almost all text labels are overlapping, thereby decreasing their readability. To force text labels into these spaces, the user may consider using a larger number of bins. Hence, we next examine a bin size of 6 to create Figure \ref{fig:plotTNBin6}.
 
 \begin{Code}
-R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 1:6, pathEdgeCol =
-+    "seagreen2", nodeSize = 1, pathNodeSize = 3)
+R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 6, pathEdgeCol =
++    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Year")
 \end{Code}
 
 \begin{figure}[H]
@@ -374,6 +374,8 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 1:6, pathEdgeCol =
 \end{figure}
 
 We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We also confirm what we saw in the previous plot that most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
+
+Notice from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``Date". Given that the ``date" variable in this example dataset is on the timescale of years, we wanted to change the default value of the horizontal axis label to ``Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
 
 \section{Plotting ancestors and descendants by generation}
 \label{remedy}
@@ -496,8 +498,8 @@ At this point, it would be insightful to examine a more detailed view of one of 
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
 +    isDirected = FALSE)
-R> plotPath(pathCB, fontFace = 4) + ggplot2::theme(axis.text =
-+    ggplot2::element_text(size = 10), axis.title =
+R> plotPath(pathCB, fontFace = 4) + ggplot2::xlab("Year") +
++    ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title =
 +    ggplot2::element_text(size = 10)) + + ggplot2::scale_x_continuous(expand
 +    = c(.1, .2))
 \end{CodeInput}
@@ -518,10 +520,10 @@ We can achieve this using the below code. After trial and error, we use a \code{
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200) +
+R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 200)
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2))
++    (expand = c(.1, .2)) + ggplot2::xlab("Year")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -538,11 +540,11 @@ The text labels are so numerous in Figure \ref{fig:plotCBText} that simply tryin
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200, nodeSize = .5,
+R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5,
 +    pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2))
++    (expand = c(.1, .2)) + ggplot2::xlab("Year")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -562,7 +564,7 @@ We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200, nodeSize = .5,
+R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5,
 +    pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray",
 +    animate = TRUE)
 \end{CodeInput}

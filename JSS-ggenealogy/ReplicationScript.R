@@ -26,18 +26,18 @@ pathTN
 plotPath(pathTN)
 
 # Do the same for a different pair of two labels of interest ("Bedford" and "Zane"). First, we can determine the years these two labels were identified
-getYear("Bedford", sbGeneal)
-getYear("Zane", sbGeneal)
+getDate("Bedford", sbGeneal)
+getDate("Zane", sbGeneal)
 
 # Next, we can determine the shortest path of parent-child relationships between these two labels of interest and plot it.
 pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal)
 plotPath(pathBZ, fontFace = 2)
 
 # In the previous section, we obtained the shortest path between the the pair of labels "Tokyo" and "Narow" and saved it as a variable pathTN. Here, we can plot that path superimposed over all labels in the example soybean genealogy dataset.
-plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 1:3, pathEdgeCol = "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
+plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 3, pathEdgeCol = "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
 
 # We can repeat this process, only now instead of setting the bin variable to 1:3 (as we did earlier), we can set it to 1:6.
-plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 1:6, pathEdgeCol = "seagreen2", nodeSize = 1, pathNodeSize = 3)
+plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 6, pathEdgeCol = "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Year")
 
 # As is explained in the article, only the top part of Figure 6 (the figure from this section) is produced by ggenealogy code. In contrast, the bottom part of Figure 6 was produced by tools outside of ggenealogy for didactic purposes. Below, we recreate the top part of Figure 6, which was to generate a plot of the ancestors and descendants of the label Lee.
 plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
@@ -67,13 +67,14 @@ statIG <- dfToIG(statGeneal)
 pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal, isDirected = FALSE)
 
 # After doing so, we can now determine the shortest path between Sir David Cox and Petra Buzkova, and plot it.
-plotPath(pathCB, fontFace = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
+plotPath(pathCB, fontFace = 4) + ggplot2::xlab("Year") + ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
 
 # We can now superimpose this shortest path between Sir David Cox and Petra Buzkova across the entire genealogical structure.
-plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200) + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
+plotPathOnAll(pathCB, statGeneal, statIG, bin = 200) + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2)) + ggplot2::xlab("Year") 
 
 # We notice, however, that we cannot read the text of the nodes on the path of interest. To solve this problem, we can create the same plot, only now specifying that any nodes that are not on our path of interest are deemphasized with smaller text.
-plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
+plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2)) + ggplot2::xlab("Year")
+
 
 # Even though we can now read the text labels on the path of interest, we lost the ability to read labels that are not on our path of interest. At this point, we can keep the best of both worlds: We can create a plot that demphasizes the nodes that are not on the path of interest by assigning them small text font size, but incoroporate an interactive function so that we can hover over these non-path nodes if we wish to obtain their label information. This is the plot we used and interacted with to create the video embedded in Figure 12.
-plotPathOnAll(pathCB, statGeneal, statIG, bin = 1:200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray", animate = TRUE)
+plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray", animate = TRUE)
