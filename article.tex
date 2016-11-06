@@ -211,7 +211,7 @@ R> colnames(statGeneal)
 
 As is the case with both example data files introduced above, \pkg{ggenealogy} requires that the genealogy input file is a data frame structure with at least two columns. One column must be labeled ``child", and each case in that column must be of type character. The other column must be labeled ``parent," and each case in that column must either be of type character, type NA, or type ``". At this point, any \pkg{ggenealogy} plot that only requires information about parent-child relationships can be used.
 
-However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third column. In both example data files, this column is labeled ``year," and each case in that column can either be of type numeric, type NA, or type ``". At this point, any \pkg{ggenealogy} plot can be used.
+However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column can be of type numeric, type NA, or type ``". In both example data files, this column is labeled ``year,". However, we would like to emphasize that the name of quantitative variable column to be plotted is user-specified. For instance, should the data of interest contain time-related values on a shorter scale than years (such as days or months), then the column could be named ``day" or ``month". This flexibilitiy allows for more diverse datasets to easily be examined with the package.
 
 \section{Generating a graphical object}
 \label{ggo}
@@ -424,7 +424,7 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
 
 \section{Academic genealogy of statisticians}
 
-The \pkg{ggenealogy} package comes with two example datasets, and while we have introduced the plant breeding genealogy, we have yet to introduce the academic genealogy. As was demonstrated in Section \ref{exData}, every parent in the academic genealogy is also a child, and some children in the academic genealogy have more than two parents. Neither of these features was the case in the plant breeding genealogy. Additionally, the academic genealogy is much larger than the plant breeding genealogy. Some of these differences may affect how one would approach \pkg{ggenealogy} plotting tools. For this reason, we will now demonstrate some of the \pkg{ggenealogy} plotting tools we already introduced, only now applied to the academic genealogy. 
+An academic genealogy is the second dataset provided in the package, where every parent is also a child and some children have more than two parents, as was briefly described in Section \ref{exData}. Neither of these features was the case in the plant breeding genealogy. Additionally, the academic genealogy is much larger than the plant breeding genealogy. Some of these differences may affect how one would approach \pkg{ggenealogy} plotting tools. For this reason, we will now demonstrate some of the \pkg{ggenealogy} plotting tools we already introduced, only now applied to the academic genealogy. 
 
 The ability to plot ancestors and descendants by generation was demonstrated using the plant breeding genealogy in Figure \ref{fig:Lee}. As we believe this is the most novel plotting tool in the \pkg{ggenealogy} package, we will test it again here using the academic genealogy.
 
@@ -489,7 +489,7 @@ R> nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 \end{CodeOutput}
 \end{CodeChunk}
 
-At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir \code{David Cox} and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be \code{Petra Buzkova}. We set the \code{fontFace} variable of the \code{plotPath()} to a value of 4, indicating we wish to boldface and italicize the two varieties of interest.
+At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir \code{David Cox} and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be \code{Petra Buzkova}. We set the \code{fontFace} variable of the \code{plotPath()} to a value of 4, indicating we wish to boldface and italicize the two statisticians of interest.
 
 \begin{CodeChunk}
 \begin{CodeInput}
