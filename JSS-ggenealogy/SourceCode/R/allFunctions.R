@@ -258,7 +258,7 @@ buildDesList = function(v1, geneal, gen=0){
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
 #' @seealso \code{\link{dfToIG}} for information on producing ig from the genealogy
 #' @seealso \url{http://www.r-project.org} for iGraph information
-buildEdgeTotalDF = function(geneal, ig, bin = 12, colName){
+buildEdgeTotalDF = function(geneal, ig, colName, bin = 12){
   
   if(class(ig)!="igraph"){
     stop("ig must be an igraph object")
@@ -331,7 +331,7 @@ buildMinusPathDF = function(path, geneal, ig, colName, bin = 12){
     }
     varieties <- path
     path <- getPath(varieties[1], varieties[2], ig, colName)
-  } else if(sum(names(path)%in%c("pathVertices", "dateVertices"))!=2){
+  } else if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
     stop("path does not appear to be a result of the getPath() function")
   } 
   
@@ -339,7 +339,7 @@ buildMinusPathDF = function(path, geneal, ig, colName, bin = 12){
   eG <- igraph::get.data.frame(ig, "edges")
   
   label=tG$name
-  x=tG$date
+  x=tG[[colName]]
   y=tG$y
   # If the label is part of the path, then we change the its value to NA
   for (i in 1:length(label)){
@@ -371,7 +371,7 @@ buildPathDF = function(path){
     # The labels of the nodes are the names of the varieties in the path
     label=path$pathVertices
     # The x-axis position of the node labels are the dates of the varieties in the path
-    x=as.numeric(path$dateVertices)
+    x=as.numeric(path$variableVertices)
     # The y-axis position of the node labels are incremented by unity for each new connected
     # node in the path
     y=seq(1, length(label), 1)
@@ -433,7 +433,7 @@ buildPlotTotalDF = function(path, geneal, ig, colName, bin = 12){
     }
     varieties <- path
     path <- getPath(varieties[1], varieties[2], ig, colName)
-  } else if(sum(names(path)%in%c("pathVertices", "dateVertices"))!=2){
+  } else if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
     stop("path does not appear to be a result of the getPath() function")
   } 
   
@@ -445,7 +445,7 @@ buildPlotTotalDF = function(path, geneal, ig, colName, bin = 12){
   tG <- buildSpreadTotalDF(geneal, ig, colName, bin)
   
   label=path$pathVertices
-  x=as.numeric(path$dateVertices)
+  x=as.numeric(path$variableVertices)
   xstart=x
   xend=rep(0,length(label))
   ystart=rep(0,length(label))
@@ -492,10 +492,10 @@ buildSpreadTotalDF = function(geneal, ig, colName, bin = 12){
   }
   
   totalDF2 = cbind(totalDF, dateVector)
-  colnames(totalDF2)[2] = "date"
+  colnames(totalDF2)[2] = colName
   totalDF = totalDF2
   
-  totalDF = totalDF[order(totalDF$date, decreasing=FALSE), ]
+  totalDF = totalDF[order(totalDF[[colName]], decreasing=FALSE), ]
   
   numrows <- ceiling(nrow(totalDF)/bin)
   
@@ -656,7 +656,7 @@ getChild = function(v1, geneal){
 #' @export
 getDegree = function(v1, v2, ig, geneal, colName){
   if(is.null(geneal)){
-    stop("Please input a genealogy data frame where the first two columns are nodes at least one other column is labeled `$date`")
+    stop("Please input a genealogy data frame where the first two columns are nodes and at least one other column is your inputted quantitative variable colName")
   }
   if(is.null(ig)){
     stop("Please input an igraph object formatted by dfToIG()")
@@ -747,7 +747,7 @@ getPath = function(v1, v2, ig, geneal, colName, silent=FALSE, isDirected=FALSE){
   }
   
   retPath = list()
-  dateVertices = character()
+  variableVertices = character()
   pathVertices = character()
   # If the genealogy is directed
   if (igraph::is.directed(ig)){
@@ -759,29 +759,29 @@ getPath = function(v1, v2, ig, geneal, colName, silent=FALSE, isDirected=FALSE){
     if (length(pathVIndicesForward) != 0){
       for (i in 1:length(pathVIndicesForward)){
         pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndicesForward[i]))
-        dateVertices = c(dateVertices, getVariable(pathVertices[i], geneal, colName))
+        variableVertices = c(variableVertices, getVariable(pathVertices[i], geneal, colName))
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v1){
-          dateVertices[i] = v1Year
+          variableVertices[i] = v1Year
         }
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v2){
-          dateVertices[i] = v2Year
+          variableVertices[i] = v2Year
         }
       }
-      retPath = list(pathVertices = pathVertices, dateVertices = dateVertices)
+      retPath = list(pathVertices = pathVertices, variableVertices = variableVertices)
     }
     # If there is a path in the reverse direction, then we save the names of the vertices in that order
     if (length(pathVIndicesReverse) != 0){
       for (i in 1:length(pathVIndicesReverse)){
         pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndicesReverse[i]))
-        dateVertices = c(dateVertices, getVariable(pathVertices[i], geneal, colName))
+        variableVertices = c(variableVertices, getVariable(pathVertices[i], geneal, colName))
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v1){
-          dateVertices[i] = v1Year
+          variableVertices[i] = v1Year
         }
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v2){
-          dateVertices[i] = v2Year
+          variableVertices[i] = v2Year
         }   
       }
-      retPath = list(pathVertices = pathVertices, dateVertices = dateVertices)
+      retPath = list(pathVertices = pathVertices, variableVertices = variableVertices)
     }
   } else {
     # The direction does not matter, any shortest path between the vertices will be listed
@@ -789,15 +789,15 @@ getPath = function(v1, v2, ig, geneal, colName, silent=FALSE, isDirected=FALSE){
     if (length(pathVIndices) != 0){
       for (i in 1:length(pathVIndices)){
         pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndices[i]))
-        dateVertices = c(dateVertices, getVariable(pathVertices[i], geneal, colName))
+        variableVertices = c(variableVertices, getVariable(pathVertices[i], geneal, colName))
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v1){
-          dateVertices[i] = v1Year
+          variableVertices[i] = v1Year
         }
         if (is.na(getVariable(pathVertices[i], geneal, colName)) && pathVertices[i] == v2){
-          dateVertices[i] = v2Year
+          variableVertices[i] = v2Year
         }
       }
-      retPath = list(pathVertices = pathVertices, dateVertices = dateVertices)
+      retPath = list(pathVertices = pathVertices, variableVertices = variableVertices)
     }
   }
   if(length(retPath)==0 & !silent){
@@ -973,7 +973,7 @@ plotAncDes = function(v1, geneal, mAnc=3, mDes=3, vColor="#D35C79"){
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
 #' varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-#' p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear", Soybean label", "Soybean label", "Degree")
+#' p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear", "Soybean label", "Soybean label", "Degree")
 #' p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 #' 
 #' @export
@@ -1005,18 +1005,19 @@ plotDegMatrix = function(varieties,ig,geneal,colName,xLab="Variety",yLab="Variet
 #' parent-child relationships between those nodes. For visual appeal, there is a grey
 #' box that outlines the node label, as well as an underline and overline for each label.
 #' @param path object created from function getPath
+#' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
 #' @param fontFace fontface for the two nodes of interest (1=plain, 2=bold, 3=italic, 4=bold-italic), DEFAULT is 1 
 #' @seealso \code{\link{getPath}} for information on input path building
 #' @export
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
-#' p <- getPath("Brim", "Bedford", ig, sbGeneal)
+#' p <- getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
 #' plotPath(p)
-#' plotPath(p, fontFace = 4)
-plotPath = function(path, fontFace = 1){
+#' plotPath(p, "devYear", fontFace = 4)
+plotPath = function(path, colName, fontFace = 1){
   x <- y <- label <- xstart <- ystart <- xend <- yend <- NULL
-  if(sum(names(path)%in%c("pathVertices", "dateVertices"))!=2){
+  if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
     stop("path does not appear to be a result of the getPath() function")
   }
   
@@ -1033,7 +1034,7 @@ plotPath = function(path, fontFace = 1){
     plotPathImage = ggplot2::ggplot(data = pPDF,ggplot2::aes(x = xstart, y = y, label=label)) +
       ggplot2::geom_segment(ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend)) +
       ggplot2::geom_label(fill = "grey80", size = 3, fontface=pPDF$fontface) +
-      ggplot2::xlab("Date") +
+      ggplot2::xlab(colName) +
       ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(),
                      axis.title.y=ggplot2::element_blank(),legend.position="none",
                      panel.grid.major.y=ggplot2::element_blank(),
@@ -1092,13 +1093,13 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
     }
     varieties <- path
     path <- getPath(varieties[1], varieties[2], ig, colName)
-  } else if(sum(names(path)%in%c("pathVertices", "dateVertices"))!=2){
+  } else if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
     stop("path does not appear to be a result of the getPath() function")
   } 
   
-  pMPDF <- buildMinusPathDF(path, geneal, ig, bin, colName)
-  eTDF <- buildEdgeTotalDF(geneal, ig, bin, colName)
-  pTDF <- buildPlotTotalDF(path, geneal, ig, bin, colName)
+  pMPDF <- buildMinusPathDF(path, geneal, ig, colName, bin)
+  eTDF <- buildEdgeTotalDF(geneal, ig, colName, bin)
+  pTDF <- buildPlotTotalDF(path, geneal, ig, colName, bin)
   
   eTDF <- stats::na.omit(eTDF) #remove any row that has at least one NA
   
@@ -1122,7 +1123,7 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
       ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
 
   plotTotalImage = plotTotalImage + ggplot2::geom_text(data = pTDF,ggplot2::aes(x = x, y = y, label = label), size = pathNodeSize, fontface=pathNodeFont) +
-    ggplot2::xlab("Date") +
+    ggplot2::xlab(colName) +
     # Erase the y-axis, and only include grids from the x-axis
     ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(),
                    axis.title.y=ggplot2::element_blank(),legend.position="none",
@@ -1157,7 +1158,7 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
 #' @examples
 #' data(sbGeneal)
 #' varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-#' p <- plotYearMatrix(varieties, sbGeneal, "devYear", Variety", "Variety", "Degree")
+#' p <- plotYearMatrix(varieties, sbGeneal, "devYear", "Variety", "Variety", "Degree")
 #' p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 #' 
 #' @export

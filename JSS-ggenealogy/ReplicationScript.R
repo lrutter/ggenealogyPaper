@@ -19,25 +19,25 @@ sbIG
 getBasicStatistics(sbIG)
 
 # Determine shortest path of parent-child relationships between two labels of interest ("Tokyo" and "Narow")
-pathTN <- getPath("Tokyo", "Narow", sbIG, sbGeneal)
+pathTN <- getPath("Tokyo", "Narow", sbIG, sbGeneal, "devYear")
 pathTN
 
 # Plot returned path
-plotPath(pathTN)
+plotPath(pathTN, "devYear")
 
 # Do the same for a different pair of two labels of interest ("Bedford" and "Zane"). First, we can determine the years these two labels were identified
-getDate("Bedford", sbGeneal)
-getDate("Zane", sbGeneal)
+getVariable("Bedford", sbGeneal, "devYear")
+getVariable("Zane", sbGeneal, "devYear")
 
 # Next, we can determine the shortest path of parent-child relationships between these two labels of interest and plot it.
-pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal)
-plotPath(pathBZ, fontFace = 2)
+pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
+plotPath(pathBZ, "devYear", fontFace = 2)
 
 # In the previous section, we obtained the shortest path between the the pair of labels "Tokyo" and "Narow" and saved it as a variable pathTN. Here, we can plot that path superimposed over all labels in the example soybean genealogy dataset.
-plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 3, pathEdgeCol = "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
+plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol = "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
 
 # We can repeat this process, only now instead of setting the bin variable to 1:3 (as we did earlier), we can set it to 1:6.
-plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 6, pathEdgeCol = "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Year")
+plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol = "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Year")
 
 # As is explained in the article, only the top part of Figure 6 (the figure from this section) is produced by ggenealogy code. In contrast, the bottom part of Figure 6 was produced by tools outside of ggenealogy for didactic purposes. Below, we recreate the top part of Figure 6, which was to generate a plot of the ancestors and descendants of the label Lee.
 plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")

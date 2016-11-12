@@ -4,7 +4,7 @@
 \alias{getDegree}
 \title{Determine the degree between two varieties}
 \usage{
-getDegree(v1, v2, ig, geneal)
+getDegree(v1, v2, ig, geneal, colName)
 }
 \arguments{
 \item{v1}{the label of the first variety/vertex of interest (in character string format)}
@@ -14,6 +14,8 @@ getDegree(v1, v2, ig, geneal)
 \item{ig}{the graph representation of the data genealogy (in igraph format)}
 
 \item{geneal}{the full genealogy  (in data frame format)}
+
+\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 }
 \description{
 Returns the degree (distance between unweighted edges) between two varieties, where an edge
@@ -22,6 +24,6 @@ represents a parent-child relationship
 \examples{
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
-getDegree("Brim", "Bedford", ig, sbGeneal)
+getDegree("Brim", "Bedford", ig, sbGeneal, "devYear")
 }
 

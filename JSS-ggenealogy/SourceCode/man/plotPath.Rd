@@ -4,10 +4,12 @@
 \alias{plotPath}
 \title{Construct the graphic object of the path}
 \usage{
-plotPath(path, fontFace = 1)
+plotPath(path, colName, fontFace = 1)
 }
 \arguments{
 \item{path}{object created from function getPath}
+
+\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 
 \item{fontFace}{fontface for the two nodes of interest (1=plain, 2=bold, 3=italic, 4=bold-italic), DEFAULT is 1}
 }
@@ -21,9 +23,9 @@ box that outlines the node label, as well as an underline and overline for each 
 \examples{
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
-p <- getPath("Brim", "Bedford", ig, sbGeneal)
+p <- getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
 plotPath(p)
-plotPath(p, fontFace = 4)
+plotPath(p, "devYear", fontFace = 4)
 }
 \seealso{
 \code{\link{getPath}} for information on input path building

@@ -4,13 +4,15 @@
 \alias{plotYearMatrix}
 \title{Returns the image object to show the heat map of dates between the inputted set of vertices}
 \usage{
-plotYearMatrix(varieties, geneal, xLab = "Variety", yLab = "Variety",
-  legendLab = "Difference in dates")
+plotYearMatrix(varieties, geneal, colName, xLab = "Variety",
+  yLab = "Variety", legendLab = "Difference in dates")
 }
 \arguments{
 \item{varieties}{subset of varieties used to generate the heat map}
 
 \item{geneal}{the full genealogy  (in data frame format)}
+
+\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 
 \item{xLab}{string label on the x axis (default is "Variety")}
 
@@ -24,7 +26,7 @@ Returns the image object to show the heat map of dates between the inputted set 
 \examples{
 data(sbGeneal)
 varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-p <- plotYearMatrix(varieties, sbGeneal, "Variety", "Variety", "Degree")
+p <- plotYearMatrix(varieties, sbGeneal, "devYear", "Variety", "Variety", "Degree")
 p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 
 }

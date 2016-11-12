@@ -4,7 +4,7 @@
 \alias{plotPathOnAll}
 \title{Plot a path between two vertices over the full genealogy}
 \usage{
-plotPathOnAll(path, geneal, ig, bin = 12, edgeCol = "gray84",
+plotPathOnAll(path, geneal, ig, colName, bin = 12, edgeCol = "gray84",
   pathEdgeCol = "seagreen", nodeSize = 3, pathNodeSize = 3,
   pathNodeFont = "bold", nodeCol = "black", animate = FALSE)
 }
@@ -14,6 +14,8 @@ plotPathOnAll(path, geneal, ig, bin = 12, edgeCol = "gray84",
 \item{geneal}{the full genealogy  (in data frame format)}
 
 \item{ig}{the graph representation of the data genealogy (in igraph format)}
+
+\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 
 \item{bin}{the number of bins to determine the vertical positions of nodes (default is 12). For more information on choosing bin size, please visit the ggenealogy vignette}
 
@@ -44,9 +46,9 @@ boldfaced edges.
 \examples{
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
-path <- getPath("Brim", "Bedford", ig, sbGeneal)
+path <- getPath("Brim", "Bedford", ig, "devYear", sbGeneal)
 bV <- 12
-plotTotalImage <- plotPathOnAll(path = path, geneal = sbGeneal, ig = ig, bin = bV)
+plotTotalImage <- plotPathOnAll(path = path, geneal = sbGeneal, ig = ig, "devYear", bin = bV)
 plotTotalImage
 }
 \seealso{

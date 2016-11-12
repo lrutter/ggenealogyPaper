@@ -4,7 +4,7 @@
 \alias{getPath}
 \title{Determine the path between two varieties}
 \usage{
-getPath(v1, v2, ig, geneal, silent = FALSE, isDirected = FALSE)
+getPath(v1, v2, ig, geneal, colName, silent = FALSE, isDirected = FALSE)
 }
 \arguments{
 \item{v1}{the label of the first variety/vertex of interest (in character string format)}
@@ -14,6 +14,8 @@ getPath(v1, v2, ig, geneal, silent = FALSE, isDirected = FALSE)
 \item{ig}{the graph representation of the data genealogy (in igraph format)}
 
 \item{geneal}{the full genealogy  (in data frame format)}
+
+\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 
 \item{silent}{whether or not to print output (defaults to false)}
 
@@ -29,7 +31,7 @@ and return the path if it exists.
 \examples{
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
-getPath("Brim", "Bedford", ig, sbGeneal)
-getPath("Tokyo", "Volstate", ig, sbGeneal)
+getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
+getPath("Tokyo", "Volstate", ig, sbGeneal, "yield")
 }
 
