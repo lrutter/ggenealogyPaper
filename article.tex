@@ -126,7 +126,7 @@ In the \pkg{kinship2} package, if an individual cannot be represented with only 
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=0.65\textwidth]{kinshipFig}}
-    \caption{Example pedigree chart from the \pkg{kinship2} package, where the vertical axis denotes generation count. We superimposed green-highlighted individual 215 for explanatory purposes. As an offspring of a parent-child relationship, individual 215 is both a second and third generation individual. Hence, it should be displayed twice on the vertical axis, once for each of its generation counts. However, most standard pedigree tools only allow for an individual to be displayed once. In the \pkg{kinship2} package, individuals can indeed be displayed more than once. However, each child must have zero or two parents (one male and one female). These restrictions make it impossible to plot genealogical data by generation count in cases where there are many inter-generational breedings.
+    \caption{Example pedigree chart from the \pkg{kinship2} package, where the vertical axis denotes generation count. We superimposed green-highlighted individual 215 for explanatory purposes. As an offspring of a parent-child relationship, individual 215 is both a second and third generation individual. Hence, it should be displayed twice on the vertical axis, once for each of its generation counts. However, most standard pedigree tools only allow for an individual to be displayed once. In the \pkg{kinship2} package, individuals can indeed be displayed more than once. However, each child must have zero or two parents (one male and one female). These restrictions make it impossible to plot genealogical data by generation count in cases where there are many inter-generational breedings.}
     \label{fig:kinshipFig}
 \end{figure}
 
@@ -175,13 +175,14 @@ R> str(sbGeneal)
 \end{CodeInput}
 \begin{CodeOutput}
 'data.frame':	390 obs. of  5 variables:
- $ child       : chr  "5601T" "Adams" "A.K." "A.K. (Harrow)" ...
- $ date        : num  1981 1948 1910 1912 1968 ...
- $ yield       : int  NA 2734 NA 2665 NA 2981 2887 2817 NA NA ...
- $ date.imputed: logi  TRUE FALSE TRUE FALSE FALSE FALSE ...
- $ parent      : chr  "Hutcheson" "Dunfield" NA "A.K." ...
+ $ child      : chr  "5601T" "Adams" "A.K." "A.K. (Harrow)" ...
+ $ devYear    : num  1981 1948 1910 1912 1968 ...
+ $ yield      : int  NA 2734 NA 2665 NA 2981 2887 2817 NA NA ...
+ $ yearImputed: logi  TRUE FALSE TRUE FALSE FALSE FALSE ...
+ $ parent     : chr  "Hutcheson" "Dunfield" NA "A.K." ...
 \end{CodeOutput}
 \end{CodeChunk}
+
 \subsection{Academic genealogy of statisticians}
 The \pkg{ggenealogy} package also comes with an academic genealogy of statisticians; this dataset is in the form of a data frame with 8165 rows and six columns. To develop this later dataset, we contacted the \citealt{mgp}, a web-based database for the genealogy of academic mathematicians. This database, which currently contains almost 200,000 entries, is a service of the North Dakota State University Department of Mathematics and the American Mathematical Society. The Mathematics Genealogy Project contact provided us a Structured Query Language (SQL) export, and we used PostgreSQL to query the database (\citealt{psql}).
 
@@ -205,7 +206,7 @@ R> dim(statGeneal)
 R> colnames(statGeneal)
 \end{CodeInput}
 \begin{CodeOutput}
-[1] "child"   "parent"  "date"    "country" "school"  "thesis" 
+[1] "child"    "parent"   "gradYear" "country"  "school"   "thesis" 
 \end{CodeOutput}
 \end{CodeChunk}
 
@@ -213,7 +214,7 @@ R> colnames(statGeneal)
 
 As is the case with both example data files introduced above, \pkg{ggenealogy} requires that the genealogy input file is a data frame structure with at least two columns. One column must be labeled ``child", and each case in that column must be of type character. The other column must be labeled ``parent," and each case in that column must either be of type character, type NA, or type ``". At this point, any \pkg{ggenealogy} plot that only requires information about parent-child relationships can be used.
 
-However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column can be of type numeric, type NA, or type ``". In both example data files, this column is labeled ``date," and each case in that column can be of type numeric, type NA, or type ``". At this point, any \pkg{ggenealogy} plot can be used.
+However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column can be of type numeric, type NA, or type ``". In the first example dataset, columns that could be used for this purpose include ``devYear", ``yield", and ``yearImputed"; in the second example dataset, the column that could be used for this purpose is ``gradYear". At this point, any \pkg{ggenealogy} plot can be used.
 
 \section{Generating a graphical object}
 \label{ggo}
@@ -273,7 +274,7 @@ $logN
 \section{Plotting a shortest path}
 \label{psp}
 
-With soybean lineages, it may be useful for soybean breeders to track how two varieties are related to each other via parent-child relationships. Then, any dramatic changes in yield and other measures of interest between the two varieties can be traced across their genetic timeline. The \pkg{ggenealogy} package allows users to select two varieties of interest, and determine the shortest pathway of parent-child relationships between them, using the \code{getPath()} function. This will return a list that contains the variety names and their years in the path.
+With soybean lineages, it may be useful for soybean breeders to track how two varieties are related to each other via parent-child relationships. Then, any dramatic changes in yield and other measures of interest between the two varieties can be traced across their genetic timeline. The \pkg{ggenealogy} package allows users to select two varieties of interest, and determine the shortest pathway of parent-child relationships between them, using the \code{getPath()} function. This will return a list that contains the path, along with the variety name and quantitative variable value of interest for each variety in the path. For this example, we will use the development year (from the column ``devYear") as our quantitative variable.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -283,15 +284,15 @@ R> pathTN
 \begin{CodeOutput}
 $pathVertices
 [1] "Tokyo"    "Volstate" "Jackson"  "R66-873"  "Narow"   
-$dateVertices
-[1] "1907"   "1942"   "1954.5" "1971.5" "1985"  
+$variableVertices
+[1] "1907"   "1942"   "1954.5" "1971.5" "1985"   
 \end{CodeOutput}
 \end{CodeChunk}
 
 The returned path object can then be plotted using the \code{plotPath()} function.
 
 \begin{Code}
-R> plotPath(pathTN)
+plotPath(pathTN, "devYear")
 \end{Code}
 
 \begin{figure}[h]
@@ -303,28 +304,28 @@ R> plotPath(pathTN)
 
 This produces a visual that informs users of all the varieties involved in the shortest path between the two varieties of interest (see left half of Figure \ref{fig:pathTNZB}). In this plot, the release year of all varieties involved in the path are indicated on the horizontal axis, while the vertical axis has no meaning other than to simply to display the labels evenly spaced vertically. The shortest path between varieties \code{Tokyo} and \code{Narow} is composed of a unidirectional series of parent-child relationships, with \code{Tokyo} as the starting ancestor in the early 1900s, \code{Narow} as the most recent descendent in the mid 1980s, and three varieties in between.
 
-Next, we can run the same set of functions on a different pair of varieties. First, a call to the \pkg{ggenealogy} function \code{getDate()} indicates that variety \code{Bedford} was released in 1978 and variety \code{Zane} in 1985.
+Next, we can run the same set of functions on a different pair of varieties. First, we can call the \pkg{ggenealogy} function \code{getVariable()} using the input quantitative variable of development year. This indicates that variety \code{Bedford} was released in 1978 and variety \code{Zane} in 1985.
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> getDate("Bedford", sbGeneal)
+R> getVariable("Bedford", sbGeneal, "devYear")
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 1978
 \end{CodeOutput}
 \begin{CodeInput}
-R> getDate("Zane", sbGeneal)
+R> getVariable("Zane", sbGeneal, "devYear")
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 1985
 \end{CodeOutput}
 \end{CodeChunk}
 
-We can then create a plot showing the shortest path between these two varieties of interest. As this is a longer path, we may also consider setting the \code{fontFace} variable of the \code{plotPath()} to a value of 2, indicating we wish to boldface the two varieties of interest.
+We can then create a plot showing the shortest path between these two varieties of interest. As this is a longer path, we may also consider setting the \code{fontFace} variable of the \code{plotPath()} to a value of 2, indicating we wish to boldface the two varieties of interest. In addition, as is the case with plotting tools in \pkg{ggenealogy}, we can append \pkg{ggplot2} syntax. In this case, we may wish to hard code the x-axis label from its default value of ``devYear" (the inputted quantitative variable column name) to the more readable ``Development Year".
 
 \begin{Code}
-R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal)
-R> plotPath(pathBZ, fontFace = 2)
+R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
+R> plotPath(pathBZ, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
 \end{Code}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
@@ -339,7 +340,7 @@ Now that we can create path objects, we may wish to know how those paths are pos
 There is a function available in the \pkg{ggenealogy} package \code{plotPathOnAll()} that can allow users to quickly visualize their path of interest superimposed over all varieties and edges present in the whole data structure. Here we will produce a plot of the shortest path between varieties \code{Tokyo} and \code{Narow} across the entire dataset, as is displayed in Figure \ref{fig:plotTNBin3}.
 
 \begin{Code}
-R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 3, pathEdgeCol = "red",
+R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol = "red",
 +    nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::
 +    element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
 \end{Code}
@@ -364,8 +365,8 @@ This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not o
 However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the noticeably distinct bins, whereas almost all text labels are overlapping, thereby decreasing their readability. To force text labels into these spaces, the user may consider using a larger number of bins. Hence, we next examine a bin size of 6 to create Figure \ref{fig:plotTNBin6}.
 
 \begin{Code}
-R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 6, pathEdgeCol =
-+    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Year")
+R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol =
++    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Development Year")
 \end{Code}
 
 \begin{figure}[H]
@@ -377,7 +378,7 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, bin = 6, pathEdgeCol =
 
 We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We also confirm what we saw in the previous plot that most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
 
-Notice from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``Date". Given that the ``date" variable in this example dataset is on the timescale of years, we wanted to change the default value of the horizontal axis label to ``Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
+Notice again from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``devYear". We wanted to change the default value of the horizontal axis label to ``Development Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
 
 \section{Plotting ancestors and descendants by generation}
 \label{remedy}
@@ -411,10 +412,11 @@ Here we generate a distance matrix for a set of 10 varieties, setting the x-labe
 \begin{Code}
 >R varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
 +    "Pella", "Tokyo", "Young", "Zane")
->R plotDegMatrix(varieties, sbIG, sbGeneal, "Variety", "Variety", "Degree") +
+>R plotDegMatrix(varieties, sbIG, sbGeneal, "devYear") +
 +    ggplot2::scale_fill_continuous(low = "white", high = "darkgreen") +
 +    ggplot2::theme(legend.title = ggplot2::element_text(size = 15),
-+    legend.text = ggplot2::element_text(size = 15))
++    legend.text = ggplot2::element_text(size = 15)) +
++    ggplot2::labs(x = "Variety", y = "Variety")
 \end{Code}
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that a shortest path degree of 10 may be considered relative to the rest of this dataset.
@@ -499,8 +501,8 @@ At this point, it would be insightful to examine a more detailed view of one of 
 \begin{CodeInput}
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
-+    isDirected = FALSE)
-R> plotPath(pathCB, fontFace = 4) + ggplot2::xlab("Year") +
++    "gradYear", isDirected = FALSE)
+R> plotPath(pathCB, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation Year") +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title =
 +    ggplot2::element_text(size = 10)) + + ggplot2::scale_x_continuous(expand
 +    = c(.1, .2))
@@ -522,10 +524,10 @@ We can achieve this using the below code. After trial and error, we use a \code{
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 200)
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200)
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2)) + ggplot2::xlab("Year")
++    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -542,11 +544,11 @@ The text labels are so numerous in Figure \ref{fig:plotCBText} that simply tryin
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5,
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .5,
 +    pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2)) + ggplot2::xlab("Year")
++    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
 \end{CodeInput}
 \end{CodeChunk}
 

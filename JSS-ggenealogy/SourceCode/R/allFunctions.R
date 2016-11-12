@@ -652,16 +652,16 @@ getChild = function(v1, geneal){
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
-#' getDegree("Brim", "Bedford", ig, sbGeneal, "devYear")
+#' getDegree("Brim", "Bedford", ig, sbGeneal)
 #' @export
 getDegree = function(v1, v2, ig, geneal, colName){
   if(is.null(geneal)){
-    stop("Please input a genealogy data frame where the first two columns are nodes and at least one other column is your inputted quantitative variable colName")
+    stop("Please input a genealogy data frame")
   }
   if(is.null(ig)){
     stop("Please input an igraph object formatted by dfToIG()")
   }
-  path <- getPath(v1=v1, v2=v2, ig=ig, geneal = geneal, colName = colName, isDirected=F)
+  path <- getPath(v1=v1, v2=v2, ig=ig, geneal = geneal, isDirected=F, colName = colName)
   # The degree between two vertices is equal to one less than the number of nodes in the shortest path
   return(length(path$pathVertices)-1)
 }
@@ -964,20 +964,17 @@ plotAncDes = function(v1, geneal, mAnc=3, mDes=3, vColor="#D35C79"){
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
-#' @param xLab string label on the x axis (default is "Variety")
-#' @param yLab string label on the y axis (default is "Variety")
-#' @param legendLab string label on the legend (default is "Degree")
 #' 
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
 #' varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-#' p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear", "Soybean label", "Soybean label", "Degree")
+#' p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear")
 #' p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 #' 
 #' @export
-plotDegMatrix = function(varieties,ig,geneal,colName,xLab="Variety",yLab="Variety",legendLab="Degree"){
+plotDegMatrix = function(varieties,ig,geneal,colName){
   Var1 <- Var2 <- value <- NULL
   matVar = matrix(, nrow = length(varieties), ncol = length(varieties))
   for (i in 1:length(varieties)){
@@ -989,7 +986,7 @@ plotDegMatrix = function(varieties,ig,geneal,colName,xLab="Variety",yLab="Variet
   tdm <- reshape2::melt(matVar)
   
   heatMap = ggplot2::ggplot(tdm, ggplot2::aes(x = Var1, y = rev(Var2), fill = value)) +
-    ggplot2::labs(x = xLab, y = yLab, fill = legendLab) +
+    ggplot2::labs(x = "Variable", y = "Variable", fill = "Degree") +
     ggplot2::geom_raster() +
     ggplot2::scale_x_continuous(breaks=seq(1, length(varieties), 1), labels=varieties) +
     ggplot2::scale_y_continuous(breaks=seq(1, length(varieties), 1), labels=rev(varieties)) +
