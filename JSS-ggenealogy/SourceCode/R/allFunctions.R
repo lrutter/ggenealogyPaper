@@ -1107,6 +1107,16 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
   )
   
   textFrame <- stats::na.omit(textFrame) #remove any row that has at least one NA
+  eTDF <- eTDF[(eTDF$x %in% textFrame$x) & (eTDF$xend %in% textFrame$x),]
+  
+  rowETDF <- rownames(eTDF)
+  rowTextFrame <- rownames(textFrame)
+  rownames(eTDF) <- 1:nrow(eTDF)
+  rownames(textFrame) <- 1:nrow(textFrame)
+  eTDF$y <- textFrame[match(eTDF$x, textFrame$x),]$y
+  eTDF$yend <- textFrame[match(eTDF$xend, textFrame$x),]$y
+  rownames(eTDF) <- rowETDF
+  rownames(textFrame) <- rowTextFrame
   
   # The plotTotalImage object creates two line segments (geom_segment), one to create grey
   # edges for non-path connections between pairs of nodes, the other to create light-green
@@ -1114,7 +1124,8 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
   # create labels of size 2 for non-path connections between pairs of nodes, the other to
   # create labels of size 2.5 and boldfaced for path connections between pairs of nodes.
   plotTotalImage = ggplot2::ggplot(data = pMPDF, ggplot2::aes(x = x, y = y)) +
-    ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y-.1, xend=xend, yend=yend+.1), colour = edgeCol) +
+    #ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y-.1, xend=xend, yend=yend+.1), colour = edgeCol) +
+    ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y, xend=xend, yend=yend), colour = edgeCol) +
     ggplot2::geom_segment(data = pTDF, ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend), colour = pathEdgeCol, size = 1) +
       ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
       ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)

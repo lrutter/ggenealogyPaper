@@ -52,7 +52,7 @@ pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 pathCL
 plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
 
-
+plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 4, pathEdgeCol = "purple")
 
 ##########################################################
 
