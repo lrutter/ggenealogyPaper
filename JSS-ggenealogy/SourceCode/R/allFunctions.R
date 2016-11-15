@@ -114,7 +114,7 @@ buildAncDesCoordDF = function(df){
 #' 
 #' Returns the data frame that includes labels and plot coordinates of all ancestors and descendants of a variety. Users can specify the maximum number of ancestors and descendants to display.
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param mAnc the maximum number of generations of ancestors of v1 to be displayed (in numeric format)
 #' @param mDes the maximum number of generations of descendants of v1 to be displayed (in numeric format)
 #' @param geneal the full genealogy (in data frame format)
@@ -186,7 +186,7 @@ buildAncDesTotalDF = function(v1, geneal, mAnc=3, mDes=3){
 #' 
 #' This function returns a nested list of the ancestors of the inputted variety.
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param gen the generation (note: This should be left as default, as any other input will not affect results anyway)
 #' @seealso \code{\link{getParent}} for information on determining parents
@@ -219,7 +219,7 @@ buildAncList = function(v1, geneal, gen = 0){
 #' 
 #' This function returns a nested list of the descendants of the inputted variety.
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param gen the generation (note: This should be left as default, as any other input will not affect results)
 #' @seealso \code{\link{getChild}} for information on determining children
@@ -316,10 +316,11 @@ buildEdgeTotalDF = function(geneal, ig, colName, bin = 12){
 #' @param geneal the full genealogy  (in data frame format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param colNameY the name of the second optional column of the data frame that contains the second optional quantitative variable of interest (in character string format). This optional quantitative variable will be plotted on the vertical axis.
 #' @param bin the number of bins to determine the vertical positions of nodes (default is 12). For more information on choosing bin size, please visit the ggenealogy vignette.
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @seealso \code{\link{getPath}} for information on input path building
-buildMinusPathDF = function(path, geneal, ig, colName, bin = 12){
+buildMinusPathDF = function(path, geneal, ig, colName, colNameY, bin = 12){
   
   if(class(ig)!="igraph"){
     stop("ig must be an igraph object")
@@ -340,7 +341,17 @@ buildMinusPathDF = function(path, geneal, ig, colName, bin = 12){
   } 
   
   tG <- buildSpreadTotalDF(geneal, ig, colName, bin)
-  eG <- igraph::get.data.frame(ig, "edges")
+  #eG <- igraph::get.data.frame(ig, "edges")
+  
+  if (colNameY !=""){
+    rowNametG <- rownames(tG)
+    rownames(tG) <- 1:nrow(tG)
+    rowNameG <- rownames(geneal)
+    rownames(geneal) <- 1:nrow(geneal)
+    tG$y <- geneal[match(tG$name, geneal$child),][[colNameY]]
+    rownames(tG) <- rowNametG
+    rownames(geneal) <- rowNameG
+  }
   
   label=tG$name
   x=tG[[colName]]
@@ -422,11 +433,12 @@ buildPathDF = function(path){
 #' @param geneal the full genealogy  (in data frame format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param colNameY the name of the second optional column of the data frame that contains the second optional quantitative variable of interest (in character string format). This optional quantitative variable will be plotted on the vertical axis.
 #' @param bin the number of bins to determine the vertical positions of nodes (default is 12). For more information on choosing bin size, please visit the ggenealogy vignette
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @seealso \code{\link{getPath}} for information on input path building
-buildPlotTotalDF = function(path, geneal, ig, colName, bin = 12){
+buildPlotTotalDF = function(path, geneal, ig, colName, colNameY = "", bin = 12){
   if(class(ig)!="igraph"){
     stop("ig must be an igraph object")
   }
@@ -441,12 +453,21 @@ buildPlotTotalDF = function(path, geneal, ig, colName, bin = 12){
     stop("path does not appear to be a result of the getPath() function")
   } 
   
-  
   if(class(bin) != "numeric"){
     stop("bin must contain a number")
   }
   
   tG <- buildSpreadTotalDF(geneal, ig, colName, bin)
+  
+  if (colNameY !=""){
+    rowNametG <- rownames(tG)
+    rownames(tG) <- 1:nrow(tG)
+    rowNameG <- rownames(geneal)
+    rownames(geneal) <- 1:nrow(geneal)
+    tG$y <- geneal[match(tG$name, geneal$child),][[colNameY]]
+    rownames(tG) <- rowNametG
+    rownames(geneal) <- rowNameG
+  }
   
   label=path$pathVertices
   x=as.numeric(path$variableVertices)
@@ -517,7 +538,7 @@ buildSpreadTotalDF = function(geneal, ig, colName, bin = 12){
 #' 
 #' This function returns a list of the ancestors of the inputted variety within and including a given number of generations
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param gen the number of generations back to include as ancestors
 #' @export
@@ -581,7 +602,7 @@ getBasicStatistics = function(ig){
 #' 
 #' This function returns a list of the descendants of the inputted variety within and including a given number of generations
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param gen the number of generations back to include as descendants
 #' @export
@@ -632,7 +653,7 @@ getEdges = function(ig, geneal){
 #' 
 #' This function returns zero or more values that indicate the children of the inputted variety.
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @examples
 #' data(sbGeneal)
@@ -648,8 +669,8 @@ getChild = function(v1, geneal){
 #' 
 #' Returns the degree (distance between unweighted edges) between two varieties, where an edge
 #' represents a parent-child relationship
-#' @param v1 the label of the first variety/vertex of interest (in character string format)
-#' @param v2 the label of the second variety/vertex of interest (in character string format)
+#' @param v1 the label of the first vertex of interest (in character string format)
+#' @param v2 the label of the second vertex of interest (in character string format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
@@ -689,7 +710,7 @@ getNodes = function(geneal){
 #' 
 #' This function returns up to two values that indicate the parents of the inputted variety.
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @examples
 #' data(sbGeneal)
@@ -708,8 +729,8 @@ getParent = function(v1, geneal){
 #' path will be returned. If there is not a path, a list of character(0) will be returned. Note:
 #' For a directed graph, the direction matters. However, this function will check both directions
 #' and return the path if it exists.
-#' @param v1 the label of the first variety/vertex of interest (in character string format)
-#' @param v2 the label of the second variety/vertex of interest (in character string format)
+#' @param v1 the label of the first vertex of interest (in character string format)
+#' @param v2 the label of the second vertex of interest (in character string format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
@@ -814,7 +835,7 @@ getPath = function(v1, v2, ig, geneal, colName, silent=FALSE, isDirected=FALSE){
 #' Determine the date of a variety
 #' 
 #' Returns the documented date of the inputted variety
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param geneal the full genealogy  (in data frame format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
 #' @examples
@@ -916,7 +937,7 @@ nodeToDF = local({
 #'
 #' Returns the image object to show the ancestors and descendants of a variety, with the variety highlighted, if desired
 #' 
-#' @param v1 the label of the variety/vertex of interest (in character string format)
+#' @param v1 the label of the vertex of interest (in character string format)
 #' @param mAnc the maximum number of generations of ancestors of v1 to be displayed (in numeric format)
 #' @param mDes the maximum number of generations of descendants of v1 to be displayed (in numeric format)
 #' @param geneal the full genealogy  (in data frame format)
@@ -1063,6 +1084,7 @@ plotPath = function(path, colName, fontFace = 1){
 #' @param geneal the full genealogy  (in data frame format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param colNameY the name of the second optional column of the data frame that contains the second optional quantitative variable of interest (in character string format). This optional quantitative variable will be plotted on the vertical axis.
 #' @param bin the number of bins to determine the vertical positions of nodes (default is 12). For more information on choosing bin size, please visit the ggenealogy vignette
 #' @param edgeCol color of the non-path edges, default is "gray84"
 #' @param pathEdgeCol color of the path edges, default is "seagreen"
@@ -1082,7 +1104,7 @@ plotPath = function(path, colName, fontFace = 1){
 #' @seealso \code{\link{getPath}} for information on input path building
 #' @export
 #' 
-plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84", pathEdgeCol = "seagreen", nodeSize = 3, pathNodeSize = 3, pathNodeFont = "bold", nodeCol = "black", animate = FALSE){
+plotPathOnAll = function(path, geneal, ig, colName, colNameY, bin = 12, edgeCol = "gray84", pathEdgeCol = "seagreen", nodeSize = 3, pathNodeSize = 3, pathNodeFont = "bold", nodeCol = "black", animate = FALSE){
   x <- y <- xend <- yend <- xstart <- ystart <- label <- NULL
   if(class(ig)!="igraph"){
     stop("ig must be an igraph object")
@@ -1098,9 +1120,9 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
     stop("path does not appear to be a result of the getPath() function")
   } 
   
-  pMPDF <- buildMinusPathDF(path, geneal, ig, colName, bin)
+  pMPDF <- buildMinusPathDF(path, geneal, ig, colName, colNameY, bin)
   eTDF <- buildEdgeTotalDF(geneal, ig, colName, bin)
-  pTDF <- buildPlotTotalDF(path, geneal, ig, colName, bin)
+  pTDF <- buildPlotTotalDF(path, geneal, ig, colName, colNameY, bin)
   
   eTDF <- stats::na.omit(eTDF) #remove any row that has at least one NA
   
@@ -1134,15 +1156,18 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
     ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y, xend=xend, yend=yend), colour = edgeCol) +
     ggplot2::geom_segment(data = pTDF, ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend), colour = pathEdgeCol, size = 1) +
       ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
-      #ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
 
   plotTotalImage = plotTotalImage + ggplot2::geom_text(data = pTDF,ggplot2::aes(x = x, y = y, label = label), size = pathNodeSize, fontface=pathNodeFont) +
     ggplot2::xlab(colName) +
-    # Erase the y-axis, and only include grids from the x-axis
-    ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(),
-                   axis.title.y=ggplot2::element_blank(),legend.position="none",
-                   panel.grid.major.y=ggplot2::element_blank(),
-                   panel.grid.minor=ggplot2::element_blank())
+    ggplot2::theme(legend.position="none", panel.grid.minor=ggplot2::element_blank())
+  
+  if (colNameY == ""){
+    plotTotalImage = plotTotalImage + ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major.y=ggplot2::element_blank())
+  }
+  
+  if (colNameY != ""){
+    plotTotalImage = plotTotalImage + ggplot2::ylab(colNameY)
+  }
   
   # Return the plotTotalImage, if animate is FALSE
   if (animate==FALSE){
