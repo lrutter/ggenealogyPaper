@@ -277,6 +277,8 @@ buildEdgeTotalDF = function(geneal, ig, colName, bin = 12){
   y=as.numeric(rep("",numEdges))
   xend=as.numeric(rep("",numEdges))
   yend=as.numeric(rep("",numEdges))
+  name=as.numeric(rep("",numEdges))
+  nameEnd=as.numeric(rep("",numEdges))
   # For each edge in the graph
   for (i in 1:numEdges){
     xname = as.character(eG[i,]$from)
@@ -295,9 +297,11 @@ buildEdgeTotalDF = function(geneal, ig, colName, bin = 12){
     xend[i] = xend_i
     y[i] = y_i
     yend[i] = yend_i
+    name[i] = xname
+    nameEnd[i] = xendname
   }
   # Create a dataframe containing the start and end positions of the x and y axes
-  edgeTotalDF = as.data.frame(cbind(x, y, xend, yend))
+  edgeTotalDF = as.data.frame(cbind(x, y, xend, yend, name, nameEnd))
   
   edgeTotalDF
 }
@@ -341,7 +345,7 @@ buildMinusPathDF = function(path, geneal, ig, colName, bin = 12){
   label=tG$name
   x=tG[[colName]]
   y=tG$y
-  # If the label is part of the path, then we change the its value to NA
+  # If the label is part of the path, then we change its value to NA
   for (i in 1:length(label)){
     if (label[i]%in%path$pathVertices){
       label[i]=NA
@@ -1113,10 +1117,13 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
   rowTextFrame <- rownames(textFrame)
   rownames(eTDF) <- 1:nrow(eTDF)
   rownames(textFrame) <- 1:nrow(textFrame)
-  eTDF$y <- textFrame[match(eTDF$x, textFrame$x),]$y
-  eTDF$yend <- textFrame[match(eTDF$xend, textFrame$x),]$y
+  eTDF$y <- textFrame[match(eTDF$name, textFrame$label),]$y
+  eTDF$yend <- textFrame[match(eTDF$nameEnd, textFrame$label),]$y
+  eTDF <- eTDF[,-c(5,6)]
   rownames(eTDF) <- rowETDF
   rownames(textFrame) <- rowTextFrame
+  eTDF$x <- as.integer(as.character(eTDF$x))
+  eTDF$xend <- as.integer(as.character(eTDF$xend)) 
   
   # The plotTotalImage object creates two line segments (geom_segment), one to create grey
   # edges for non-path connections between pairs of nodes, the other to create light-green
@@ -1124,11 +1131,10 @@ plotPathOnAll = function(path, geneal, ig, colName, bin = 12, edgeCol = "gray84"
   # create labels of size 2 for non-path connections between pairs of nodes, the other to
   # create labels of size 2.5 and boldfaced for path connections between pairs of nodes.
   plotTotalImage = ggplot2::ggplot(data = pMPDF, ggplot2::aes(x = x, y = y)) +
-    #ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y-.1, xend=xend, yend=yend+.1), colour = edgeCol) +
     ggplot2::geom_segment(data = eTDF, ggplot2::aes(x=x, y=y, xend=xend, yend=yend), colour = edgeCol) +
     ggplot2::geom_segment(data = pTDF, ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend), colour = pathEdgeCol, size = 1) +
       ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
-      ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
+      #ggplot2::geom_text(data = textFrame, ggplot2::aes(x = x, y = y, label = label), size = nodeSize, colour = nodeCol)
 
   plotTotalImage = plotTotalImage + ggplot2::geom_text(data = pTDF,ggplot2::aes(x = x, y = y, label = label), size = pathNodeSize, fontface=pathNodeFont) +
     ggplot2::xlab(colName) +
