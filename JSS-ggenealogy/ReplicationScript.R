@@ -39,6 +39,23 @@ plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol = "red", n
 # We can repeat this process, only now instead of setting the bin variable to 1:3 (as we did earlier), we can set it to 1:6.
 plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol = "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Development Year")
 
+##########################################################
+
+row.has.na <- apply(sbGeneal, 1, function(x){any(is.na(x))})
+sbFilt <- sbGeneal[!row.has.na,]
+dim(sbFilt)
+sbFiltIG <- dfToIG(sbFilt)
+sbFiltIG
+getBasicStatistics(sbFiltIG)
+
+pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
+pathCL
+plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
+
+
+
+##########################################################
+
 # As is explained in the article, only the top part of Figure 6 (the figure from this section) is produced by ggenealogy code. In contrast, the bottom part of Figure 6 was produced by tools outside of ggenealogy for didactic purposes. Below, we recreate the top part of Figure 6, which was to generate a plot of the ancestors and descendants of the label Lee.
 plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 
