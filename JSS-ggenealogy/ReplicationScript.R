@@ -41,18 +41,25 @@ plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol = "seagree
 
 ##########################################################
 
-row.has.na <- apply(sbGeneal, 1, function(x){any(is.na(x))})
-sbFilt <- sbGeneal[!row.has.na,]
+#works
+# row.has.na <- apply(sbGeneal, 1, function(x){any(is.na(x))})
+# sbFilt <- sbGeneal[!row.has.na,]
+# dim(sbFilt)
+# sbFiltIG <- dfToIG(sbFilt)
+# pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
+# pathCL
+# plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
+# plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 4, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
+
+sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
 dim(sbFilt)
 sbFiltIG <- dfToIG(sbFilt)
-sbFiltIG
-getBasicStatistics(sbFiltIG)
-
 pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 pathCL
 plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
+plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
 
-plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 4, pathEdgeCol = "purple")
+
 
 ##########################################################
 
