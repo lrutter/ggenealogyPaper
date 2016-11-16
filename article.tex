@@ -292,7 +292,7 @@ $variableVertices
 The returned path object can then be plotted using the \code{plotPath()} function.
 
 \begin{Code}
-plotPath(pathTN, "devYear")
+plotPath(pathTN, sbGeneal, "devYear")
 \end{Code}
 
 \begin{figure}[h]
@@ -325,7 +325,7 @@ We can then create a plot showing the shortest path between these two varieties 
 
 \begin{Code}
 R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
-R> plotPath(pathBZ, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
+R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
 \end{Code}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.

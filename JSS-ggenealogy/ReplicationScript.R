@@ -23,7 +23,7 @@ pathTN <- getPath("Tokyo", "Narow", sbIG, sbGeneal, "devYear")
 pathTN
 
 # Plot returned path
-plotPath(pathTN, "devYear")
+plotPath(pathTN, sbGeneal, "devYear")
 
 # Do the same for a different pair of two labels of interest ("Bedford" and "Zane"). First, we can determine the years these two labels were identified
 getVariable("Bedford", sbGeneal, "devYear")
@@ -31,7 +31,7 @@ getVariable("Zane", sbGeneal, "devYear")
 
 # Next, we can determine the shortest path of parent-child relationships between these two labels of interest and plot it.
 pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
-plotPath(pathBZ, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
+plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
 
 # In the previous section, we obtained the shortest path between the the pair of labels "Tokyo" and "Narow" and saved it as a variable pathTN. Here, we can plot that path superimposed over all labels in the example soybean genealogy dataset.
 plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol = "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
@@ -41,26 +41,15 @@ plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol = "seagree
 
 ##########################################################
 
-#works
-# row.has.na <- apply(sbGeneal, 1, function(x){any(is.na(x))})
-# sbFilt <- sbGeneal[!row.has.na,]
-# dim(sbFilt)
-# sbFiltIG <- dfToIG(sbFilt)
-# pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
-# pathCL
-# plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
-# plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 4, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
-
 sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
-dim(sbFilt)
 sbFiltIG <- dfToIG(sbFilt)
 pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
-pathCL
-plotPath(pathCL, "yield") + ggplot2::xlab("Yield")
+plotPath(pathCL, sbFilt, "yield") + ggplot2::xlab("Yield")
 plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
+plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange") + ggplot2::xlab("Yield") + ggplot2::ylab("Development Year")
 
-
-
+pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
+plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
 ##########################################################
 
 # As is explained in the article, only the top part of Figure 6 (the figure from this section) is produced by ggenealogy code. In contrast, the bottom part of Figure 6 was produced by tools outside of ggenealogy for didactic purposes. Below, we recreate the top part of Figure 6, which was to generate a plot of the ancestors and descendants of the label Lee.

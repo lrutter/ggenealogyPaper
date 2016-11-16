@@ -381,7 +381,10 @@ buildMinusPathDF = function(path, geneal, ig, colName, colNameY, bin = 12){
 #' to connect to the node at the next largest y-value), "yend" (the y-axis position
 #' of the outgoing edge (connected to the node at the next largest y-value))).
 #' @param path path object representing the path between two vertices
-buildPathDF = function(path){
+#' @param geneal the full genealogy  (in data frame format)
+#' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param colNameY the name of the second optional column of the data frame that contains the second optional quantitative variable of interest (in character string format). This optional quantitative variable will be plotted on the vertical axis.
+buildPathDF = function(path, geneal, colName, colNameY=""){
   if(length(path) > 0){
     # The labels of the nodes are the names of the varieties in the path
     label=path$pathVertices
@@ -389,14 +392,18 @@ buildPathDF = function(path){
     x=as.numeric(path$variableVertices)
     # The y-axis position of the node labels are incremented by unity for each new connected
     # node in the path
-    y=seq(1, length(label), 1)
+    if (colNameY==""){
+      y=seq(1, length(label), 1)
+    }
+    else{
+      y =geneal[match(label, geneal$child),][[colNameY]]
+    }
     # The starting x-axis position of the edge between two nodes will be the x-axis position
     # of the label of the first node
     xstart=x
     xend=rep(0,length(label))
     yend=rep(0,length(label))
     for (i in 1:length(label)){
-      y[i] = i
       xend[i] = xstart[i]
       if (i < length(label)){
         # The ending x-axis position of the edge between two nodes will be the x-axis position
@@ -1027,7 +1034,9 @@ plotDegMatrix = function(varieties,ig,geneal,colName){
 #' parent-child relationships between those nodes. For visual appeal, there is a grey
 #' box that outlines the node label, as well as an underline and overline for each label.
 #' @param path object created from function getPath
+#' @param geneal the full genealogy  (in data frame format)
 #' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param colNameY the name of the second optional column of the data frame that contains the second optional quantitative variable of interest (in character string format). This optional quantitative variable will be plotted on the vertical axis.
 #' @param fontFace fontface for the two nodes of interest (1=plain, 2=bold, 3=italic, 4=bold-italic), DEFAULT is 1 
 #' @seealso \code{\link{getPath}} for information on input path building
 #' @export
@@ -1037,30 +1046,40 @@ plotDegMatrix = function(varieties,ig,geneal,colName){
 #' p <- getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
 #' plotPath(p)
 #' plotPath(p, "devYear", fontFace = 4)
-plotPath = function(path, colName, fontFace = 1){
+plotPath = function(path, geneal, colName, colNameY="", fontFace = 1){
   x <- y <- label <- xstart <- ystart <- xend <- yend <- NULL
   if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
     stop("path does not appear to be a result of the getPath() function")
   }
   
-  pPDF <- buildPathDF(path)
+  pPDF <- buildPathDF(path, geneal, colName, colNameY)
   pPDF$fontface = rep(1,each=length(path$pathVertices))
   pPDF[pPDF$label==path$pathVertices[1],]$fontface = fontFace
   pPDF[pPDF$label==path$pathVertices[length(path$pathVertices)],]$fontface = fontFace
   
-  colnames(pPDF)[which(colnames(pPDF)=="x")] = "Year"
-  #ggplot2::ggplot(data = pPDF,ggplot2::aes(x = x, y = y, label = label)) + geom_label()
+  if (colNameY!=""){
+    pPDF$y <- geneal[match(pPDF$label, geneal$child),][[colNameY]]
+  }
   
   if (length(dim(pPDF))>1){ # check to make sure pPDF is a data frame
-    
-    plotPathImage = ggplot2::ggplot(data = pPDF,ggplot2::aes(x = xstart, y = y, label=label)) +
-      ggplot2::geom_segment(ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend)) +
-      ggplot2::geom_label(fill = "grey80", size = 3, fontface=pPDF$fontface) +
-      ggplot2::xlab(colName) +
-      ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(),
-                     axis.title.y=ggplot2::element_blank(),legend.position="none",
-                     panel.grid.major.y=ggplot2::element_blank(),
-                     panel.grid.minor=ggplot2::element_blank())
+    if (colNameY==""){
+      plotPathImage = ggplot2::ggplot(data = pPDF,ggplot2::aes(x = xstart, y = y, label=label)) +
+        ggplot2::geom_segment(ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend)) +
+        ggplot2::geom_label(fill = "grey80", size = 3, fontface=pPDF$fontface) +
+        ggplot2::xlab(colName) +
+        ggplot2::theme(axis.text.y=ggplot2::element_blank(),axis.ticks.y=ggplot2::element_blank(),
+                       axis.title.y=ggplot2::element_blank(),legend.position="none",
+                       panel.grid.major.y=ggplot2::element_blank(),
+                       panel.grid.minor=ggplot2::element_blank())      
+    }
+    else{
+      plotPathImage = ggplot2::ggplot(data = pPDF,ggplot2::aes(x = xstart, y = y, label=label)) +
+        ggplot2::geom_segment(ggplot2::aes(x=xstart, y=ystart, xend=xend, yend=yend)) +
+        ggplot2::geom_label(fill = "grey80", size = 3, fontface=pPDF$fontface) +
+        ggplot2::xlab(colName) + ggplot2::ylab(colNameY) +
+        ggplot2::theme(legend.position="none", panel.grid.minor=ggplot2::element_blank())
+    }
+
   }
   else{
     plotPathImage = print("There is no path to display between the two inputted vertices.")
@@ -1104,7 +1123,7 @@ plotPath = function(path, colName, fontFace = 1){
 #' @seealso \code{\link{getPath}} for information on input path building
 #' @export
 #' 
-plotPathOnAll = function(path, geneal, ig, colName, colNameY, bin = 12, edgeCol = "gray84", pathEdgeCol = "seagreen", nodeSize = 3, pathNodeSize = 3, pathNodeFont = "bold", nodeCol = "black", animate = FALSE){
+plotPathOnAll = function(path, geneal, ig, colName, colNameY = "", bin = 12, edgeCol = "gray84", pathEdgeCol = "seagreen", nodeSize = 3, pathNodeSize = 3, pathNodeFont = "bold", nodeCol = "black", animate = FALSE){
   x <- y <- xend <- yend <- xstart <- ystart <- label <- NULL
   if(class(ig)!="igraph"){
     stop("ig must be an igraph object")
