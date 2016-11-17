@@ -45,11 +45,11 @@ sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
 sbFiltIG <- dfToIG(sbFilt)
 pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 plotPath(pathCL, sbFilt, "yield") + ggplot2::xlab("Yield")
+pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
+plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
 plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
 plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange") + ggplot2::xlab("Yield") + ggplot2::ylab("Development Year")
 
-pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
-plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
 ##########################################################
 
 # As is explained in the article, only the top part of Figure 6 (the figure from this section) is produced by ggenealogy code. In contrast, the bottom part of Figure 6 was produced by tools outside of ggenealogy for didactic purposes. Below, we recreate the top part of Figure 6, which was to generate a plot of the ancestors and descendants of the label Lee.
@@ -80,7 +80,7 @@ statIG <- dfToIG(statGeneal)
 pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal, "gradYear", isDirected = FALSE)
 
 # After doing so, we can now determine the shortest path between Sir David Cox and Petra Buzkova, and plot it.
-plotPath(pathCB, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation Year") + ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, 1.5))
+plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation Year") + ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, 1.5))
 
 # We can now superimpose this shortest path between Sir David Cox and Petra Buzkova across the entire genealogical structure.
 plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2)) + ggplot2::xlab("Graduation Year") 
@@ -89,4 +89,8 @@ plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) + ggplot2::them
 plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title = ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous(expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
 
 # Even though we can now read the text labels on the path of interest, we lost the ability to read labels that are not on our path of interest. At this point, we can keep the best of both worlds: We can create a plot that demphasizes the nodes that are not on the path of interest by assigning them small text font size, but incoroporate an interactive function so that we can hover over these non-path nodes if we wish to obtain their label information. This is the plot we used and interacted with to create the video embedded in Figure 12.
-plotPathOnAll(pathCB, statGeneal, statIG, bin = 200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray", animate = TRUE)
+plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray", animate = TRUE)
+
+##########################################################
+plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange", animate = TRUE)
+plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange", animate = TRUE)

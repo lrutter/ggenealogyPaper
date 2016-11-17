@@ -1194,12 +1194,22 @@ plotPathOnAll = function(path, geneal, ig, colName, colNameY = "", bin = 12, edg
   }
   # Return the animatePlotTotalImage, if animate is TRUE
   else{
-    animatePlotTotalImage <- plotly::plotly_build(plotly::ggplotly(plotTotalImage, tooltip = c("x", "label")))
-    animatePlotTotalImage$data[[1]]$hoverinfo <- "none"
-    animatePlotTotalImage$data[[2]]$hoverinfo <- "none"
-    animatePlotTotalImage$data[[3]]$hoverinfo <- c("x+text")
-    animatePlotTotalImage$data[[4]]$hoverinfo <- c("x+text")
-    animatePlotTotalImage
+    if (colNameY == ""){
+      animatePlotTotalImage <- plotly::plotly_build(plotly::ggplotly(plotTotalImage, tooltip = c("x", "label")))
+      animatePlotTotalImage$data[[1]]$hoverinfo <- "none"
+      animatePlotTotalImage$data[[2]]$hoverinfo <- "none"
+      animatePlotTotalImage$data[[3]]$hoverinfo <- c("x+text")
+      animatePlotTotalImage$data[[4]]$hoverinfo <- c("x+text")
+      animatePlotTotalImage 
+    }
+    else{
+      animatePlotTotalImage <- plotly::plotly_build(plotly::ggplotly(plotTotalImage, tooltip = c("x", "label")))
+      animatePlotTotalImage$data[[1]]$hoverinfo <- "none"
+      animatePlotTotalImage$data[[2]]$hoverinfo <- "none"
+      animatePlotTotalImage$data[[3]]$hoverinfo <- c("x+y+text")
+      animatePlotTotalImage$data[[4]]$hoverinfo <- c("x+y+text")
+      animatePlotTotalImage       
+    }
   }
 }
 
