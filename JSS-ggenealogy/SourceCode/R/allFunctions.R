@@ -556,6 +556,9 @@ buildSpreadTotalDF = function(geneal, ig, colName, bin = 12){
 #' getAncestors("Essex", sbGeneal, 5)
 getAncestors = function(v1, geneal, gen = 3){
   id.offset <- NULL
+  if (is.null(buildAncList(v1, geneal))){
+    return(data.frame())
+  }
   aDF = buildAncDesCoordDF(nodeToDF(buildAncList(v1, geneal)))
   subDF = aDF[aDF$gen <= gen & aDF$gen != 0,]
   keep = c("label","gen")

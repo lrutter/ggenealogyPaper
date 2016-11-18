@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 NOV 2016 13:49
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  17 NOV 2016 14:06
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1461,13 +1461,19 @@ Overfull \hbox (6.79999pt too wide) in paragraph at lines 611--613
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 621.
+Overfull \hbox (8.1628pt too wide) in paragraph at lines 617--618
+[]\T1/aer/m/n/10.95 We would like to state that users can still hard code one o
+r two vari-ables in the \T1/aett/m/n/10.95 plotPathOnAll()
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 621.
+Package xcolor Warning: Incompatible color definition on input line 626.
 
 
-Package xcolor Warning: Incompatible color definition on input line 621.
+Package xcolor Warning: Incompatible color definition on input line 626.
+
+
+Package xcolor Warning: Incompatible color definition on input line 626.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1476,16 +1482,16 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 [25]
 
-Package xcolor Warning: Incompatible color definition on input line 625.
+Package xcolor Warning: Incompatible color definition on input line 630.
 
 
-Package xcolor Warning: Incompatible color definition on input line 625.
+Package xcolor Warning: Incompatible color definition on input line 630.
 
 
-Package xcolor Warning: Incompatible color definition on input line 625.
+Package xcolor Warning: Incompatible color definition on input line 630.
 
 
-Package xcolor Warning: Incompatible color definition on input line 625.
+Package xcolor Warning: Incompatible color definition on input line 630.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1531,13 +1537,13 @@ Package xcolor Warning: Incompatible color definition on input line 96.
 
 )
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 644--644
 
  []
 
@@ -1550,40 +1556,40 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 639.
-
-
-Package xcolor Warning: Incompatible color definition on input line 639.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 639--639
+Underfull \hbox (badness 10000) in paragraph at lines 644--644
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
+
+
+Package xcolor Warning: Incompatible color definition on input line 644.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 644--644
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 639.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 644.
 
-Package xcolor Warning: Incompatible color definition on input line 639.
-
-
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
-Package xcolor Warning: Incompatible color definition on input line 639.
+Package xcolor Warning: Incompatible color definition on input line 644.
+
+
+Package xcolor Warning: Incompatible color definition on input line 644.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1592,21 +1598,21 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 Package atenddvi Info: Last page = 28.
 [28]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 639.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 639.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 644.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 644.
  (./article.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 639.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 639.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 644.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 644.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 639.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 644.
  ) 
 Here is how much of TeX's memory you used:
  29020 strings out of 493706
  558922 string characters out of 6145769
- 586760 words of memory out of 5000000
+ 586759 words of memory out of 5000000
  31974 multiletter control sequences out of 15000+600000
  42200 words of font info for 50 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
