@@ -38,12 +38,7 @@ CoxBranches <- getBranchStatQuant("David Cox", statGeneal, "gradYear", 15)
 ##############################################################################
 ##############################################################################
 
-
-v1="David Cox";geneal=statGeneal;colName="thesis";gen=15
-
-rExpr = "grepl('Stochastic', geneal$colName)"
-
-getBranchStatQual = function(v1, rExpr, gen=3){
+getBranchStatQual = function(v1, geneal, colName, rExpr, gen=3){
   id.offset <- NULL
     if (is.null(getChild(v1, geneal))){
     return(data.frame())
@@ -55,35 +50,34 @@ getBranchStatQual = function(v1, rExpr, gen=3){
     dat[[colName]] <- geneal[match(dat$label, geneal$child),][[colName]]
     Labels <- dat$label
     Count <- length(Labels)
-    
     rExpr = gsub("geneal[$]colName", "dat[[colName]]", rExpr)
-    
-    eval(parse(text=rExpr))
-    
-    Mean <- mean(eval(parse(text=rExpr)),na.rm=TRUE)
-    SD <- sd(eval(parse(text=rExpr)),na.rm=TRUE)
+    CountTrue <- sum(eval(parse(text=rExpr)),na.rm=TRUE)
     NACount <- sum(is.na(eval(parse(text=rExpr))))
     PercentNotNA <- round(100*(1-(NACount/Count)),digits=2)
-    datRet <- rbind(datRet, data.frame(Name=childList[i], Mean=Mean, SD=SD, Count=Count, NACount=NACount, PercentNotNA=PercentNotNA, Labels=paste(Labels, collapse = ',')))
+    datRet <- rbind(datRet, data.frame(Name=childList[i], CountTrue = CountTrue, Count=Count, NACount=NACount, PercentNotNA=PercentNotNA, Labels=paste(Labels, collapse = ',')))
   }
-  datRet <- datRet[order(-datRet$Mean),]
+  datRet <- datRet[order(-datRet$CountTrue),]
   return(datRet)
 }
 
-grepl("Stochastic", statGeneal$thesis) #150 \\147
-rExpr = "grepl('Stochastic', statGeneal$thesis)" #works
+v1="David Cox";geneal=statGeneal;colName="thesis";gen=15
+rExpr = "grepl('Stochastic', geneal$colName)"
+DCBranches_Stochastic <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
-grepl("(?i)Stochastic", statGeneal$thesis) #163 \\160
-rExpr = "grepl('(?i)Stochastic', statGeneal$thesis)" #works
+rExpr = "grepl('(?i)Stochastic', geneal$colName)"
+DCBranches_StochasticCaps <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
-(statGeneal$thesis=="University of Leeds")
-rExpr = "statGeneal$thesis=='University of Leeds'" #works
+colName = "country"
+rExpr = "geneal$colName=='UnitedKingdom'" #works
+DCBranches_UK <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
-# Number, not just TRUE or FALSE
-str_count(statGeneal$thesis, 'Stochastic')
-rExpr = "str_count(statGeneal$thesis, 'Stochastic')" #works
+desDC <- getDescendants("David Cox", statGeneal,15)
+sort(table(statGeneal[match(desDC$label,statGeneal$child),]$school))
+sum(statGeneal[match(getChild("David Cox",statGeneal),statGeneal$child),]$school=="University of London")
 
-str_count(statGeneal$thesis, '(?i)Stochastic')
-rExpr = "str_count(statGeneal$thesis, '(?i)Stochastic')" #works
+colName = "school"
+rExpr = "geneal$colName=='University of London'" #works
+DCBranches_UL <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
-
+rExpr = "geneal$colName=='Universidade de São Paulo'"
+DCBranches_USP <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
