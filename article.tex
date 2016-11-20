@@ -593,7 +593,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .
 
 In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and \code{Petra Buzkova}, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
 
-\subsection{Interactive plotting functions}
+\section{Interactive plotting functions}
 \label{interaction}
 
 We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. This interactive functionality comes from methods in the \pkg{plotly} package (\citealt{plotly}). A short video demonstration of these interactive features can be viewed below. 
@@ -614,12 +614,17 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .
     \label{fig:plotAnimate}
 \end{figure}
 
-We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value is revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hoering over labels, the label name, yield value, and development year is revealed.
+We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value is revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year is revealed.
 
 \begin{Code}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange", animate = TRUE)
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange", animate = TRUE)
 \end{Code}
+
+\section{Branch calculations and parsings}
+
+It may be helpful for users to search through the descendant branches of an individual of interest to compare and contrast how a variable of interest changes within these branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of individuals graduating from a certain school or country? What propotion have thesis titles containing a word of interest? Which are graduating new students in recent years?
+
 
 \section{Future avenues}
 

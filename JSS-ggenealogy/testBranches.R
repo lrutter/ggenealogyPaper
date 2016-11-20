@@ -52,7 +52,7 @@ getBranchStatQual = function(v1, geneal, colName, rExpr, gen=3){
     Count <- length(Labels)
     rExpr = gsub("geneal[$]colName", "dat[[colName]]", rExpr)
     CountTrue <- sum(eval(parse(text=rExpr)),na.rm=TRUE)
-    NACount <- sum(is.na(eval(parse(text=rExpr))))
+    NACount <- sum(dat[[colName]]=="")
     PercentNotNA <- round(100*(1-(NACount/Count)),digits=2)
     datRet <- rbind(datRet, data.frame(Name=childList[i], CountTrue = CountTrue, Count=Count, NACount=NACount, PercentNotNA=PercentNotNA, Labels=paste(Labels, collapse = ',')))
   }
@@ -62,17 +62,17 @@ getBranchStatQual = function(v1, geneal, colName, rExpr, gen=3){
 
 v1="David Cox";geneal=statGeneal;colName="thesis";gen=15
 rExpr = "grepl('Stochastic', geneal$colName)"
-DCBranches_Stochastic <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
+DCBranches_Sto <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
 rExpr = "grepl('(?i)Stochastic', geneal$colName)"
-DCBranches_StochasticCaps <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
+DCBranches_StoCaps <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
 colName = "country"
 rExpr = "geneal$colName=='UnitedKingdom'" #works
 DCBranches_UK <- getBranchStatQual(v1, geneal, colName, rExpr, gen)
 
 desDC <- getDescendants("David Cox", statGeneal,15)
-sort(table(statGeneal[match(desDC$label,statGeneal$child),]$school))
+tail(sort(table(statGeneal[match(desDC$label,statGeneal$child),]$school)),5)
 sum(statGeneal[match(getChild("David Cox",statGeneal),statGeneal$child),]$school=="University of London")
 
 colName = "school"
