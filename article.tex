@@ -621,9 +621,27 @@ R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange", anim
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange", animate = TRUE)
 \end{Code}
 
-\section{Branch calculations and parsings}
+\section{Branch parsing and calculations}
 
-It may be helpful for users to search through the descendant branches of an individual of interest to compare and contrast how a variable of interest changes within these branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of individuals graduating from a certain school or country? What propotion have thesis titles containing a word of interest? Which are graduating new students in recent years?
+It may be helpful for users to search through descendant branches of a certain individual to compare and contrast how a variable of interest changes along these branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which branches are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of students graduating from certain schools or countries? Which branches are graduating new students in recent years? Which branches have the highest proportion of students with thesis titles containing a word of interest?
+
+Answering these questions in a straightforward manner requires more than basic data frame manipulation; it also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can easily answer these questions using branch traversal. One method can be used to track a quantitative variable across branches (\code{getBranchQuant()}) and the other method can be used to track a qualitative variables across branches (\code{getBranchQual()}).
+
+We can demonstrate the (\code{getBranchQuant()}) method by examining the yield variable across the descendant branches of the soybean variety ``A.K.". To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> AKBranches <- getBranchQuant("A.K.", sbGeneal, "yield", 15)
+R> select(AKBranches,-DesNames)
+\end{CodeInput}
+\begin{CodeOutput}
+           Name     Mean       SD Count NACount PercentNotNA
+1 A.K. (Harrow) 2932.154 197.0092    54      41        24.07
+2        Illini 2856.667 210.7801   131     125         4.58
+\end{CodeOutput}
+\end{Code}
+
+We see from the output that ``A.K." has two children named ``A.K. (Harrow)" and "Illini". Descendants from the ``A.K. (Harrow)" branch have a higher mean yield than the ``Illini" branch (2932.154 versus 2856.667). However, the 
 
 
 \section{Future avenues}

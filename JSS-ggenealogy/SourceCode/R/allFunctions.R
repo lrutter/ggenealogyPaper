@@ -1296,3 +1296,77 @@ dfToIG = function(geneal, vertexinfo = NULL, edgeweights = 1, isDirected=FALSE){
   
   igraph::graph.data.frame(d=edges, directed=isDirected, vertices=nodes)
 }
+
+#' Descendant branch calculations for quantitative variable 
+#' 
+#' Returns a data frame containing the names of all children of an individual of interest ("Name"). The mean and standard deviation ("Mean" and "SD") of a quantitative variable across all descendents of each child is reported. In addition, for each child, the number of its descendants is reported ("Count"), the number of its descendants who do not have a value for the quantitative variable ("NACount") is reported, and the names of all of its descendants is reported ("DesNames").
+#' 
+#' @param v1 the label of the vertex of interest (in character string format)
+#' @param geneal the full genealogy  (in data frame format)
+#' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#' @param gen the number of generations back to include as ancestors
+#' @examples
+#' data(statGeneal)
+#' DC_Year <- getBranchQuant("David Cox", statGeneal, "gradYear", 15)
+#' 
+#' @export
+getBranchQuant = function(v1, geneal, colName, gen=3){
+  id.offset <- NULL
+  if (is.null(getChild(v1, geneal))){
+    return(data.frame())
+  }
+  childList <- getChild(v1,geneal)
+  datRet <- data.frame()
+  for (i in 1:length(childList)){
+    dat <- getDescendants(childList[i], geneal, gen)
+    dat[[colName]] <- geneal[match(dat$label, geneal$child),][[colName]]
+    DesNames <- dat$label
+    Count <- length(DesNames)
+    Mean <- mean(dat[[colName]], na.rm=TRUE)
+    SD <- sd(dat[[colName]], na.rm = TRUE)
+    NACount <- sum(is.na(dat[[colName]]))
+    datRet <- rbind(datRet, data.frame(Name=childList[i], Mean=Mean, SD=SD, Count=Count, NACount=NACount, DesNames=paste(DesNames, collapse = ',')))
+  }
+  datRet <- datRet[order(-datRet$Mean),]
+  return(datRet)
+}
+
+#' Descendant branch calculations for quantitative variable 
+#' 
+#' Returns a data frame containing the names of all children of an individual of interest ("Name"). The mean and standard deviation ("Mean" and "SD") of a quantitative variable across all descendents of each child is reported. In addition, for each child, the number of its descendants is reported ("Count"), the number of its descendants who do not have a value for the quantitative variable ("NACount") is reported, and the names of all of its descendants is reported ("DesNames").
+#' 
+#' @param v1 the label of the vertex of interest (in character string format)
+#' @param geneal the full genealogy  (in data frame format)
+#' @param colName the name of the column of the data frame that contains the qualitative variable of interest (in character string format)
+#' @param rExpr regular expression to be applied to the column that contains the qualitative variable of interest (in character string format). The regular expression syntax must work on a data frame column of type character. The term geneal$colName must be used in the regular expression.
+#' @param gen the number of generations back to include as ancestors
+#' @examples
+#' data(statGeneal)
+#' rExpr = "geneal$colName=='The Johns Hopkins University'"
+#' DC_JHU = getBranchQual("David Cox", statGeneal, "school", rExpr, 15)
+#' rExpr = "geneal$colName=='UnitedKingdom'"
+#' DC_UK = getBranchQual("David Cox", statGeneal, "country", rExpr, 15)
+#' rExpr = "grepl('(?i)Stochastic', geneal$colName)"
+#' DC_Stochastic = getBranchQual("David Cox", statGeneal, "thesis", rExpr, 15)
+#' @export
+#' 
+getBranchQual = function(v1, geneal, colName, rExpr, gen=3){
+  id.offset <- NULL
+  if (is.null(getChild(v1, geneal))){
+    return(data.frame())
+  }
+  childList <- getChild(v1,geneal)
+  datRet <- data.frame()
+  for (i in 1:length(childList)){
+    dat <- getDescendants(childList[i], geneal, gen)
+    dat[[colName]] <- geneal[match(dat$label, geneal$child),][[colName]]
+    DesNames <- dat$label
+    Count <- length(DesNames)
+    rExpr = gsub("geneal[$]colName", "dat[[colName]]", rExpr)
+    CountTrue <- sum(eval(parse(text=rExpr)),na.rm=TRUE)
+    NACount <- sum(dat[[colName]]=="")
+    datRet <- rbind(datRet, data.frame(Name=childList[i], CountTrue = CountTrue, Count=Count, NACount=NACount, DesNames=paste(DesNames, collapse = ',')))
+  }
+  datRet <- datRet[order(-datRet$CountTrue),]
+  return(datRet)
+}
