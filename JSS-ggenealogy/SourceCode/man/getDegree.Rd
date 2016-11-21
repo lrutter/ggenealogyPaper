@@ -4,7 +4,7 @@
 \alias{getDegree}
 \title{Determine the degree between two varieties}
 \usage{
-getDegree(v1, v2, ig, geneal, colName)
+getDegree(v1, v2, ig, geneal)
 }
 \arguments{
 \item{v1}{the label of the first vertex of interest (in character string format)}
@@ -14,8 +14,6 @@ getDegree(v1, v2, ig, geneal, colName)
 \item{ig}{the graph representation of the data genealogy (in igraph format)}
 
 \item{geneal}{the full genealogy  (in data frame format)}
-
-\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 }
 \description{
 Returns the degree (distance between unweighted edges) between two varieties, where an edge

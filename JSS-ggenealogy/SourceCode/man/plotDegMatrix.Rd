@@ -4,7 +4,7 @@
 \alias{plotDegMatrix}
 \title{Returns the image object to show the heat map of degrees between the inputted set of vertices}
 \usage{
-plotDegMatrix(varieties, ig, geneal, colName)
+plotDegMatrix(varieties, ig, geneal)
 }
 \arguments{
 \item{varieties}{subset of varieties used to generate the heat map}
@@ -12,8 +12,6 @@ plotDegMatrix(varieties, ig, geneal, colName)
 \item{ig}{the graph representation of the data genealogy (in igraph format)}
 
 \item{geneal}{the full genealogy  (in data frame format)}
-
-\item{colName}{the name of the column of the data frame that contains the quantitative variable of interest (in character string format)}
 }
 \description{
 Returns the image object to show the heat map of degrees between the inputted set of vertices
@@ -22,7 +20,7 @@ Returns the image object to show the heat map of degrees between the inputted se
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
 varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear")
+p <- plotDegMatrix(varieties, ig, sbGeneal)
 p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 
 }

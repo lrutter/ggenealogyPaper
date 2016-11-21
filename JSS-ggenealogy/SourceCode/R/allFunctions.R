@@ -683,22 +683,22 @@ getChild = function(v1, geneal){
 #' @param v2 the label of the second vertex of interest (in character string format)
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param geneal the full genealogy  (in data frame format)
-#' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
+#'
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
 #' getDegree("Brim", "Bedford", ig, sbGeneal)
 #' @export
-getDegree = function(v1, v2, ig, geneal, colName){
+getDegree = function(v1, v2, ig, geneal){
   if(is.null(geneal)){
     stop("Please input a genealogy data frame")
   }
   if(is.null(ig)){
     stop("Please input an igraph object formatted by dfToIG()")
   }
-  path <- getPath(v1=v1, v2=v2, ig=ig, geneal = geneal, isDirected=F, colName = colName)
+  path <- getPathOnly(v1=v1, v2=v2, ig=ig, geneal = geneal, isDirected=F)
   # The degree between two vertices is equal to one less than the number of nodes in the shortest path
-  return(length(path$pathVertices)-1)
+  return(length(path)-1)
 }
 
 #' Returns the nodes for a full genealogy
@@ -833,6 +833,87 @@ getPath = function(v1, v2, ig, geneal, colName, silent=FALSE, isDirected=FALSE){
         }
       }
       retPath = list(pathVertices = pathVertices, variableVertices = variableVertices)
+    }
+  }
+  if(length(retPath)==0 & !silent){
+    message("Warning: There is no path between those two vertices")
+  }
+  # Return the shortest path, if it exists
+  retPath
+}
+
+
+#' Determine the path between two varieties
+#' 
+#' Determines the shortest path between the two inputted vertices, and takes into
+#' account whether or not the graph is directed. If there is a path, the list of vertices of the
+#' path will be returned. If there is not a path, a list of character(0) will be returned. Note:
+#' For a directed graph, the direction matters. However, this function will check both directions
+#' and return the path if it exists.
+#' @param v1 the label of the first vertex of interest (in character string format)
+#' @param v2 the label of the second vertex of interest (in character string format)
+#' @param ig the graph representation of the data genealogy (in igraph format)
+#' @param geneal the full genealogy  (in data frame format)
+#' @param silent whether or not to print output (defaults to false) 
+#' @param isDirected whether or not the graph is directed (defaults to false)
+#' @export
+getPathOnly = function(v1, v2, ig, geneal, silent=FALSE, isDirected=FALSE){
+  geneal = geneal[which(geneal$parent!=""),]
+  ig = dfToIG(geneal)
+  if(!is.character(v1) & !is.character(v2)){
+    stop("First two arguments must be strings")
+  } else {
+    if(!v1%in%igraph::V(ig)$name){
+      warning("v1 is not a graph vertex")
+    }
+    if(!v2%in%igraph::V(ig)$name){
+      warning("v2 is not a graph vertex")
+    }
+  }
+  if(is.null(geneal)){
+    stop("Please input a genealogy data frame where the first two columns are nodes at least one other column is labeled `Year`")
+  }
+  if(is.null(ig)){
+    stop("Please input an igraph object formatted by dfToIG()")
+  }
+  
+  if(igraph::is.directed(ig) != isDirected){
+    if(isDirected){
+      stop("Cannot compute directed path on an undirected graph")
+    }
+    warning("Graph type does not match isDirected specification")
+  }
+  
+  retPath = list()
+  pathVertices = character()
+  # If the genealogy is directed
+  if (igraph::is.directed(ig)){
+    # We need to look at both forward and reverse cases of directions, because the user may not know
+    # the potential direction of a path between the two vertices
+    pathVIndicesForward = igraph::get.shortest.paths(ig, v1, v2, weights = NA, output="vpath")$vpath[[1]]
+    pathVIndicesReverse = igraph::get.shortest.paths(ig, v2, v1, weights = NA, output="vpath")$vpath[[1]]
+    # If there is a path in the forward direction, then we save the names of the vertices in that order
+    if (length(pathVIndicesForward) != 0){
+      for (i in 1:length(pathVIndicesForward)){
+        pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndicesForward[i]))
+      }
+      retPath = pathVertices
+    }
+    # If there is a path in the reverse direction, then we save the names of the vertices in that order
+    if (length(pathVIndicesReverse) != 0){
+      for (i in 1:length(pathVIndicesReverse)){
+        pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndicesReverse[i]))
+      }
+      retPath = pathVertices
+    }
+  } else {
+    # The direction does not matter, any shortest path between the vertices will be listed
+    pathVIndices = igraph::get.shortest.paths(ig, v1, v2, weights = NA, output="vpath")$vpath[[1]]
+    if (length(pathVIndices) != 0){
+      for (i in 1:length(pathVIndices)){
+        pathVertices = c(pathVertices, igraph::get.vertex.attribute(ig, "name", index=pathVIndices[i]))
+      }
+      retPath = pathVertices
     }
   }
   if(length(retPath)==0 & !silent){
@@ -998,23 +1079,22 @@ plotAncDes = function(v1, geneal, mAnc=3, mDes=3, vColor="#D35C79"){
 #' @param varieties subset of varieties used to generate the heat map
 #' @param ig the graph representation of the data genealogy (in igraph format)
 #' @param geneal the full genealogy  (in data frame format)
-#' @param colName the name of the column of the data frame that contains the quantitative variable of interest (in character string format)
 #' 
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
 #' varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-#' p <- plotDegMatrix(varieties, ig, sbGeneal, "devYear")
+#' p <- plotDegMatrix(varieties, ig, sbGeneal)
 #' p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 #' 
 #' @export
-plotDegMatrix = function(varieties,ig,geneal,colName){
+plotDegMatrix = function(varieties,ig,geneal){
   Var1 <- Var2 <- value <- NULL
   matVar = matrix(, nrow = length(varieties), ncol = length(varieties))
   for (i in 1:length(varieties)){
     for (j in 1:length(varieties)){
-      matVar[i,j]=getDegree(varieties[i],varieties[j],ig,geneal,colName)
+      matVar[i,j]=getDegree(varieties[i],varieties[j],ig,geneal)
     }
   }
   
@@ -1046,9 +1126,13 @@ plotDegMatrix = function(varieties,ig,geneal,colName){
 #' @examples
 #' data(sbGeneal)
 #' ig <- dfToIG(sbGeneal)
-#' p <- getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
-#' plotPath(p)
-#' plotPath(p, "devYear", fontFace = 4)
+#' pathTN <- getPath("Tokyo", "Narow", sbIG, sbGeneal, "devYear")
+#' plotPath(pathTN, sbGeneal, "devYear")
+#' 
+#' sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
+#' sbFiltIG <- dfToIG(sbFilt)
+#' pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
+#' plotPath(pathCL, sbFilt, "devYear", "yield") + ggplot2::xlab("Dev Year") + ggplot2::ylab("Yield")
 plotPath = function(path, geneal, colName, colNameY="", fontFace = 1){
   x <- y <- label <- xstart <- ystart <- xend <- yend <- NULL
   if(sum(names(path)%in%c("pathVertices", "variableVertices"))!=2){
@@ -1117,11 +1201,11 @@ plotPath = function(path, geneal, colName, colNameY="", fontFace = 1){
 #' @param nodeCol color of the non-path node labels, default is black
 #' @examples
 #' data(sbGeneal)
-#' ig <- dfToIG(sbGeneal)
-#' path <- getPath("Brim", "Bedford", ig, "devYear", sbGeneal)
-#' bV <- 12
-#' plotTotalImage <- plotPathOnAll(path = path, geneal = sbGeneal, ig = ig, "devYear", bin = bV)
-#' plotTotalImage
+#' sb <- sbGeneal[complete.cases(sbGeneal[1:3]),]
+#' ig <- dfToIG(sb)
+#' pathCL <- getPath("Clark", "Lawrence", ig, sb, "yield")
+#' plotPathOnAll(pathCL, sb, ig, "yield", bin = 3, pathEdgeCol = "red") + ggplot2::xlab("Yield")
+#' plotPathOnAll(pathCL, sb, ig, "yield", "devYear") + ggplot2::xlab("Yield") + ggplot2::ylab("Year")
 #' @seealso \url{http://www.r-project.org} for iGraph information
 #' @seealso \code{\link{getPath}} for information on input path building
 #' @export
@@ -1229,16 +1313,16 @@ plotPathOnAll = function(path, geneal, ig, colName, colNameY = "", bin = 12, edg
 #' @examples
 #' data(sbGeneal)
 #' varieties <- c("Bedford", "Calland", "Narow", "Pella", "Tokyo", "Young", "Zane")
-#' p <- plotYearMatrix(varieties, sbGeneal, "devYear", "Variety", "Variety", "Degree")
+#' p <- plotVariableMatrix(varieties, sbGeneal, "devYear", "Variety", "Variety", "Difference")
 #' p + ggplot2::scale_fill_continuous(low = "white", high = "darkgreen")
 #' 
 #' @export
-plotYearMatrix = function(varieties, geneal, colName, xLab = "Variety", yLab = "Variety", legendLab = "Difference in dates"){
+plotVariableMatrix = function(varieties, geneal, colName, xLab = "Variety", yLab = "Variety", legendLab = "Difference in variable"){
   Var1 <- Var2 <- value <- NULL
   matVar = matrix(, nrow = length(varieties), ncol = length(varieties))
   for (i in 1:length(varieties)){
     for (j in 1:length(varieties)){
-      matVar[i,j]=abs(getVariable(varieties[i],geneal)-getVariable(varieties[j],geneal))
+      matVar[i,j]=abs(getVariable(varieties[i],geneal,colName)-getVariable(varieties[j],geneal,colName))
     }
   }
   
@@ -1323,7 +1407,7 @@ getBranchQuant = function(v1, geneal, colName, gen=3){
     DesNames <- dat$label
     Count <- length(DesNames)
     Mean <- mean(dat[[colName]], na.rm=TRUE)
-    SD <- sd(dat[[colName]], na.rm = TRUE)
+    SD <- stats::sd(dat[[colName]], na.rm = TRUE)
     NACount <- sum(is.na(dat[[colName]]))
     datRet <- rbind(datRet, data.frame(Name=childList[i], Mean=Mean, SD=SD, Count=Count, NACount=NACount, DesNames=paste(DesNames, collapse = ',')))
   }

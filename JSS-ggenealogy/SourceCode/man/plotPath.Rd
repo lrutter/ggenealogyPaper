@@ -27,9 +27,13 @@ box that outlines the node label, as well as an underline and overline for each 
 \examples{
 data(sbGeneal)
 ig <- dfToIG(sbGeneal)
-p <- getPath("Brim", "Bedford", ig, sbGeneal, "devYear")
-plotPath(p)
-plotPath(p, "devYear", fontFace = 4)
+pathTN <- getPath("Tokyo", "Narow", sbIG, sbGeneal, "devYear")
+plotPath(pathTN, sbGeneal, "devYear")
+
+sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
+sbFiltIG <- dfToIG(sbFilt)
+pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
+plotPath(pathCL, sbFilt, "devYear", "yield") + ggplot2::xlab("Dev Year") + ggplot2::ylab("Yield")
 }
 \seealso{
 \code{\link{getPath}} for information on input path building

@@ -48,11 +48,11 @@ boldfaced edges.
 }
 \examples{
 data(sbGeneal)
-ig <- dfToIG(sbGeneal)
-path <- getPath("Brim", "Bedford", ig, "devYear", sbGeneal)
-bV <- 12
-plotTotalImage <- plotPathOnAll(path = path, geneal = sbGeneal, ig = ig, "devYear", bin = bV)
-plotTotalImage
+sb <- sbGeneal[complete.cases(sbGeneal[1:3]),]
+ig <- dfToIG(sb)
+pathCL <- getPath("Clark", "Lawrence", ig, sb, "yield")
+plotPathOnAll(pathCL, sb, ig, "yield", bin = 3, pathEdgeCol = "red") + ggplot2::xlab("Yield")
+plotPathOnAll(pathCL, sb, ig, "yield", "devYear") + ggplot2::xlab("Yield") + ggplot2::ylab("Year")
 }
 \seealso{
 \url{http://www.r-project.org} for iGraph information
