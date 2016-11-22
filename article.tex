@@ -149,8 +149,6 @@ Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical
 
 Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in demonstrative code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
 
-\clearpage
-
 \section{Example datasets}
 \label{exData}
 
@@ -325,14 +323,15 @@ We can then create a plot showing the shortest path between these two varieties 
 
 \begin{Code}
 R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
-R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) + ggplot2::xlab("Development Year")
+R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) +
++    ggplot2::xlab("Development Year")
 \end{Code}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
 
-Furthermore, as determined by the figure, for both \code{Zane} and \code{Bedford}, there are four varieties of unidirectional parent-child relationships between each of them and their common ancestor \code{D55-4090}. Hence, any feature of interest that differentiates \code{Zane} and \code{Bedford} (protein content, yield, disease resistance, etc.) can also be examined across these two separate lineage histories.
+Furthermore, as seen in the figure, for both \code{Zane} and \code{Bedford}, there are four varieties of unidirectional parent-child relationships between each of them and their common ancestor \code{D55-4090}. Hence, any feature that differentiates \code{Zane} and \code{Bedford} (protein content, yield, disease resistance, etc.) can also be examined across these two separate lineage histories.
 
-We would like to note that the \code{plotPath()} method can be created with one or two quantitative variables that the user hard-codes. We illustrate this with the \code{sbGeneal} data frame after we subset it to remove observations that do not have values for the quantitative variable ``yield". Then, we can examine the path between the varieties \code{Clark} and \code{Lawrence} and plot how the quantitative varible ``yield" changes along the parent-child relationships of that path. Likewise, we plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPath()} function can be viewed in Figure \ref{fig:plotPathQV2}.
+We would like to note that the \code{plotPath()} method can be created with one or two quantitative variables that the user hard-codes. We illustrate this with the \code{sbGeneal} data frame after we subset it to remove observations that do not have values for the quantitative variable ``yield". Then, we can examine the path between the varieties \code{Clark} and \code{Lawrence} and plot how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPath()} function can be viewed in Figure \ref{fig:plotPathQV2}.
 
 \begin{Code}
 R> sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
@@ -340,7 +339,8 @@ R> sbFiltIG <- dfToIG(sbFilt)
 R> pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 R> plotPath(pathCL, sbFilt, "yield") + ggplot2::xlab("Yield")
 R> pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
-R> plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
+R> plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development
++    Year") + ggplot2::ylab("Yield")
 \end{Code}
 
 \begin{figure}[h]
@@ -358,9 +358,10 @@ Now that we can create path objects, we may wish to know how those paths are pos
 There is a function available in the \pkg{ggenealogy} package \code{plotPathOnAll()} that can allow users to quickly visualize their path of interest superimposed over all varieties and edges present in the whole data structure. Here we will produce a plot of the shortest path between varieties \code{Tokyo} and \code{Narow} across the entire dataset, as is displayed in Figure \ref{fig:plotTNBin3}.
 
 \begin{Code}
-R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol = "red",
-+    nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text = ggplot2::
-+    element_text(size = 12), axis.title = ggplot2::element_text(size = 12))
+R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol =
++    "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text =
++    ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size
++    = 12))
 \end{Code}
 
 \begin{figure}%[h]
@@ -384,7 +385,8 @@ However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the no
 
 \begin{Code}
 R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol =
-+    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Development Year")
++    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Development
++    Year")
 \end{Code}
 
 \begin{figure}[H]
@@ -398,11 +400,13 @@ We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitiga
 
 Notice again from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``devYear". We wanted to change the default value of the horizontal axis label to ``Development Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
 
-We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) that we previously created by subsetting the soy bean genealogy data to only include observations that contain a value for the quantitative variable ``yield". Then, we can examine the path across the entire genealogical structure and how the quantitative varible ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
+We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) that we previously created by subsetting the soy bean genealogy data to only include observations that contain a value for the quantitative variable ``yield". Then, we can examine the path across the entire genealogical structure and how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
 
 \begin{Code}
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol = "purple") + ggplot2::xlab("Yield")
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange") + ggplot2::xlab("Yield") + ggplot2::ylab("Development Year")
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol =
++    "purple") + ggplot2::xlab("Yield")
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol =
++    "orange") + ggplot2::xlab("Yield") + ggplot2::ylab("Development Year")
 \end{Code}
 
 \begin{figure}[h]
@@ -424,6 +428,8 @@ R> plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 \end{Code}
 
 This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} has 3 generations of ancestors and 5 generations of descendants. We also notice that some varieties are repeated, which is a unique feature provided by \pkg{ggenealogy}. For example, the variety \code{5601T} is represented four times - once as a third generation descendant of \code{Lee}, once as a fourth generation descendant of \code{Lee}, and twice as a fifth generation descendant of \code{Lee}. The variety \code{5601T} was repeated multiple times because there are multiple paths between \code{Lee} and \code{5601T}. For explanation purposes, all paths between \code{Lee} and \code{5601T} were manually highlighted in blue.
+
+\clearpage
 
 \begin{figure}[H]
     \centering
@@ -459,6 +465,8 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
     \caption{The shortest path degree matrix between ten varieties of interest.}
     \label{fig:degMatrix}
 \end{figure}
+
+\clearpage
 
 \section{Academic genealogy of statisticians}
 
@@ -534,12 +542,14 @@ At this point, it would be insightful to examine a more detailed view of one of 
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
 +    "gradYear", isDirected = FALSE)
-R> plotPath(pathCB, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation Year") +
-+    ggplot2::theme(axis.text = ggplot2::element_text(size = 10), axis.title =
-+    ggplot2::element_text(size = 10)) + + ggplot2::scale_x_continuous(expand
-+    = c(.1, .2))
+R> plotPath(pathCB, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation
++    Year") + ggplot2::theme(axis.text = ggplot2::element_text(size = 10),
++    axis.title = ggplot2::element_text(size = 10)) +
++    ggplot2::scale_x_continuous(expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
+
+\clearpage
 
 \begin{figure}[H]
     \centering
@@ -553,6 +563,8 @@ This code results in Figure \ref{fig:pathCB}. We see that the shortest path betw
 We also notice in Figure \ref{fig:pathCB} that Sir \code{David Cox} received his statistics degree in about 1950, and \code{Petra Buzkova} received her statistics degree in about 2005. This genealogy only contains historical information about obtained degrees, and does not project into the future. Hence, we can be assured that \code{Petra Buzkova} is one of the younger individuals in the dataset, at least in the sense that the youngest individual could only have received his or her degree ten years after \code{Petra Buzkova}. However, we cannot be assured that Sir \code{David Cox} is one of the oldest individuals in the dataset. As such, it would be informative to superimpose this path of interest onto the entire dataset, using the \code{plotPathOnAll()} function of the \pkg{ggenealogy} package, as we did for the soybean genealogy in Figures \ref{fig:plotTNBin3} and \ref{fig:plotTNBin6}.
 
 We can achieve this using the below code. After trial and error, we use a \code{bin} of size 200, and append \pkg{ggplot2} syntax to define suitable x-axis limits. The output of this process is illustrated in Figure \ref{fig:plotCBText}.
+
+\clearpage
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -576,8 +588,8 @@ The text labels are so numerous in Figure \ref{fig:plotCBText} that simply tryin
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .5,
-+    pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
++    .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
 +    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
@@ -600,8 +612,8 @@ We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .5,
-+    pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray",
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
++    .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray",
 +    animate = TRUE)
 \end{CodeInput}
 \end{CodeChunk}
@@ -617,19 +629,21 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize = .
 We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value is revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year is revealed.
 
 \begin{Code}
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange", animate = TRUE)
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "orange", animate = TRUE)
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange",
++    animate = TRUE)
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol =
++    "orange", animate = TRUE)
 \end{Code}
 
 \section{Branch parsing and calculations}
 
 It may be helpful for users to search through descendant branches of a certain individual to compare and contrast how a variable of interest changes along those branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which branches are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of students graduating from certain universities or countries? Which branches are graduating new students in recent years? Which branches have the highest proportion of thesis titles containing a word of interest?
 
-Answering these questions in a straightforward manner requires more than basic data frame manipulation: It also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can easily answer these questions using branch traversal. One method can be used to track a quantitative variable across branches (\code{getBranchQuant()}) and the other method can be used to track a qualitative variable across branches (\code{getBranchQual()}).
+Answering these questions in a straightforward manner requires more than basic data frame manipulation: It also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can answer these questions using branch traversal. The\code{getBranchQuant()} function can be used to track a quantitative variable across branches and the \code{getBranchQual()} method can be used to track a qualitative variable across branches.
 
 \subsection{Quantitative variable parsing and calculations}
 
-We can demonstrate the \code{getBranchQuant()} function by examining the quantitative variable ``yield" across the descendant branches of the soybean variety ``A.K.". To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
+We can demonstrate the \code{getBranchQuant()} function by examining the quantitative variable ``yield" across the descendant branches of the soybean variety \code{A.K.}. To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -643,9 +657,9 @@ R> select(AKBranchYield,-DesNames)
 \end{CodeOutput}
 \end{CodeChunk}
 
-We see from the output that ``A.K." has two children named ``A.K. (Harrow)" and ``Illini". Descendants from the ``A.K. (Harrow)" branch have a higher mean yield than the ``Illini" branch (2932.154 versus 2856.667). However, we should recognize that even though the branches contain a large number of descendants (54 and 131), most of these descendants did not include a yield value in the dataset (41 and 125). As a result, the mean values are calculated from a small proportion of the descendants.
+We see from the output that \code{A.K.} has two children named \code{A.K. (Harrow)} and \code{Illini}. Descendants from the \code{A.K. (Harrow)} branch have a higher mean yield than the \code{Illini} branch (2932.154 versus 2856.667). However, we should recognize that even though the branches contain a large number of descendants (54 and 131), most of these descendants did not come with a yield value (41 and 125). As a result, the mean values are calculated from a small proportion of the descendants.
 
-As another example, we can examine the mean graduation year for the ``descendant" branches of academic statistician ``David Cox". We know from earlier that ``David Cox" had 42 ``children", so as expected the \code{CoxBranchYear} object below contains 42 rows. However, only 8 of these rows have any ``descendants" of their own. As a result, only the first 8 rows of the object contain branch information.
+As another example, we can examine the mean graduation year for the ``descendant" branches of the academic statistician \code{David Cox}. We know from earlier that \code{David Cox} had 42 ``children", so as expected, the \code{CoxBranchYear} object below contains 42 rows. However, only 8 of these rows have any ``descendants" of their own. As a result, only the first 8 rows of the \code{CoxBranchYear} object contain branch information.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -667,13 +681,13 @@ R> head(select(CoxBranchYear,-DesNames),10)
 \end{CodeOutput}
 \end{CodeChunk}
 
-In this case, we see that of the 8 ``children" of David Cox who had ``children" of their own, ``Mark Berman" has the ``descendants" (n=5) who on average have graduated the most recently (2007.200), whereas ``Peter Bloomfield" has the ``descendants" (n=49) who on average have graduated the least recently (1999.918). We see that, for all branches, there are no ``descendants" who contain a NA value for graduation year.
+In this case, we see that of the 8 ``children" of \code{David Cox} who had ``children" of their own, \code{Mark Berman} had the ``descendants" (n=5) who have on average graduated the most recently (2007.200), whereas \code{Peter Bloomfield} has the ``descendants" (n=49) who on average have graduated the least recently (1999.918). We see that, for all branches, there are no ``descendants" who contain a NA value for graduation year.
 
 \subsection{Qualitative variable parsing and calculations}
 
-The \code{getBranchQual()} function requires similar inputs as the \code{getBranchQuant()} function, except that it also requires an input parameter called \code{rExpr}. The user must initialize this input parameter to a regular expression that can be applied to the column containing the qualitative variable of interest. The regular expression syntax must work on a data frame column of type character. It must be saved as a double quotation string, and any quotation marks within the regular expression must be single quotations. The term ``geneal\$colName" must be used in the regular expression.
+The \code{getBranchQual()} function requires similar inputs as the \code{getBranchQuant()} function, except that it also requires an input parameter called \code{rExpr}. The user must initialize this input parameter to a regular expression that can be applied to the column containing the qualitative variable of interest. The regular expression syntax must work on a data frame column of type character. It must be saved as a double quotation string, and any quotation marks within it must be single quotations. The term ``geneal\$colName" must be used in the regular expression.
 
-We can demonstrate the \code{getBranchQual()} function by examining the qualitative variable ``thesis" across the ``descendant" branches of the academic statistican ``David Cox". Since one of the primary research areas for ``David Cox" was stochastic processes, we can determine if any descendant branches of his ``children" contained thesis titles that included the word ``stochastic".
+We can demonstrate the \code{getBranchQual()} function by examining the qualitative variable ``thesis" across the ``descendant" branches of the academic statistician \code{David Cox}. Since one of the primary research areas for \code{David Cox} was stochastic processes, we can determine if any descendant branches of his ``children" contained thesis titles that included the word ``stochastic".
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -693,18 +707,19 @@ R> head(select(CoxBranchStochastic, -DesNames))
 \end{CodeOutput}
 \end{CodeChunk}
 
-We see that only two ``children" of ``David Cox" had any ``descendants" with thesis titles containing the word ``Stochastic" (4 out of 49 ``descendants" of ``Peter Bloomfield" and 1 out of 17 ``descendants" of ``Basilio Periera"). We see again that none of the ``descendants" from either branches contained values that were NA for the variable ``thesis".
+We see that only two ``children" of \code{David Cox} had any ``descendants" with thesis titles containing the word ``Stochastic" (4 out of 49 ``descendants" of \code{Peter Bloomfield} and 1 out of 17 ``descendants" of \code{Basilio Periera}). We see again that none of the ``descendants" from either branches contained values that were NA for the variable ``thesis".
 
-In many string parsing applications, the choice of the regular expression can be tricky. This is probably true when the string variable we are parsing is thesis titles. For instance, notice that in our regular expression, we accounted for all instances of the substring ``Stochastic". Hence, words that contain "Stochastic" as a substring (such as ``Stochastics" and ``Stochastically") will also be returned. In addition, we defined our regular expression to return matches whether the first letter was upper or lower case. When initializing the \code{rExpr} parameter, users would need to consider what variants of their search criteria they would like to define as matches.
+In many string parsing applications, the choice of the regular expression can be tricky. This is true when the string variable we are parsing is thesis titles. For instance, notice that in our regular expression, we accounted for all instances of the substring ``Stochastic". Hence, words that contain "Stochastic" (such as ``Stochastics" and ``Stochastically") will also be returned. In addition, we defined our regular expression to return matches whether the first letter was upper or lower case. When initializing the \code{rExpr} parameter, users would need to consider what nuances of their search criteria they would like to define as matches.
 
-We will demonstrate one more example of the \code{getBranchQual()} function by searching the qualitative variable ``school" across the ``descendant" branches of the academic statistican ``David Cox". The Mathematics Genealogy Project coding system for the ``school" variable was non-ambiguous, and so we do not have to worry about various ways the same school could be named in the dataset. As a result, we can now simply use a regular expression that equates specifically to one value.
+We will demonstrate one more example of the \code{getBranchQual()} function by searching the qualitative variable ``school" across the ``descendant" branches of the academic statistician \code{David Cox}. The Mathematics Genealogy Project coding system for the ``school" variable was non-ambiguous, and so we do not have to worry about all the various ways the same school could be coded in the dataset. As a result, we now do not have to search for various substrings; we can simply use a regular expression that equates to one value.
 
-It may be interesting to examine the school that is represented the most among all descendants of ``David Cox". To accomplish this, we use the \code{getDescendants()} function to create a data frame called \code{desDC} that contains the names of all 159 ``descendants" of ``David Cox". Then, we use the basic R function \code{match()} to match the school names from the original dataset to each of the 159 ``descendants" in the \code{desDC} data frame. We then use the basic R functions \code{sort()} and \code{table()} to examine the five schools that were represented the most out of the 159 ``descendants".
+It may be interesting to examine the school that is represented the most among all descendants of \code{David Cox}. To determine what school this is, we use the \code{getDescendants()} function to create a data frame called \code{desDC} that contains the names of all 159 ``descendants" of \code{David Cox}. Then, we use the base R function \code{match()} to match the school names from the original dataset to each of the 159 ``descendants" in the \code{desDC} data frame. After that, we use the base R functions \code{sort()} and \code{table()} to examine the five schools that were represented the most throughout the 159 ``descendants".
 
 \begin{CodeChunk}
 \begin{CodeInput}
 R> desDC <- getDescendants("David Cox", statGeneal, 15)
-R> tail(sort(table(statGeneal[match(desDC$label,statGeneal$child),]$school)),5)
+R> tableDC <- table(statGeneal[match(desDC$label, statGeneal$child), ]$school)
+R> tail(sort(tableDC), 5)
 \end{CodeInput}
 \begin{CodeOutput}
           The Johns Hopkins University 
@@ -720,12 +735,12 @@ Universidade Federal do Rio de Janeiro
 \end{CodeOutput}
 \end{CodeChunk}
 
-We see from this table that the most common school of the 159 ``descendants" of ``David Cox" was the University of London with a count of 35. We can now determine which of the 42 branches from the ``children" of ``David Cox" have the largest proportion of ``descendants" graduating from the University of London.
+We see from this table that the most common school of the 159 ``descendants" of \code{David Cox} was the University of London with a count of 35. We can now determine which of the branches from the 42 ``children" of \code{David Cox} have the largest proportion of ``descendants" graduating from the University of London.
 
 \begin{CodeChunk}
 \begin{CodeInput}
 R> colName = "school"
-R> rExpr = "geneal$colName=='University of London'" #works
+R> rExpr = "geneal$colName=='University of London'"
 R> DCBranchUL <- getBranchQual(v1, geneal, colName, rExpr, gen)
 R> head(select(DCBranchUL, -DesNames))
 \end{CodeInput}
@@ -740,18 +755,20 @@ R> head(select(DCBranchUL, -DesNames))
 \end{CodeOutput}
 \end{CodeChunk}
 
-We see that ``Peter McCullagh" is the only ``child" of ``David Cox" that has a ``descendant" branch with one student graduating from the University of London; the rest of the 41 children of ``David Cox" have ``descendant" branches with zero students graduating from the University of London. This must mean the other 34 ``descendants" of ``David Cox" that graduated from the University of London were direct ``children" of ``David Cox". We can verify this below:
+We see that \code{Peter McCullagh} is the only ``child" of \code{David Cox} that has a ``descendant" branch with one student graduating from the University of London; the rest of the 41 children of \code{David Cox} have ``descendant" branches with zero students graduating from the University of London. This must mean the other 34 ``descendants" of \code{David Cox} that graduated from the University of London were direct ``children" of \code{David Cox}. We can verify this below:
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> sum(statGeneal[match(getChild("David Cox",statGeneal),statGeneal$child),]$school=="University of London")
+R> DCChild <- statGeneal[match(getChild("David Cox", statGeneal),
++    statGeneal$child), ]
+R> sum(DCChild$school == "University of London")
 \end{CodeInput}
 \begin{CodeOutput}
 [1] 34
 \end{CodeOutput}
 \end{CodeChunk}
 
-The examples above demonstrate that users can quickly and flexibly parse descendant branches. The swiftness comes from \pkg{ggenealogy} functions that allow for fast parent-child traversals, such as \code{getChild()}, \code{getDescendants()}, \code{getBranchQuant()}, and \code{getBranchQual()}. The flexibilty comes from data frame manipulation functions in base R that can be used in conjunction with the parent-child traversals.
+The examples above demonstrate that users can quickly and flexibly parse descendant branches. The swiftness comes from \pkg{ggenealogy} functions that allow for fast parent-child traversals, such as \code{getChild()}, \code{getDescendants()}, \code{getBranchQuant()}, and \code{getBranchQual()}. The flexibility comes from data frame manipulation functions in base R that can be used in conjunction with the parent-child traversals.
 
 \section{Future avenues}
 
