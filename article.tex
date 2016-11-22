@@ -34,7 +34,7 @@
 
 %% an abstract and keywords
 \Abstract{
-  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The latest stable package version is available in source and binary form on the Comprehensive \proglang{R} Archive Network.}
+  This paper introduces \pkg{ggenealogy} (\citealt{ggen}), a developing \proglang{R} software package that provides tools for searching through genealogical data, generating basic statistics on their graphical structures using parent and child connections, parsing and performing calculations on branches of interest, and displaying the results. It is possible to draw the genealogy in relation to variables related to the nodes, and to determine and display the shortest path distances between the nodes. Production of pairwise distance matrices and genealogical diagrams constrained on generation are also available in the visualization toolkit. The tools are being tested on a dataset with milestone cultivars of soybean varieties (\citealt{soybean}) as well as on a web-based database of the academic genealogy of mathematicians (\citealt{mgp}). The latest stable package version is available in source and binary form on the Comprehensive \proglang{R} Archive Network.}
 
 \Keywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, \proglang{R}}
 \Plainkeywords{genealogy, data visualization, statistical graphics, exploratory data analysis, interactive, R} %% without formatting
@@ -147,7 +147,7 @@ We will now provide a brief overview of the functionality of the \pkg{ggenealogy
 
 Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical data in multiple ways. Users can obtain and plot the shortest path between two nodes of interest constrained on a variable of interest (see Section \ref{psp}), superimpose a shortest path between two nodes of interest with the entire genealogical structure constrained on a variable of interest (see Section \ref{sspt}), plot the ancestors and descendants of a node of interest constrained on generation count (see Section \ref{remedy}), and plot distance matrices based on a variable of interest (see Section \ref{pdm}).
 
-Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in demonstrative code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
+Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
 
 \section{Example datasets}
 \label{exData}
@@ -212,7 +212,7 @@ R> colnames(statGeneal)
 
 As is the case with both example data files introduced above, \pkg{ggenealogy} requires that the genealogy input file is a data frame structure with at least two columns. One column must be labeled ``child", and each case in that column must be of type character. The other column must be labeled ``parent," and each case in that column must either be of type character, type NA, or type ``". At this point, any \pkg{ggenealogy} plot that only requires information about parent-child relationships can be used.
 
-However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column should be of type numeric. In the first example dataset, columns that could be used for this purpose (once subsetted to filter out values of ``'' and NA) include ``devYear", ``yield", and ``yearImputed"; in the second example dataset, the column that could be used for this purpose is ``gradYear". At this point, any \pkg{ggenealogy} plot can be used.
+However, some \pkg{ggenealogy} plots also make use of quantitative variable values associated with individuals in the genealogy. For these plots, the input data frame should also contain a third quantitative variable column. Each case in this quantitative variable column should be of type numeric. In the first example dataset, columns that could be used for this purpose include ``devYear", ``yield", and ``yearImputed"; in the second example dataset, the column that could be used for this purpose is ``gradYear". However, for these quantitative variable columns to successfully be used in plots, we would first need to assure that each row within them contains a numeric value (not NA). We could achieve this by filtering out or imputing certain rows that contain NA values for this column of interest. We demonstrate a filtering process for this purpose at the end of Section \ref{psp}. After that, any \pkg{ggenealogy} plot can be used.
 
 \section{Generating a graphical object}
 \label{ggo}
@@ -377,6 +377,8 @@ For each variety, the x coordinate (year) and width of the x coordinate (text la
 
 If the user decides to produce a plot using three bins, as in the example code above, then the varieties are all grouped into three bins based on their year values. In other words, there will be bin 1 (the ``oldest bin") which includes the one-third of varieties with the oldest years of release, bin 2 (the ``middle bin"), and bin 3 (the ``youngest bin"). Then, in order to decrease text overlap, the consecutively increasing y-axis coordinates are alternatively assigned to the three bins (For example: bin 1, bin 2, bin 3, bin 1, bin 2, bin 3, ...) repeatedly until all varieties are addressed. This algorithm means that for any pair of varieties within a given bin, there are exactly two other varieties vertically separating them.
 
+\clearpage
+
 In the code above, \code{bin} was assigned a value of 3, and \code{pathEdgeCol} was assigned a value of ``red". Additionally, we specified a size of 2.5 for the non-path node test using the \code{nodeSize} parameter, and a size of 4 for the path node text using the \code{pathNodeSize} parameter. There are several other parameters in the \code{plotPathOnAll()} function, which can be read in more detail using the help command.
 
 This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not on the path of interest are thin and gray by default, whereas edges on the path of interest are bolded by default. We also see that variety labels in the path of interest are boldfaced by default. Figure \ref{fig:plotTNBin3} presents useful information: We immediately gather that the path of interest does span most of the years of the data structure. In fact, \code{Tokyo} appears to be the oldest variety in the dataset, and \code{Narow} appears to be one of the youngest varieties. We can also determine that the majority of varieties were released between 1950 and 1970.
@@ -396,11 +398,13 @@ R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol =
     \label{fig:plotTNBin6}
 \end{figure}
 
+\clearpage
+
 We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitigates text overlap compared to Figure \ref{fig:plotTNBin3}. We also confirm what we saw in the previous plot that most varieties were released between 1950 and 1970, and any textual overlap is confined to this range of years.
 
 Notice again from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``devYear". We wanted to change the default value of the horizontal axis label to ``Development Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
 
-We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) that we previously created by subsetting the soy bean genealogy data to only include observations that contain a value for the quantitative variable ``yield". Then, we can examine the path across the entire genealogical structure and how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
+We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) that we previously created to assure that there were no NA values in the quantitative variable ``yield". Then, we can examine the path across the remaining genealogical structure and how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
 
 \begin{Code}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol =
@@ -429,7 +433,12 @@ R> plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
 
 This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} has 3 generations of ancestors and 5 generations of descendants. We also notice that some varieties are repeated, which is a unique feature provided by \pkg{ggenealogy}. For example, the variety \code{5601T} is represented four times - once as a third generation descendant of \code{Lee}, once as a fourth generation descendant of \code{Lee}, and twice as a fifth generation descendant of \code{Lee}. The variety \code{5601T} was repeated multiple times because there are multiple paths between \code{Lee} and \code{5601T}. For explanation purposes, all paths between \code{Lee} and \code{5601T} were manually highlighted in blue.
 
-\clearpage
+The bottom plot of Figure \ref{fig:Lee} is not an output plot of \pkg{ggenealogy}. Instead, it was simply created for didactic purposes. Here, the paths that were manually highlighted in blue in the top plot produced by \pkg{ggenealogy} are shown again, only now nodes cannot be repeated. The parenthetical number above each node represents the set of generation counts distancing that node from the center node \code{Lee}; green parentheses indicate that the node could be successfully placed in one horizontal position, but red parentheses indicate that the node could not be successfully placed in one horizontal position. We see that node \code{TN89-39} cannot simultaneously be represented as both a third and fourth descendent of node \code{Lee}, and node \code{5601T} cannot simultaneously be represented as a third, fourth, and fifth descendent of node \code{Lee}. Hence, without allowing nodes to repeat, this dataset cannot be presented in the graph on the bottom as it can be in the \pkg{ggenealogy} graph on the top. This is a current limitation in other genealogy and graphical software that \pkg{ggenealogy} can now provide.
+
+\section{Plotting distance matrix}
+\label{pdm}
+
+It may also be of interest to generate matrices where the colors indicates a variable between all pairwise combinations of inputted varieties. The package \pkg{ggenealogy} also provides a function \code{plotDegMatrix()} for that purpose. We can demonstrate this function with the variable being the shortest path degree between a given pair of varieties. The shortest path degree is calculated as the smallest number of parent-child edges needed to traverse between two varieties of interest. For instance, in Figure \ref{fig:pathTNZB}, the shortest path degree between \code{Tokyo} and \code{Narow} is four and the shortest path degree between \code{Bedford} and \code{Zane} is ten.
 
 \begin{figure}[H]
     \centering
@@ -438,23 +447,15 @@ This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} h
     \label{fig:Lee}
 \end{figure}
 
-The bottom plot of Figure \ref{fig:Lee} is not an output plot of \pkg{ggenealogy}. Instead, it was simply created for didactic purposes. Here, the paths that were manually highlighted in blue in the top plot produced by \pkg{ggenealogy} are shown again, only now nodes cannot be repeated. The parenthetical number above each node represents the set of generation counts distancing that node from the center node \code{Lee}; green parentheses indicate that the node could be successfully placed in one horizontal position, but red parentheses indicate that the node could not be successfully placed in one horizontal position. We see that node \code{TN89-39} cannot simultaneously be represented as both a third and fourth descendent of node \code{Lee}, and node \code{5601T} cannot simultaneously be represented as a third, fourth, and fifth descendent of node \code{Lee}. Hence, without allowing nodes to repeat, this dataset cannot be presented in the graph on the bottom as it can be in the \pkg{ggenealogy} graph on the top. This is a current limitation in other genealogy and graphical software that \pkg{ggenealogy} can now provide.
-
-\section{Plotting distance matrix}
-\label{pdm}
-
-It may also be of interest to generate matrices where the colors indicates a variable between all pairwise combinations of inputted varieties. The package \pkg{ggenealogy} also provides a function \code{plotDegMatrix()} for that purpose. We can demonstrate this function with the variable being the shortest path degree between a given pair of varieties. The shortest path degree is calculated as the smallest number of parent-child edges needed to traverse between two varieties of interest. For instance, in Figure \ref{fig:pathTNZB}, the shortest path degree between \code{Tokyo} and \code{Narow} is four and the shortest path degree between \code{Bedford} and \code{Zane} is ten.
-
 Here we generate a distance matrix for a set of 10 varieties, setting the x-label and y-label as ``Variety" and the legend label as ``Degree". In this example, we add \pkg{ggplot2} functionality to specify that pairs with small degrees are white, while those with large degrees are dark green, as well as to specify the text size of the legend title and label.
 
 \begin{Code}
 >R varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
 +    "Pella", "Tokyo", "Young", "Zane")
->R plotDegMatrix(varieties, sbIG, sbGeneal) +
-+    ggplot2::scale_fill_continuous(low = "white", high = "darkgreen") +
-+    ggplot2::theme(legend.title = ggplot2::element_text(size = 15),
-+    legend.text = ggplot2::element_text(size = 15)) + ggplot2::labs(x = 
-+    "Variety", y = "Variety")
+>R plotDegMatrix(varieties, sbIG, sbGeneal) + ggplot2::scale_fill_continuous
++    (low = "white", high = "darkgreen") + ggplot2::theme(legend.title =
++    ggplot2::element_text(size = 15), legend.text = ggplot2::element_text
++    (size = 15)) + ggplot2::labs(x = "Variety", y = "Variety")
 \end{Code}
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that a shortest path degree of 10 may be considered relative to the rest of this dataset.
@@ -465,8 +466,6 @@ This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of t
     \caption{The shortest path degree matrix between ten varieties of interest.}
     \label{fig:degMatrix}
 \end{figure}
-
-\clearpage
 
 \section{Academic genealogy of statisticians}
 
@@ -518,7 +517,7 @@ R> plotAncDes("David Cox", statGeneal, mAnc = 6, mDes = 6, vCol = "blue")
     \label{fig:dCox}
 \end{figure}
 
-We see from Figure \ref{fig:dCox} that Sir \code{David Cox} had 42 ``children", many of them becoming notable statisticians themselves, such as Basilio Pereira, Valerie Isham, Gauss Cordeiro, Peter McCullagh, and Henry Wynn. Of his ``children", the one who produced the most ``children" of their own was Peter Bloomfield, who has 26 ``children" and 49 ``descendants". In total, Sir \code{David Cox} had five generations of academic statistics mentees in this dataset.
+We see from Figure \ref{fig:dCox} that Sir \code{David Cox} had 42 ``children", many of them becoming notable statisticians themselves, such as \code{Basilio Pereira}, \code{Valerie Isham}, \code{Gauss Cordeiro}, \code{Peter McCullagh}, and \code{Henry Wynn}. Of his ``children", the one who produced the most ``children" of their own was \code{Peter Bloomfield}, who has 26 ``children" and 49 ``descendants". In total, Sir \code{David Cox} had five generations of academic statistics mentees in this dataset.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -542,14 +541,12 @@ At this point, it would be insightful to examine a more detailed view of one of 
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
 +    "gradYear", isDirected = FALSE)
-R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) +
-+    ggplot2::xlab("Graduation Year") + ggplot2::theme(axis.text = 
-+    ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(
-+    (size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
+R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) + ggplot2::xlab
++    ("Graduation Year") + ggplot2::theme(axis.text = ggplot2::element_text
++    (size = 10), axis.title = ggplot2::element_text(size = 10)) +
++    ggplot2::scale_x_continuous(expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
-
-\clearpage
 
 \begin{figure}[H]
     \centering
@@ -563,8 +560,6 @@ This code results in Figure \ref{fig:pathCB}. We see that the shortest path betw
 We also notice in Figure \ref{fig:pathCB} that Sir \code{David Cox} received his statistics degree in about 1950, and \code{Petra Buzkova} received her statistics degree in about 2005. This genealogy only contains historical information about obtained degrees, and does not project into the future. Hence, we can be assured that \code{Petra Buzkova} is one of the younger individuals in the dataset, at least in the sense that the youngest individual could only have received his or her degree ten years after \code{Petra Buzkova}. However, we cannot be assured that Sir \code{David Cox} is one of the oldest individuals in the dataset. As such, it would be informative to superimpose this path of interest onto the entire dataset, using the \code{plotPathOnAll()} function of the \pkg{ggenealogy} package, as we did for the soybean genealogy in Figures \ref{fig:plotTNBin3} and \ref{fig:plotTNBin6}.
 
 We can achieve this using the below code. After trial and error, we use a \code{bin} of size 200, and append \pkg{ggplot2} syntax to define suitable x-axis limits. The output of this process is illustrated in Figure \ref{fig:plotCBText}.
-
-\clearpage
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -596,19 +591,19 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
 \end{CodeInput}
 \end{CodeChunk}
 
+In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and \code{Petra Buzkova}, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
+
+\section{Interactive plotting functions}
+\label{interaction}
+
+We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. This interactive functionality comes from methods in the \pkg{plotly} package (\citealt{plotly}). A short video demonstration of these interactive features can be viewed in Figure \ref{fig:plotAnimate}.
+
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=\textwidth]{plotCBNoText}}
     \caption{The shortest path between Sir \code{David Cox} and \code{Petra Buzkova}, superimposed over the data structure, using a bin size of 200. Individuals on the shortest path are labeled in large and black text and connected by dark green edges; all other individuals are labeled in small and gray text and connected by light gray edges.}
     \label{fig:plotCBNoText}
 \end{figure}
-
-In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and \code{Petra Buzkova}, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
-
-\section{Interactive plotting functions}
-\label{interaction}
-
-We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be primarily interested in understanding how the path of interest is overlaid across the entire genealogical structure, we could, upon viewing the entire structure, also develop an interest in nodes that are not on the path of interest but are revealed to stand out among the rest of the genealogical structure. For instance, in Figure \ref{fig:plotCBNoText}, it may be of interest for us to determine the names of the few individuals who obtained their statistics degrees before 1900. Fortunately, within the \code{plotPathOnAll()} function, there is a variable \code{animate} that we can set to a value of TRUE to create an interactive version of the figure that allows us to hover over individual illegible labels and immediately receive their labels in a readable format. This interactive functionality comes from methods in the \pkg{plotly} package (\citealt{plotly}). A short video demonstration of these interactive features can be viewed below. 
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -617,14 +612,6 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
 +    animate = TRUE)
 \end{CodeInput}
 \end{CodeChunk}
-
-\begin{figure}[H]
-    \centering
-    \fbox{\includemedia[label = v1, playbutton=none, width=1.0\textwidth, addresource=animateGen.mov, activate=pageopen, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}}
-    \mediabutton[mediacommand=v1:playPause,]{\mybox{Play/Pause}}
-    \caption{A short video demonstrating the animation features for this function. Please note that to properly view this video, the PDF version of this document must be opened in Adobe Acrobat Reader DC (version >=9), which can be downloaded free of charge. This video can only be viewed on Windows or Mac OS X platforms; it cannot be viewed on mobile devices.}
-    \label{fig:plotAnimate}
-\end{figure}
 
 We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value would be revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year would be revealed. We do not include the animated videos that the below code creates in this document, but readers can use the below code to create them on their own.
 
@@ -635,15 +622,24 @@ R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol =
 +    "orange", animate = TRUE)
 \end{Code}
 
+\begin{figure}[H]
+    \centering
+    \fbox{\includemedia[label = v1, playbutton=none, width=1.0\textwidth, addresource=animateGen.mov, activate=pageopen, flashvars={source=animateGen.mov}]{\includegraphics{./plotCBNoText.png}}{VPlayer.swf}}
+    \mediabutton[mediacommand=v1:playPause,]{\mybox{Play/Pause}}
+    \caption{A short video demonstrating the animation features for this function. Please note that to properly view this video, the PDF version of this document must be opened in Adobe Acrobat Reader DC (version >=9), which can be downloaded free of charge. This video can only be viewed on Windows or Mac OS X platforms; it cannot be viewed on mobile devices.}
+    \label{fig:plotAnimate}
+\end{figure}
+
 \section{Branch parsing and calculations}
 
 It may be helpful for users to search through descendant branches of a certain individual to compare and contrast how a variable of interest changes along those branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which branches are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of students graduating from certain universities or countries? Which branches are graduating new students in recent years? Which branches have the highest proportion of thesis titles containing a word of interest?
 
-Answering these questions in a straightforward manner requires more than basic data frame manipulation: It also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can answer these questions using branch traversal. The\code{getBranchQuant()} function can be used to track a quantitative variable across branches and the \code{getBranchQual()} method can be used to track a qualitative variable across branches.
+Answering these questions in a straightforward manner requires more than basic data frame manipulation: It also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can answer these questions using branch traversal. The \code{getBranchQuant()} function can be used to track a quantitative variable across branches and the \code{getBranchQual()} method can be used to track a qualitative variable across branches.
 
+\clearpage
 \subsection{Quantitative variable parsing and calculations}
 
-We can demonstrate the \code{getBranchQuant()} function by examining the quantitative variable ``yield" across the descendant branches of the soybean variety \code{A.K.}. To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
+We can demonstrate the \code{getBranchQuant()} function by examining the quantitative variable ``yield" across the descendant branches of the soybean variety \code{A.K.} To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -657,7 +653,7 @@ R> select(AKBranchYield, -DesNames)
 \end{CodeOutput}
 \end{CodeChunk}
 
-We see from the output that \code{A.K.} has two children named \code{A.K. (Harrow)} and \code{Illini}. Descendants from the \code{A.K. (Harrow)} branch have a higher mean yield than the \code{Illini} branch (2932.154 versus 2856.667). However, we should recognize that even though the branches contain a large number of descendants (54 and 131), most of these descendants did not come with a yield value (41 and 125). As a result, the mean values are calculated from a small proportion of the descendants.
+We see from the output that \code{A.K.} has two children named \code{A.K. (Harrow)} and \code{Illini}. Descendants from the \code{A.K. (Harrow)} branch have a higher mean yield than the \code{Illini} branch (2932.154 versus 2856.667). However, we should recognize that even though the branches contain a large number of descendants (54 and 131), most of these descendants did not come with a yield value (41 and 125). As a result, the mean values were calculated from a small proportion of the descendants.
 
 As another example, we can examine the mean graduation year for the ``descendant" branches of the academic statistician \code{David Cox}. We know from earlier that \code{David Cox} had 42 ``children", so as expected, the \code{CoxBranchYear} object below contains 42 rows. However, only 8 of these rows have any ``descendants" of their own. As a result, only the first 8 rows of the \code{CoxBranchYear} object contain branch information.
 
@@ -683,9 +679,10 @@ R> head(select(CoxBranchYear, -DesNames), 10)
 
 In this case, we see that of the 8 ``children" of \code{David Cox} who had ``children" of their own, \code{Mark Berman} had the ``descendants" (n=5) who have on average graduated the most recently (2007.200), whereas \code{Peter Bloomfield} has the ``descendants" (n=49) who on average have graduated the least recently (1999.918). We see that, for all branches, there are no ``descendants" who contain a NA value for graduation year.
 
+\clearpage
 \subsection{Qualitative variable parsing and calculations}
 
-The \code{getBranchQual()} function requires similar inputs as the \code{getBranchQuant()} function, except that it also requires an input parameter called \code{rExpr}. The user must initialize this input parameter to a regular expression that can be applied to the column containing the qualitative variable of interest. The regular expression syntax must work on a data frame column of type character. It must be saved as a double quotation string, and any quotation marks within it must be single quotations. The term ``geneal\$colName" must be used in the regular expression.
+The \code{getBranchQual()} function requires similar inputs as the \code{getBranchQuant()} function above, except that it also requires an input parameter called \code{rExpr}. The user must initialize this input parameter to a regular expression that can be applied to the column containing the qualitative variable of interest. The regular expression syntax must work on a data frame column of type character. It must be saved as a double quotation string, and any quotation marks within it must be single quotations. The term \code{geneal\$colName} must be used in the regular expression.
 
 We can demonstrate the \code{getBranchQual()} function by examining the qualitative variable ``thesis" across the ``descendant" branches of the academic statistician \code{David Cox}. Since one of the primary research areas for \code{David Cox} was stochastic processes, we can determine if any descendant branches of his ``children" contained thesis titles that included the word ``stochastic".
 
@@ -711,9 +708,9 @@ We see that only two ``children" of \code{David Cox} had any ``descendants" with
 
 In many string parsing applications, the choice of the regular expression can be tricky. This is true when the string variable we are parsing is thesis titles. For instance, notice that in our regular expression, we accounted for all instances of the substring ``Stochastic". Hence, words that contain "Stochastic" (such as ``Stochastics" and ``Stochastically") will also be returned. In addition, we defined our regular expression to return matches whether the first letter was upper or lower case. When initializing the \code{rExpr} parameter, users would need to consider what nuances of their search criteria they would like to define as matches.
 
-We will demonstrate one more example of the \code{getBranchQual()} function by searching the qualitative variable ``school" across the ``descendant" branches of the academic statistician \code{David Cox}. The Mathematics Genealogy Project coding system for the ``school" variable was non-ambiguous, and so we do not have to worry about all the various ways the same school could be coded in the dataset. As a result, we now do not have to search for various substrings; we can simply use a regular expression that equates to one value.
+We will demonstrate one more example of the \code{getBranchQual()} function by searching the qualitative variable ``school" across the ``descendant" branches of the academic statistician \code{David Cox}. The Mathematics Genealogy Project coding system for the ``school" variable was non-ambiguous, and so we do not have to worry about all the various ways the same school could be coded in the dataset. As a result, we no longer have to search for various substrings; we can simply use a regular expression that equates to one value.
 
-It may be interesting to examine the school that is represented the most among all descendants of \code{David Cox}. To determine what school this is, we use the \code{getDescendants()} function to create a data frame called \code{desDC} that contains the names of all 159 ``descendants" of \code{David Cox}. Then, we use the base R function \code{match()} to match the school names from the original dataset to each of the 159 ``descendants" in the \code{desDC} data frame. After that, we use the base R functions \code{sort()} and \code{table()} to examine the five schools that were represented the most throughout the 159 ``descendants".
+It may be interesting to examine the school that is represented the most among all descendants of \code{David Cox}. To determine what school this is, we use the \code{getDescendants()} function to create a data frame called \code{desDC} that contains the names of all 159 ``descendants" of \code{David Cox}. Then, we use the base R function \code{match()} to match the school names from the original genealogy dataset to each of the 159 ``descendants" in the \code{desDC} data frame. After that, we use the base R functions \code{sort()} and \code{table()} to examine the five schools that were represented the most throughout the 159 ``descendants".
 
 \begin{CodeChunk}
 \begin{CodeInput}
@@ -768,7 +765,7 @@ R> sum(DCChild$school == "University of London")
 \end{CodeOutput}
 \end{CodeChunk}
 
-The examples above demonstrate that users can quickly and flexibly parse descendant branches. The swiftness comes from \pkg{ggenealogy} functions that allow for fast parent-child traversals, such as \code{getChild()}, \code{getDescendants()}, \code{getBranchQuant()}, and \code{getBranchQual()}. The flexibility comes from data frame manipulation functions in base R that can be used in conjunction with the parent-child traversals.
+The examples above demonstrate that users can quickly and flexibly parse descendant branches. The swiftness comes from \pkg{ggenealogy} functions that allow for fast parent-child traversals, such as \code{getChild()}, \code{getDescendants()}, \code{getBranchQuant()}, and \code{getBranchQual()}. The flexibility comes from data frame manipulation functions in base R that can be used in conjunction with the parent-child traversal methods.
 
 \section{Future avenues}
 
@@ -782,6 +779,7 @@ The \pkg{ggenealogy} visualization tool \code{plotPathOnAll()} is suitable as a 
 
 The \pkg{ggenealogy} package offers various plotting tools that can assist those studying genealogical lineages in the data exploration phases, as well as in preparing publication-suitable images. As each plot comes with its pros and cons, we recommended for users to explore several visualization tools. If users are simultaneously using similar packages, we in particular recommend using the \code{plotAncDes()} function. This plot allows users to view generation counts of a variety of interest in a manner that is not as readily available in similar software packages.
 
+\clearpage
 \section*{Acknowledgments}
 
 The authors thank Drs. James E. Specht and Randy C. Shoemaker for helpful discussions of soybean genealogy. In addition, the authors are grateful for the financial support from the United Soybean Board (Project 1204), The North Central Soybean Research Program, the NSF Plant Genome Research Program (award number 0820642), and the USDA-ARS CRIS Project 3625-21220-005-00D. The USDA is an equal opportunity provider and employer. Mention of trade names or commercial products in this article is solely for the purpose of providing specific information and does not imply recommendation or endorsement by the U.S. Department of Agriculture. Author Cook was a faculty member at Iowa State University at the time that most of this work was conducted.

@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  22 NOV 2016 08:57
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  22 NOV 2016 15:01
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -999,10 +999,7 @@ Package xcolor Warning: Incompatible color definition on input line 98.
 
 Package xcolor Warning: Incompatible color definition on input line 98.
 
-ABD: EveryShipout initializing macros
-Underfull \vbox (badness 6575) has occurred while \output is active []
-
- [1
+ABD: EveryShipout initializing macros [1
 
 ]
 
@@ -1151,6 +1148,10 @@ Overfull \hbox (5.47499pt too wide) has occurred while \output is active
  []
 
 [6]
+
+Package xcolor Warning: Incompatible color definition on input line 215.
+
+
 Overfull \hbox (5.47499pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 7
  []
@@ -1218,67 +1219,77 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 [12]
 
-Package xcolor Warning: Incompatible color definition on input line 382.
-
-
-Package xcolor Warning: Incompatible color definition on input line 382.
-
-
 Package xcolor Warning: Incompatible color definition on input line 384.
 
 
 Package xcolor Warning: Incompatible color definition on input line 384.
+
+
+Package xcolor Warning: Incompatible color definition on input line 386.
+
+
+Package xcolor Warning: Incompatible color definition on input line 386.
 
 File: plotTNBin6.png Graphic file (type QTm)
 <use  "plotTNBin6.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 394--395
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 396--397
  [][] 
  []
-
-
-Package xcolor Warning: Incompatible color definition on input line 399.
-
-
-Package xcolor Warning: Incompatible color definition on input line 399.
-
-
-Package xcolor Warning: Incompatible color definition on input line 401.
-
-
-Package xcolor Warning: Incompatible color definition on input line 401.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 13
  []
 
-[13]
+[13
+
+]
 
 Package xcolor Warning: Incompatible color definition on input line 403.
 
+
+Package xcolor Warning: Incompatible color definition on input line 403.
+
+
+Package xcolor Warning: Incompatible color definition on input line 405.
+
+
+Package xcolor Warning: Incompatible color definition on input line 405.
+
+
+Package xcolor Warning: Incompatible color definition on input line 407.
+
 File: plotPathOnAllQV2.png Graphic file (type QTm)
 <use  "plotPathOnAllQV2.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 414--415
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 418--419
  [][] 
  []
 
 
-Underfull \vbox (badness 1527) has occurred while \output is active []
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Package xcolor Warning: Incompatible color definition on input line 426.
+
+
+Package xcolor Warning: Incompatible color definition on input line 426.
+
+
+Package xcolor Warning: Incompatible color definition on input line 434.
+
+
+Package xcolor Warning: Incompatible color definition on input line 436.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 14 []
  []
 
-[14]
+[14
 
-Package xcolor Warning: Incompatible color definition on input line 422.
+]
 
-
-Package xcolor Warning: Incompatible color definition on input line 422.
-
-
-Package xcolor Warning: Incompatible color definition on input line 430.
+Package xcolor Warning: Incompatible color definition on input line 441.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1288,157 +1299,163 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [15]
 File: LeeAD.png Graphic file (type QTm)
  <use  "LeeAD.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 436--437
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 445--446
  [][] 
  []
-
-
-Package xcolor Warning: Incompatible color definition on input line 441.
-
-
-Underfull \vbox (badness 10000) has occurred while \output is active []
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 16 []
  []
 
-[16
+[16]
 
-]
-
-Package xcolor Warning: Incompatible color definition on input line 446.
+Package xcolor Warning: Incompatible color definition on input line 461.
 
 
-Package xcolor Warning: Incompatible color definition on input line 460.
-
-
-Package xcolor Warning: Incompatible color definition on input line 460.
+Package xcolor Warning: Incompatible color definition on input line 461.
 
 File: degMatrix.png Graphic file (type QTm)
 <use  "degMatrix.png" >
+
+Package xcolor Warning: Incompatible color definition on input line 472.
+
+
+Package xcolor Warning: Incompatible color definition on input line 474.
+
+
+Package xcolor Warning: Incompatible color definition on input line 476.
+
+
+Package xcolor Warning: Incompatible color definition on input line 476.
+
+
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 17
  []
 
 [17]
 
-Package xcolor Warning: Incompatible color definition on input line 473.
+Package xcolor Warning: Incompatible color definition on input line 507.
 
 
-Package xcolor Warning: Incompatible color definition on input line 475.
+Package xcolor Warning: Incompatible color definition on input line 507.
+
+File: dCox.png Graphic file (type QTm)
+<use  "dCox.png" >
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 515--516
+ [][] 
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 477.
+LaTeX Warning: Float too large for page by 80.0589pt on input line 518.
 
 
-Package xcolor Warning: Incompatible color definition on input line 477.
-
-
-Package xcolor Warning: Incompatible color definition on input line 508.
-
-
-Package xcolor Warning: Incompatible color definition on input line 508.
+Package xcolor Warning: Incompatible color definition on input line 520.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 18 []
  []
 
-[18
-
-]
-File: dCox.png Graphic file (type QTm)
- <use  "dCox.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 516--517
- [][] 
- []
-
-
-LaTeX Warning: Float too large for page by 80.0589pt on input line 519.
-
-
-Package xcolor Warning: Incompatible color definition on input line 521.
-
-
+[18]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 19
  []
 
 [19]
+File: pathCB.png Graphic file (type QTm)
+ <use  "pathCB.png" >
+
+Package xcolor Warning: Incompatible color definition on input line 558.
+
+
+Package xcolor Warning: Incompatible color definition on input line 560.
+
+
+Package xcolor Warning: Incompatible color definition on input line 560.
+
+
+Package xcolor Warning: Incompatible color definition on input line 560.
+
+
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 20 []
  []
 
 [20]
-File: pathCB.png Graphic file (type QTm)
- <use  "pathCB.png" >
 
-Package xcolor Warning: Incompatible color definition on input line 561.
+Package xcolor Warning: Incompatible color definition on input line 562.
 
-
-Package xcolor Warning: Incompatible color definition on input line 563.
-
-
-Package xcolor Warning: Incompatible color definition on input line 563.
+File: plotCBText.png Graphic file (type QTm)
+<use  "plotCBText.png" >
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 575--576
+ [][] 
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 563.
-
-
-Package xcolor Warning: Incompatible color definition on input line 565.
+Package xcolor Warning: Incompatible color definition on input line 580.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 21
  []
 
-[21
+[21]
 
-]
-File: plotCBText.png Graphic file (type QTm)
- <use  "plotCBText.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 580--581
+Package xcolor Warning: Incompatible color definition on input line 582.
+
+
+Package xcolor Warning: Incompatible color definition on input line 582.
+
+
+Package xcolor Warning: Incompatible color definition on input line 594.
+
+
+Package xcolor Warning: Incompatible color definition on input line 599.
+
+
+Package xcolor Warning: Incompatible color definition on input line 599.
+
+
+Package xcolor Warning: Incompatible color definition on input line 599.
+
+
+Package xcolor Warning: Incompatible color definition on input line 599.
+
+
+Package xcolor Warning: Incompatible color definition on input line 599.
+
+File: plotCBNoText.png Graphic file (type QTm)
+<use  "plotCBNoText.png" >
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 603--604
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 585.
-
-
-Package xcolor Warning: Incompatible color definition on input line 587.
-
-
-Package xcolor Warning: Incompatible color definition on input line 587.
+Underfull \vbox (badness 3568) has occurred while \output is active []
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 22 []
  []
 
-[22
+[22]
+Overfull \hbox (8.1628pt too wide) in paragraph at lines 616--617
+[]\T1/aer/m/n/10.95 We would like to state that users can still hard code one o
+r two vari-ables in the \T1/aett/m/n/10.95 plotPathOnAll()
+ []
 
-]
-File: plotCBNoText.png Graphic file (type QTm)
- <use  "plotCBNoText.png" >
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 601--602
+File: ./plotCBNoText.png Graphic file (type QTm)
+<use  "./plotCBNoText.png" >
+\g__file_internal_ior=\read4
+ <VPlayer.swf> <animateGen.mov>
+Overfull \hbox (6.79999pt too wide) in paragraph at lines 627--629
  [][] 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 606.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
-
-
-Package xcolor Warning: Incompatible color definition on input line 611.
+Underfull \vbox (badness 1092) has occurred while \output is active []
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1446,21 +1463,6 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [23]
-File: ./plotCBNoText.png Graphic file (type QTm)
- <use  "./plotCBNoText.png" >
-\g__file_internal_ior=\read4
- <VPlayer.swf> <animateGen.mov>
-Overfull \hbox (6.79999pt too wide) in paragraph at lines 623--625
- [][] 
- []
-
-
-Overfull \hbox (8.1628pt too wide) in paragraph at lines 629--630
-[]\T1/aer/m/n/10.95 We would like to state that users can still hard code one o
-r two vari-ables in the \T1/aett/m/n/10.95 plotPathOnAll()
- []
-
-
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 24 []
  []
@@ -1470,36 +1472,52 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 25
  []
 
-[25]
+[25
+
+]
 
 LaTeX Font Warning: Font shape `TS1/aett/m/sl' undefined
 (Font)              using `TS1/aett/m/n' instead
-(Font)              for symbol `textquotesingle' on input line 695.
+(Font)              for symbol `textquotesingle' on input line 692.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 26 []
  []
 
-[26]
+[26
+
+]
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 27
  []
 
 [27]
-Overfull \hbox (4.2749pt too wide) in paragraph at lines 771--772
+Overfull \hbox (4.2749pt too wide) in paragraph at lines 768--769
 []\T1/aer/m/n/10.95 The ex-am-ples above demon-strate that users can quickly an
 d flex-i-bly parse de-scen-dant branches.
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 775.
+Package xcolor Warning: Incompatible color definition on input line 772.
 
 
-Package xcolor Warning: Incompatible color definition on input line 775.
+Package xcolor Warning: Incompatible color definition on input line 772.
 
 
-Package xcolor Warning: Incompatible color definition on input line 775.
+Package xcolor Warning: Incompatible color definition on input line 772.
+
+
+Package xcolor Warning: Incompatible color definition on input line 776.
+
+
+Package xcolor Warning: Incompatible color definition on input line 776.
+
+
+Package xcolor Warning: Incompatible color definition on input line 776.
+
+
+Package xcolor Warning: Incompatible color definition on input line 776.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1507,24 +1525,13 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
  []
 
 [28]
-
-Package xcolor Warning: Incompatible color definition on input line 779.
-
-
-Package xcolor Warning: Incompatible color definition on input line 779.
-
-
-Package xcolor Warning: Incompatible color definition on input line 779.
-
-
-Package xcolor Warning: Incompatible color definition on input line 779.
-
-
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 29
  []
 
-[29] (./article.bbl
+[29
+
+] (./article.bbl
 LaTeX Font Info:    Font shape `T1/aer/b/it' in size <10.95> not available
 (Font)              Font shape `T1/aer/bx/it' tried instead on input line 14.
 
@@ -1563,13 +1570,13 @@ Package xcolor Warning: Incompatible color definition on input line 96.
 
 )
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 793--793
+Underfull \hbox (badness 10000) in paragraph at lines 791--791
 
  []
 
@@ -1582,40 +1589,40 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 793--793
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 793.
-
-
-Package xcolor Warning: Incompatible color definition on input line 793.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 793--793
+Underfull \hbox (badness 10000) in paragraph at lines 791--791
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
+
+
+Package xcolor Warning: Incompatible color definition on input line 791.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 791--791
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 793.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 791.
 
-Package xcolor Warning: Incompatible color definition on input line 793.
-
-
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
-Package xcolor Warning: Incompatible color definition on input line 793.
+Package xcolor Warning: Incompatible color definition on input line 791.
+
+
+Package xcolor Warning: Incompatible color definition on input line 791.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
@@ -1624,21 +1631,21 @@ Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 
 Package atenddvi Info: Last page = 31.
 [31]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 793.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 793.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 791.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 791.
  (./article.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 793.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 793.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 791.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 791.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 793.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 791.
  ) 
 Here is how much of TeX's memory you used:
  29022 strings out of 493706
  558950 string characters out of 6145769
- 587213 words of memory out of 5000000
+ 587327 words of memory out of 5000000
  31976 multiletter control sequences out of 15000+600000
  42200 words of font info for 50 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
