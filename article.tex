@@ -290,7 +290,7 @@ $variableVertices
 The returned path object can then be plotted using the \code{plotPath()} function.
 
 \begin{Code}
-plotPath(pathTN, sbGeneal, "devYear")
+R> plotPath(pathTN, sbGeneal, "devYear")
 \end{Code}
 
 \begin{figure}[h]
@@ -323,8 +323,8 @@ We can then create a plot showing the shortest path between these two varieties 
 
 \begin{Code}
 R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
-R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) +
-+    ggplot2::xlab("Development Year")
+R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) + ggplot2::xlab
++    ("Development Year")
 \end{Code}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
@@ -450,11 +450,11 @@ Here we generate a distance matrix for a set of 10 varieties, setting the x-labe
 \begin{Code}
 >R varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
 +    "Pella", "Tokyo", "Young", "Zane")
->R plotDegMatrix(varieties, sbIG, sbGeneal, "devYear") +
+>R plotDegMatrix(varieties, sbIG, sbGeneal) +
 +    ggplot2::scale_fill_continuous(low = "white", high = "darkgreen") +
 +    ggplot2::theme(legend.title = ggplot2::element_text(size = 15),
-+    legend.text = ggplot2::element_text(size = 15)) +
-+    ggplot2::labs(x = "Variety", y = "Variety")
++    legend.text = ggplot2::element_text(size = 15)) + ggplot2::labs(x = 
++    "Variety", y = "Variety")
 \end{Code}
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that a shortest path degree of 10 may be considered relative to the rest of this dataset.
@@ -542,10 +542,10 @@ At this point, it would be insightful to examine a more detailed view of one of 
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
 +    "gradYear", isDirected = FALSE)
-R> plotPath(pathCB, "gradYear", fontFace = 4) + ggplot2::xlab("Graduation
-+    Year") + ggplot2::theme(axis.text = ggplot2::element_text(size = 10),
-+    axis.title = ggplot2::element_text(size = 10)) +
-+    ggplot2::scale_x_continuous(expand = c(.1, .2))
+R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) +
++    ggplot2::xlab("Graduation Year") + ggplot2::theme(axis.text = 
++    ggplot2::element_text(size = 10), axis.title = ggplot2::element_text(
++    (size = 10)) + ggplot2::scale_x_continuous(expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -568,7 +568,7 @@ We can achieve this using the below code. After trial and error, we use a \code{
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200)
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
 +    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
 +    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
@@ -626,7 +626,7 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
     \label{fig:plotAnimate}
 \end{figure}
 
-We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value is revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year is revealed.
+We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value would be revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year would be revealed. We do not include the animated videos that the below code creates in this document, but readers can use the below code to create them on their own.
 
 \begin{Code}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange",
@@ -648,7 +648,7 @@ We can demonstrate the \code{getBranchQuant()} function by examining the quantit
 \begin{CodeChunk}
 \begin{CodeInput}
 R> AKBranchYield <- getBranchQuant("A.K.", sbGeneal, "yield", 15)
-R> select(AKBranchYield,-DesNames)
+R> select(AKBranchYield, -DesNames)
 \end{CodeInput}
 \begin{CodeOutput}
            Name     Mean       SD Count NACount
@@ -664,7 +664,7 @@ As another example, we can examine the mean graduation year for the ``descendant
 \begin{CodeChunk}
 \begin{CodeInput}
 R> CoxBranchYear <- getBranchQuant("David Cox", statGeneal, "gradYear", 15)
-R> head(select(CoxBranchYear,-DesNames),10)
+R> head(select(CoxBranchYear, -DesNames), 10)
 \end{CodeInput}
 \begin{CodeOutput}
                          Name     Mean        SD Count NACount
