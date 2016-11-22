@@ -1412,6 +1412,7 @@ getBranchQuant = function(v1, geneal, colName, gen=3){
     datRet <- rbind(datRet, data.frame(Name=childList[i], Mean=Mean, SD=SD, Count=Count, NACount=NACount, DesNames=paste(DesNames, collapse = ',')))
   }
   datRet <- datRet[order(-datRet$Mean),]
+  rownames(datRet) <- 1:nrow(datRet)
   return(datRet)
 }
 
@@ -1452,5 +1453,6 @@ getBranchQual = function(v1, geneal, colName, rExpr, gen=3){
     datRet <- rbind(datRet, data.frame(Name=childList[i], CountTrue = CountTrue, Count=Count, NACount=NACount, DesNames=paste(DesNames, collapse = ',')))
   }
   datRet <- datRet[order(-datRet$CountTrue),]
+  rownames(datRet) <- 1:nrow(datRet)
   return(datRet)
 }

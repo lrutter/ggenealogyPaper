@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  20 NOV 2016 06:44
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2015.5.24)  21 NOV 2016 19:11
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1467,38 +1467,80 @@ r two vari-ables in the \T1/aett/m/n/10.95 plotPathOnAll()
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 626.
-
-
-Package xcolor Warning: Incompatible color definition on input line 626.
-
-
-Package xcolor Warning: Incompatible color definition on input line 626.
-
-
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 [] \T1/aer/m/n/10.95 25
  []
 
 [25]
-
-Package xcolor Warning: Incompatible color definition on input line 630.
-
-
-Package xcolor Warning: Incompatible color definition on input line 630.
-
-
-Package xcolor Warning: Incompatible color definition on input line 630.
+Overfull \hbox (45.16241pt too wide) in paragraph at lines 628--629
+\T1/aer/m/n/10.95 traver-sal. One method can be used to track a quan-ti-ta-tive
+ vari-able across branches (\T1/aett/m/n/10.95 getBranchQuant()\T1/aer/m/n/10.9
+5 )
+ []
 
 
-Package xcolor Warning: Incompatible color definition on input line 630.
+Overfull \hbox (29.99661pt too wide) in paragraph at lines 628--629
+\T1/aer/m/n/10.95 and the other method can be used to track a qual-i-ta-tive va
+ri-able across branches (\T1/aett/m/n/10.95 getBranchQual()\T1/aer/m/n/10.95 ).
+ 
+ []
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
 \T1/aer/m/n/10.95 26 []
  []
 
-[26] (./article.bbl
+[26]
+
+LaTeX Font Warning: Font shape `TS1/aett/m/sl' undefined
+(Font)              using `TS1/aett/m/n' instead
+(Font)              for symbol `textquotesingle' on input line 681.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/aer/m/n/10.95 27
+ []
+
+[27]
+Overfull \hbox (20.1426pt too wide) in paragraph at lines 726--727
+[]\T1/aer/m/n/10.95 sum(statGeneal[match(getChild("David Cox",statGeneal),statG
+eneal$\OML/cmm/m/it/10.95 child\OT1/cmr/m/n/10.95 )\OML/cmm/m/it/10.95 ; \OT1/c
+mr/m/n/10.95 ]$\T1/aer/m/n/10.95 school=="University
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 738.
+
+
+Package xcolor Warning: Incompatible color definition on input line 738.
+
+
+Package xcolor Warning: Incompatible color definition on input line 738.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+\T1/aer/m/n/10.95 28 []
+ []
+
+[28]
+
+Package xcolor Warning: Incompatible color definition on input line 742.
+
+
+Package xcolor Warning: Incompatible color definition on input line 742.
+
+
+Package xcolor Warning: Incompatible color definition on input line 742.
+
+
+Package xcolor Warning: Incompatible color definition on input line 742.
+
+
+Overfull \hbox (10.94998pt too wide) has occurred while \output is active
+[] \T1/aer/m/n/10.95 29
+ []
+
+[29] (./article.bbl
 LaTeX Font Info:    Font shape `T1/aer/b/it' in size <10.95> not available
 (Font)              Font shape `T1/aer/bx/it' tried instead on input line 14.
 
@@ -1537,85 +1579,85 @@ Package xcolor Warning: Incompatible color definition on input line 96.
 
 )
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--644
+Underfull \hbox (badness 10000) in paragraph at lines 756--756
 
  []
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
-[] \T1/aer/m/n/10.95 27
+\T1/aer/m/n/10.95 30 []
  []
 
-[27
+[30
 
 ]
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 644--644
-
- []
-
-
-Package xcolor Warning: Incompatible color definition on input line 644.
-
-
-Package xcolor Warning: Incompatible color definition on input line 644.
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 644--644
+Underfull \hbox (badness 10000) in paragraph at lines 756--756
 
  []
 
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
+
+
+Package xcolor Warning: Incompatible color definition on input line 756.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 756--756
+
+ []
+
+
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 LaTeX Font Info:    Font shape `T1/pzc/m/n' in size <13> not available
-(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 644.
+(Font)              Font shape `T1/pzc/mb/it' tried instead on input line 756.
 
-Package xcolor Warning: Incompatible color definition on input line 644.
-
-
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
-Package xcolor Warning: Incompatible color definition on input line 644.
+Package xcolor Warning: Incompatible color definition on input line 756.
+
+
+Package xcolor Warning: Incompatible color definition on input line 756.
 
 
 Overfull \hbox (10.94998pt too wide) has occurred while \output is active
-\T1/aer/m/n/10.95 28 []
+[] \T1/aer/m/n/10.95 31
  []
 
-Package atenddvi Info: Last page = 28.
-[28]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 644.
-Package atveryend Info: Executing hook `AfterLastShipout' on input line 644.
+Package atenddvi Info: Last page = 31.
+[31]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 756.
+Package atveryend Info: Executing hook `AfterLastShipout' on input line 756.
  (./article.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 644.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 644.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 756.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 756.
 
 
 LaTeX Font Warning: Some font shapes were not available, defaults substituted.
 
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 644.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 756.
  ) 
 Here is how much of TeX's memory you used:
- 29020 strings out of 493706
- 558922 string characters out of 6145769
- 586758 words of memory out of 5000000
- 31974 multiletter control sequences out of 15000+600000
+ 29022 strings out of 493706
+ 558950 string characters out of 6145769
+ 587214 words of memory out of 5000000
+ 31976 multiletter control sequences out of 15000+600000
  42200 words of font info for 50 fonts, out of 8000000 for 9000
  1328 hyphenation exceptions out of 8191
  62i,9n,73p,10348b,537s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on article.pdf (28 pages).
+Output written on article.pdf (31 pages).

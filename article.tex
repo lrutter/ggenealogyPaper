@@ -623,26 +623,135 @@ R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol = "or
 
 \section{Branch parsing and calculations}
 
-It may be helpful for users to search through descendant branches of a certain individual to compare and contrast how a variable of interest changes along these branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which branches are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of students graduating from certain schools or countries? Which branches are graduating new students in recent years? Which branches have the highest proportion of students with thesis titles containing a word of interest?
+It may be helpful for users to search through descendant branches of a certain individual to compare and contrast how a variable of interest changes along those branches. For instance, which descending branches of a particular soybean variety are producing the highest yields? Which branches are developing new varieties in recent years? Which descending branches of a particular academic statistician have large proportions of students graduating from certain universities or countries? Which branches are graduating new students in recent years? Which branches have the highest proportion of thesis titles containing a word of interest?
 
-Answering these questions in a straightforward manner requires more than basic data frame manipulation; it also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can easily answer these questions using branch traversal. One method can be used to track a quantitative variable across branches (\code{getBranchQuant()}) and the other method can be used to track a qualitative variables across branches (\code{getBranchQual()}).
+Answering these questions in a straightforward manner requires more than basic data frame manipulation: It also requires methods that can easily traverse parent-child relationships. The \pkg{ggenealogy} package has two methods that can easily answer these questions using branch traversal. One method can be used to track a quantitative variable across branches (\code{getBranchQuant()}) and the other method can be used to track a qualitative variable across branches (\code{getBranchQual()}).
 
-We can demonstrate the (\code{getBranchQuant()}) method by examining the yield variable across the descendant branches of the soybean variety ``A.K.". To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
+\subsection{Quantitative variable parsing and calculations}
+
+We can demonstrate the \code{getBranchQuant()} function by examining the quantitative variable ``yield" across the descendant branches of the soybean variety ``A.K.". To understand more about the output of this function, please consult the \pkg{ggenealogy} package documentation. In the code below, we remove the output column ``DesNames" because it verbosely lists all descendant names, which is not necessary for this demonstration.
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> AKBranches <- getBranchQuant("A.K.", sbGeneal, "yield", 15)
-R> select(AKBranches,-DesNames)
+R> AKBranchYield <- getBranchQuant("A.K.", sbGeneal, "yield", 15)
+R> select(AKBranchYield,-DesNames)
 \end{CodeInput}
 \begin{CodeOutput}
-           Name     Mean       SD Count NACount PercentNotNA
-1 A.K. (Harrow) 2932.154 197.0092    54      41        24.07
-2        Illini 2856.667 210.7801   131     125         4.58
+           Name     Mean       SD Count NACount
+1 A.K. (Harrow) 2932.154 197.0092    54      41
+2        Illini 2856.667 210.7801   131     125
 \end{CodeOutput}
-\end{Code}
+\end{CodeChunk}
 
-We see from the output that ``A.K." has two children named ``A.K. (Harrow)" and "Illini". Descendants from the ``A.K. (Harrow)" branch have a higher mean yield than the ``Illini" branch (2932.154 versus 2856.667). However, the 
+We see from the output that ``A.K." has two children named ``A.K. (Harrow)" and ``Illini". Descendants from the ``A.K. (Harrow)" branch have a higher mean yield than the ``Illini" branch (2932.154 versus 2856.667). However, we should recognize that even though the branches contain a large number of descendants (54 and 131), most of these descendants did not include a yield value in the dataset (41 and 125). As a result, the mean values are calculated from a small proportion of the descendants.
 
+As another example, we can examine the mean graduation year for the ``descendant" branches of academic statistician ``David Cox". We know from earlier that ``David Cox" had 42 ``children", so as expected the \code{CoxBranchYear} object below contains 42 rows. However, only 8 of these rows have any ``descendants" of their own. As a result, only the first 8 rows of the object contain branch information.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> CoxBranchYear <- getBranchQuant("David Cox", statGeneal, "gradYear", 15)
+R> head(select(CoxBranchYear,-DesNames),10)
+\end{CodeInput}
+\begin{CodeOutput}
+                         Name     Mean        SD Count NACount
+1                 Mark Berman 2007.200  6.340347     5       0
+2                  Henry Wynn 2005.333  7.637626     3       0
+3                Rodney Wolff 2003.500  2.121320     2       0
+4                 Jane Hutton 2003.000        NA     1       0
+5              Gauss Cordeiro 2002.643  7.722167    14       0
+6             Peter McCullagh 2001.231  8.778645    26       0
+7             Basilio Pereira 2000.647 10.074356    17       0
+8            Peter Bloomfield 1999.918 11.707969    49       0
+9            Adelchi Azzalini      NaN        NA     0       0
+10 Amy Berrington de Gonzales      NaN        NA     0       0
+\end{CodeOutput}
+\end{CodeChunk}
+
+In this case, we see that of the 8 ``children" of David Cox who had ``children" of their own, ``Mark Berman" has the ``descendants" (n=5) who on average have graduated the most recently (2007.200), whereas ``Peter Bloomfield" has the ``descendants" (n=49) who on average have graduated the least recently (1999.918). We see that, for all branches, there are no ``descendants" who contain a NA value for graduation year.
+
+\subsection{Qualitative variable parsing and calculations}
+
+The \code{getBranchQual()} function requires similar inputs as the \code{getBranchQuant()} function, except that it also requires an input parameter called \code{rExpr}. The user must initialize this input parameter to a regular expression that can be applied to the column containing the qualitative variable of interest. The regular expression syntax must work on a data frame column of type character. It must be saved as a double quotation string, and any quotation marks within the regular expression must be single quotations. The term ``geneal\$colName" must be used in the regular expression.
+
+We can demonstrate the \code{getBranchQual()} function by examining the qualitative variable ``thesis" across the ``descendant" branches of the academic statistican ``David Cox". Since one of the primary research areas for ``David Cox" was stochastic processes, we can determine if any descendant branches of his ``children" contained thesis titles that included the word ``stochastic".
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> v1 = "David Cox"; geneal = statGeneal; colName = "thesis"; gen = 15
+R> rExpr = "grepl('(?i)Stochastic', geneal$colName)"
+R> CoxBranchStochastic <- getBranchQual(v1, geneal, colName, rExpr, gen)
+R> head(select(CoxBranchStochastic, -DesNames))
+\end{CodeInput}
+\begin{CodeOutput}
+                        Name CountTrue Count NACount
+1           Peter Bloomfield         4    49       0
+2            Basilio Pereira         1    17       0
+3           Adelchi Azzalini         0     0       0
+4 Amy Berrington de Gonzales         0     0       0
+5              Andrew Roddam         0     0       0
+6            Angela Mariotto         0     0       0
+\end{CodeOutput}
+\end{CodeChunk}
+
+We see that only two ``children" of ``David Cox" had any ``descendants" with thesis titles containing the word ``Stochastic" (4 out of 49 ``descendants" of ``Peter Bloomfield" and 1 out of 17 ``descendants" of ``Basilio Periera"). We see again that none of the ``descendants" from either branches contained values that were NA for the variable ``thesis".
+
+In many string parsing applications, the choice of the regular expression can be tricky. This is probably true when the string variable we are parsing is thesis titles. For instance, notice that in our regular expression, we accounted for all instances of the substring ``Stochastic". Hence, words that contain "Stochastic" as a substring (such as ``Stochastics" and ``Stochastically") will also be returned. In addition, we defined our regular expression to return matches whether the first letter was upper or lower case. When initializing the \code{rExpr} parameter, users would need to consider what variants of their search criteria they would like to define as matches.
+
+We will demonstrate one more example of the \code{getBranchQual()} function by searching the qualitative variable ``school" across the ``descendant" branches of the academic statistican ``David Cox". The Mathematics Genealogy Project coding system for the ``school" variable was non-ambiguous, and so we do not have to worry about various ways the same school could be named in the dataset. As a result, we can now simply use a regular expression that equates specifically to one value.
+
+It may be interesting to examine the school that is represented the most among all descendants of ``David Cox". To accomplish this, we use the \code{getDescendants()} function to create a data frame called \code{desDC} that contains the names of all 159 ``descendants" of ``David Cox". Then, we use the basic R function \code{match()} to match the school names from the original dataset to each of the 159 ``descendants" in the \code{desDC} data frame. We then use the basic R functions \code{sort()} and \code{table()} to examine the five schools that were represented the most out of the 159 ``descendants".
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> desDC <- getDescendants("David Cox", statGeneal, 15)
+R> tail(sort(table(statGeneal[match(desDC$label,statGeneal$child),]$school)),5)
+\end{CodeInput}
+\begin{CodeOutput}
+          The Johns Hopkins University 
+                                     9 
+Universidade Federal do Rio de Janeiro 
+                                    17 
+       North Carolina State University 
+                                    18 
+             Universidade de São Paulo 
+                                    28 
+                  University of London 
+                                    35
+\end{CodeOutput}
+\end{CodeChunk}
+
+We see from this table that the most common school of the 159 ``descendants" of ``David Cox" was the University of London with a count of 35. We can now determine which of the 42 branches from the ``children" of ``David Cox" have the largest proportion of ``descendants" graduating from the University of London.
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> colName = "school"
+R> rExpr = "geneal$colName=='University of London'" #works
+R> DCBranchUL <- getBranchQual(v1, geneal, colName, rExpr, gen)
+R> head(select(DCBranchUL, -DesNames))
+\end{CodeInput}
+\begin{CodeOutput}
+                        Name CountTrue Count NACount
+1            Peter McCullagh         1    26       0
+2           Adelchi Azzalini         0     0       0
+3 Amy Berrington de Gonzales         0     0       0
+4              Andrew Roddam         0     0       0
+5            Angela Mariotto         0     0       0
+6             Basil Springer         0     0       0
+\end{CodeOutput}
+\end{CodeChunk}
+
+We see that ``Peter McCullagh" is the only ``child" of ``David Cox" that has a ``descendant" branch with one student graduating from the University of London; the rest of the 41 children of ``David Cox" have ``descendant" branches with zero students graduating from the University of London. This must mean the other 34 ``descendants" of ``David Cox" that graduated from the University of London were direct ``children" of ``David Cox". We can verify this below:
+
+\begin{CodeChunk}
+\begin{CodeInput}
+R> sum(statGeneal[match(getChild("David Cox",statGeneal),statGeneal$child),]$school=="University of London")
+\end{CodeInput}
+\begin{CodeOutput}
+[1] 34
+\end{CodeOutput}
+\end{CodeChunk}
+
+The examples above demonstrate that users can quickly and flexibly parse descendant branches. The swiftness comes from \pkg{ggenealogy} functions that allow for fast parent-child traversals, such as \code{getChild()}, \code{getDescendants()}, \code{getBranchQuant()}, and \code{getBranchQual()}. The flexibilty comes from data frame manipulation functions in base R that can be used in conjunction with the parent-child traversals.
 
 \section{Future avenues}
 
