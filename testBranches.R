@@ -21,7 +21,7 @@ rExpr = "grepl('Stochastic', geneal$colName)"
 DCBranches_Sto <- getBranchQual(v1, geneal, colName, rExpr, gen)
 
 rExpr = "grepl('(?i)Stochastic', geneal$colName)"
-DCBranches_StoCaps <- getBranchQual(v1, geneal, colName, rExpr, gen)
+DCBranches_Stochastic <- getBranchQual(v1, geneal, colName, rExpr, gen)
 
 colName = "country"
 rExpr = "geneal$colName=='UnitedKingdom'" #works
