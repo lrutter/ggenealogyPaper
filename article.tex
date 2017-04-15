@@ -147,7 +147,7 @@ We will now provide a brief overview of the functionality of the \pkg{ggenealogy
 
 Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical data in multiple ways. Users can obtain and plot the shortest path between two nodes of interest constrained on a variable of interest (see Section \ref{psp}), superimpose a shortest path between two nodes of interest with the entire genealogical structure constrained on a variable of interest (see Section \ref{sspt}), plot the ancestors and descendants of a node of interest constrained on generation count (see Section \ref{remedy}), and plot distance matrices based on a variable of interest (see Section \ref{pdm}).
 
-Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Subsection \ref{interaction}).
+Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Section \ref{interaction}).
 
 \section{Example datasets}
 \label{exData}
@@ -323,8 +323,8 @@ We can then create a plot showing the shortest path between these two varieties 
 
 \begin{Code}
 R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
-R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) + ggplot2::xlab
-+    ("Development Year")
+R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) +
++    ggplot2::xlab("Development Year")
 \end{Code}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
@@ -339,8 +339,8 @@ R> sbFiltIG <- dfToIG(sbFilt)
 R> pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 R> plotPath(pathCL, sbFilt, "yield") + ggplot2::xlab("Yield")
 R> pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
-R> plotPath(pathCL2, sbFilt, "devYear", "yield") + ggplot2::xlab("Development
-+    Year") + ggplot2::ylab("Yield")
+R> plotPath(pathCL2, sbFilt, "devYear", "yield") +
++    ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
 \end{Code}
 
 \begin{figure}[h]
@@ -359,9 +359,9 @@ There is a function available in the \pkg{ggenealogy} package \code{plotPathOnAl
 
 \begin{Code}
 R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol =
-+    "red", nodeSize = 2.5, pathNodeSize = 4) + ggplot2::theme(axis.text =
-+    ggplot2::element_text(size = 12), axis.title = ggplot2::element_text(size
-+    = 12))
++    "red", nodeSize = 2.5, pathNodeSize = 4) +
++    ggplot2::theme(axis.text = ggplot2::element_text(size = 12),
++    axis.title = ggplot2::element_text(size = 12))
 \end{Code}
 
 \begin{figure}%[h]
@@ -387,8 +387,8 @@ However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the no
 
 \begin{Code}
 R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol =
-+    "seagreen2", nodeSize = 1, pathNodeSize = 3) + ggplot2::xlab("Development
-+    Year")
++    "seagreen2", nodeSize = 1, pathNodeSize = 3) +
++    ggplot2::xlab("Development Year")
 \end{Code}
 
 \begin{figure}[H]
@@ -409,8 +409,9 @@ We would like to emphasize that the \code{plotPathOnAll()} method can be created
 \begin{Code}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol =
 +    "purple") + ggplot2::xlab("Yield")
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol =
-+    "orange") + ggplot2::xlab("Yield") + ggplot2::ylab("Development Year")
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear",
++    pathEdgeCol = "orange") + ggplot2::xlab("Yield") +
++    ggplot2::ylab("Development Year")
 \end{Code}
 
 \begin{figure}[h]
@@ -452,10 +453,11 @@ Here we generate a distance matrix for a set of 10 varieties, setting the x-labe
 \begin{Code}
 >R varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
 +    "Pella", "Tokyo", "Young", "Zane")
->R plotDegMatrix(varieties, sbIG, sbGeneal) + ggplot2::scale_fill_continuous
-+    (low = "white", high = "darkgreen") + ggplot2::theme(legend.title =
-+    ggplot2::element_text(size = 15), legend.text = ggplot2::element_text
-+    (size = 15)) + ggplot2::labs(x = "Variety", y = "Variety")
+>R plotDegMatrix(varieties, sbIG, sbGeneal) +
++    ggplot2::scale_fill_continuous(low = "white", high = "darkgreen") +
++    ggplot2::theme(legend.title = ggplot2::element_text(size = 15),
++    legend.text = ggplot2::element_text(size = 15)) +
++    ggplot2::labs(x = "Variety", y = "Variety")
 \end{Code}
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that a shortest path degree of 10 may be considered relative to the rest of this dataset.
@@ -541,9 +543,10 @@ At this point, it would be insightful to examine a more detailed view of one of 
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
 +    "gradYear", isDirected = FALSE)
-R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) + ggplot2::xlab
-+    ("Graduation Year") + ggplot2::theme(axis.text = ggplot2::element_text
-+    (size = 10), axis.title = ggplot2::element_text(size = 10)) +
+R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) +
++    ggplot2::xlab("Graduation Year") + ggplot2::theme(axis.text =
++    ggplot2::element_text(size = 10), axis.title =
++    ggplot2::element_text(size = 10)) +
 +    ggplot2::scale_x_continuous(expand = c(.1, .2))
 \end{CodeInput}
 \end{CodeChunk}
@@ -564,9 +567,10 @@ We can achieve this using the below code. After trial and error, we use a \code{
 \begin{CodeChunk}
 \begin{CodeInput}
 R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) +
-+    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
-+    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
++    ggplot2::theme(axis.text = ggplot2::element_text(size = 8),
++    axis.title = ggplot2::element_text(size = 8)) +
++    ggplot2::scale_x_continuous(expand = c(.1, .2)) +
++    ggplot2::xlab("Graduation Year")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -583,11 +587,11 @@ The text labels are so numerous in Figure \ref{fig:plotCBText} that simply tryin
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
-+    .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray") +
-+    ggplot2::theme(axis.text = ggplot2::element_text(size = 8), axis.title =
-+    ggplot2::element_text(size = 8)) + ggplot2::scale_x_continuous
-+    (expand = c(.1, .2)) + ggplot2::xlab("Graduation Year")
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200,
++    nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol =
++    "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size = +    8), axis.title = ggplot2::element_text(size = 8)) +
++    ggplot2::scale_x_continuous(expand = c(.1, .2)) +
++    ggplot2::xlab("Graduation Year")
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -607,9 +611,9 @@ We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be
 
 \begin{CodeChunk}
 \begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200, nodeSize =
-+    .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol = "lightgray",
-+    animate = TRUE)
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200,
++    nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol =
++    "lightgray", animate = TRUE)
 \end{CodeInput}
 \end{CodeChunk}
 
@@ -618,8 +622,8 @@ We would like to state that users can still hard code one or two variables in th
 \begin{Code}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange",
 +    animate = TRUE)
-R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear", pathEdgeCol =
-+    "orange", animate = TRUE)
+R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear",
++    pathEdgeCol = "orange", animate = TRUE)
 \end{Code}
 
 \begin{figure}[H]
@@ -715,7 +719,8 @@ It may be interesting to examine the school that is represented the most among a
 \begin{CodeChunk}
 \begin{CodeInput}
 R> desDC <- getDescendants("David Cox", statGeneal, 15)
-R> tableDC <- table(statGeneal[match(desDC$label, statGeneal$child), ]$school)
+R> tableDC <- table(statGeneal[match(desDC$label,
++    statGeneal$child), ]$school)
 R> tail(sort(tableDC), 5)
 \end{CodeInput}
 \begin{CodeOutput}
