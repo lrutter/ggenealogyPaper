@@ -145,9 +145,7 @@ We again illustrate this problem in Figure \ref{fig:Graph} with an example genea
 
 We will now provide a brief overview of the functionality of the \pkg{ggenealogy} package before going into more detail with examples later in this paper. With the \pkg{ggenealogy} package, users can convert genealogical data into graph structures. This allows for users to efficiently traverse, analyze, and elicit graph theoretical measurements on genealogical lineages (see Section \ref{ggo}). These capabilities were developed by building upon the \pkg{igraph} software (\citealt{igraph}).
 
-Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical data in multiple ways. Users can obtain and plot the shortest path between two nodes of interest constrained on a variable of interest (see Section \ref{psp}), superimpose a shortest path between two nodes of interest with the entire genealogical structure constrained on a variable of interest (see Section \ref{sspt}), plot the ancestors and descendants of a node of interest constrained on generation count (see Section \ref{remedy}), and plot distance matrices based on a variable of interest (see Section \ref{pdm}).
-
-Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Section \ref{interaction}).
+Additionally, the \pkg{ggenealogy} package allows for users to plot genealogical data in multiple ways. Users can obtain and plot the shortest path between two nodes of interest constrained on a variable of interest (see Section \ref{psp}), superimpose a shortest path between two nodes of interest with the entire genealogical structure constrained on a variable of interest (see Section \ref{sspt}), plot the ancestors and descendants of a node of interest constrained on generation count (see Section \ref{remedy}), and plot distance matrices based on a variable of interest (see Section \ref{pdm}). Most of these plotting tools were developed by building upon the \pkg{ggplot2} package (\citealt{ggplot2}). As such, most of these plotting tools can be customized by appending syntax from the \pkg{ggplot2} package, as will be demonstrated in example code throughout this paper. Moreover, some of these plotting tools have interactive capabilities that were developed with the use of the \pkg{plotly} package (\citealt{plotly}) (see Section \ref{interaction}).
 
 \section{Example datasets}
 \label{exData}
@@ -289,9 +287,9 @@ $variableVertices
 
 The returned path object can then be plotted using the \code{plotPath()} function.
 
-\begin{Code}
+\begin{CodeInput}
 R> plotPath(pathTN, sbGeneal, "devYear")
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}[h]
     \centering
@@ -321,11 +319,11 @@ R> getVariable("Zane", sbGeneal, "devYear")
 
 We can then create a plot showing the shortest path between these two varieties of interest. As this is a longer path, we may also consider setting the \code{fontFace} variable of the \code{plotPath()} to a value of 2, indicating we wish to boldface the two varieties of interest. In addition, as is the case with plotting tools in \pkg{ggenealogy}, we can append \pkg{ggplot2} syntax. In this case, we may wish to hard code the x-axis label from its default value of ``devYear" (the inputted quantitative variable column name) to the more readable ``Development Year".
 
-\begin{Code}
+\begin{CodeInput}
 R> pathBZ <- getPath("Bedford", "Zane", sbIG, sbGeneal, "devYear")
 R> plotPath(pathBZ, sbGeneal, "devYear", fontFace = 2) +
 +    ggplot2::xlab("Development Year")
-\end{Code}
+\end{CodeInput}
 
 The resulting plot (right half of Figure \ref{fig:pathTNZB}) allows us to quickly determine that \code{Bedford} is not a parent, grandparent, or any great grandparent of \code{Zane}. Instead, we see that these two varieties are not related through a unidirectional parent-child lineage, but instead have a cousin-like relationship. The oldest common ancestor between \code{Zane} and \code{Bedford} is the variety \code{D55-4090}, which was released in the mid 1940s.
 
@@ -333,15 +331,15 @@ Furthermore, as seen in the figure, for both \code{Zane} and \code{Bedford}, the
 
 We would like to note that the \code{plotPath()} method can be created with one or two quantitative variables that the user hard-codes. We illustrate this with the \code{sbGeneal} data frame after we subset it to remove observations that do not have values for the quantitative variable ``yield". Then, we can examine the path between the varieties \code{Clark} and \code{Lawrence} and plot how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPath()} function can be viewed in Figure \ref{fig:plotPathQV2}.
 
-\begin{Code}
-R> sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]),]
+\begin{CodeInput}
+R> sbFilt <- sbGeneal[complete.cases(sbGeneal[1:3]), ]
 R> sbFiltIG <- dfToIG(sbFilt)
 R> pathCL <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "yield")
 R> plotPath(pathCL, sbFilt, "yield") + ggplot2::xlab("Yield")
 R> pathCL2 <- getPath("Clark", "Lawrence", sbFiltIG, sbFilt, "devYear")
 R> plotPath(pathCL2, sbFilt, "devYear", "yield") +
 +    ggplot2::xlab("Development Year") + ggplot2::ylab("Yield")
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}[h]
     \centering
@@ -357,12 +355,12 @@ Now that we can create path objects, we may wish to know how those paths are pos
 
 There is a function available in the \pkg{ggenealogy} package \code{plotPathOnAll()} that can allow users to quickly visualize their path of interest superimposed over all varieties and edges present in the whole data structure. Here we will produce a plot of the shortest path between varieties \code{Tokyo} and \code{Narow} across the entire dataset, as is displayed in Figure \ref{fig:plotTNBin3}.
 
-\begin{Code}
+\begin{CodeInput}
 R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 3, pathEdgeCol =
 +    "red", nodeSize = 2.5, pathNodeSize = 4) +
 +    ggplot2::theme(axis.text = ggplot2::element_text(size = 12),
 +    axis.title = ggplot2::element_text(size = 12))
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}%[h]
     \centering
@@ -385,11 +383,11 @@ This code resulted in Figure \ref{fig:plotTNBin3}, where we see that edges not o
 
 However, Figure \ref{fig:plotTNBin3} has significant empty spaces between the noticeably distinct bins, whereas almost all text labels are overlapping, thereby decreasing their readability. To force text labels into these spaces, the user may consider using a larger number of bins. Hence, we next examine a bin size of 6 to create Figure \ref{fig:plotTNBin6}.
 
-\begin{Code}
+\begin{CodeInput}
 R> plotPathOnAll(pathTN, sbGeneal, sbIG, "devYear", bin = 6, pathEdgeCol =
 +    "seagreen2", nodeSize = 1, pathNodeSize = 3) +
 +    ggplot2::xlab("Development Year")
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}[H]
     \centering
@@ -404,15 +402,15 @@ We can immediately see that Figure \ref{fig:plotTNBin6} more successfully mitiga
 
 Notice again from Figure~\ref{fig:plotTNBin3} that the default horizontal axis label for the \texttt{plotPath()} method has a value of ``devYear". We wanted to change the default value of the horizontal axis label to ``Development Year". We did this in the code above for Figure~\ref{fig:plotTNBin6} by appending the \texttt{ggplot2::xlab()} function.
 
-We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) that we previously created to assure that there were no NA values in the quantitative variable ``yield". Then, we can examine the path across the remaining genealogical structure and how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
+We would like to emphasize that the \code{plotPathOnAll()} method can be created with one or two quantitative variables that the user hard-codes. We demonstrate this using the filtered data frame and igraph objects (\code{sbFilt} and \code{sbFiltIG}) to assure that there were no NA values in the quantitative variable ``yield". Then, we can examine the path across the remaining genealogical structure and how the quantitative variable ``yield" changes along the parent-child relationships of that path. Likewise, we can plot how the quantitative variables ``devYear" and ``yield" both change along the parent-child relationships of that path. The output of these two calls to the \code{plotPathOnAll()} function can be viewed in Figure \ref{fig:plotPathOnAllQV2}.
 
-\begin{Code}
+\begin{CodeInput}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", bin = 3, pathEdgeCol =
 +    "purple") + ggplot2::xlab("Yield")
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear",
 +    pathEdgeCol = "orange") + ggplot2::xlab("Yield") +
 +    ggplot2::ylab("Development Year")
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}[h]
     \centering
@@ -428,9 +426,9 @@ The most novel visual function in \pkg{ggenealogy}, \code{plotAncDes()} allows u
 
 To demonstrate this tool, we will create a plot of the ancestors and descendants of the variety \code{Lee}. We specify that the maximum number of ancestor and descendant generations are both 6, and that the text of the variety of interest is highlighted in blue:
 
-\begin{Code}
+\begin{CodeInput}
 R> plotAncDes("Lee", sbGeneal, mAnc = 6, mDes = 6, vCol = "blue")
-\end{Code}
+\end{CodeInput}
 
 This generates the top plot of Figure \ref{fig:Lee}. We notice that \code{Lee} has 3 generations of ancestors and 5 generations of descendants. We also notice that some varieties are repeated, which is a unique feature provided by \pkg{ggenealogy}. For example, the variety \code{5601T} is represented four times - once as a third generation descendant of \code{Lee}, once as a fourth generation descendant of \code{Lee}, and twice as a fifth generation descendant of \code{Lee}. The variety \code{5601T} was repeated multiple times because there are multiple paths between \code{Lee} and \code{5601T}. For explanation purposes, all paths between \code{Lee} and \code{5601T} were manually highlighted in blue.
 
@@ -450,15 +448,15 @@ It may also be of interest to generate matrices where the colors indicates a var
 
 Here we generate a distance matrix for a set of 10 varieties, setting the x-label and y-label as ``Variety" and the legend label as ``Degree". In this example, we add \pkg{ggplot2} functionality to specify that pairs with small degrees are white, while those with large degrees are dark green, as well as to specify the text size of the legend title and label.
 
-\begin{Code}
->R varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
+\begin{CodeInput}
+R> varieties <- c("Brim", "Bedford", "Calland", "Dillon", "Hood", "Narow",
 +    "Pella", "Tokyo", "Young", "Zane")
->R plotDegMatrix(varieties, sbIG, sbGeneal) +
+R> plotDegMatrix(varieties, sbIG, sbGeneal) +
 +    ggplot2::scale_fill_continuous(low = "white", high = "darkgreen") +
 +    ggplot2::theme(legend.title = ggplot2::element_text(size = 15),
 +    legend.text = ggplot2::element_text(size = 15)) +
 +    ggplot2::labs(x = "Variety", y = "Variety")
-\end{Code}
+\end{CodeInput}
 
 This creates the plot in Figure \ref{fig:degMatrix}. We see that the degree of the shortest path between varieties \code{Bedford} and \code{Zane} is 10, which is consistent with what we saw earlier in Figure \ref{fig:pathTNZB}. However, we now also see that a shortest path degree of 10 may be considered relative to the rest of this dataset.
 
@@ -481,12 +479,12 @@ After that, we can generate a table to examine all values of ``descendant" count
 
 \begin{CodeChunk}
 \begin{CodeInput}
->R library("dplyr")
->R indVec <- getNodes(statGeneal)
->R indVec <- indVec[which(indVec != "", )]
->R dFunc <- function(var) nrow(getDescendants(var, statGeneal, gen = 100))
->R numDesc <- sapply(indVec, dFunc)
->R table(numDesc)
+R> library("dplyr")
+R> indVec <- getNodes(statGeneal)
+R> indVec <- indVec[which(indVec != "", )]
+R> dFunc <- function(var) nrow(getDescendants(var, statGeneal, gen = 100))
+R> numDesc <- sapply(indVec, dFunc)
+R> table(numDesc)
 \end{CodeInput}
 \begin{CodeOutput}
 numDesc
@@ -538,7 +536,6 @@ R> nrow(getDescendants("Peter Bloomfield", statGeneal, gen = 100))
 
 At this point, it would be insightful to examine a more detailed view of one of the longest strings of ``parent-child" relationships between Sir \code{David Cox} and one of the two individuals who are his fifth generation ``descendants". We do so with the code below, choosing his fifth generation ``descendant" to be \code{Petra Buzkova}. We set the \code{fontFace} variable of the \code{plotPath()} to a value of 4, indicating we wish to boldface and italicize the two statisticians of interest.
 
-\begin{CodeChunk}
 \begin{CodeInput}
 R> statIG <- dfToIG(statGeneal)
 R> pathCB <- getPath("David Cox", "Petra Buzkova", statIG, statGeneal,
@@ -549,7 +546,6 @@ R> plotPath(pathCB, statGeneal, "gradYear", fontFace = 4) +
 +    ggplot2::element_text(size = 10)) +
 +    ggplot2::scale_x_continuous(expand = c(.1, .2))
 \end{CodeInput}
-\end{CodeChunk}
 
 \begin{figure}[H]
     \centering
@@ -562,18 +558,6 @@ This code results in Figure \ref{fig:pathCB}. We see that the shortest path betw
 
 We also notice in Figure \ref{fig:pathCB} that Sir \code{David Cox} received his statistics degree in about 1950, and \code{Petra Buzkova} received her statistics degree in about 2005. This genealogy only contains historical information about obtained degrees, and does not project into the future. Hence, we can be assured that \code{Petra Buzkova} is one of the younger individuals in the dataset, at least in the sense that the youngest individual could only have received his or her degree ten years after \code{Petra Buzkova}. However, we cannot be assured that Sir \code{David Cox} is one of the oldest individuals in the dataset. As such, it would be informative to superimpose this path of interest onto the entire dataset, using the \code{plotPathOnAll()} function of the \pkg{ggenealogy} package, as we did for the soybean genealogy in Figures \ref{fig:plotTNBin3} and \ref{fig:plotTNBin6}.
 
-We can achieve this using the below code. After trial and error, we use a \code{bin} of size 200, and append \pkg{ggplot2} syntax to define suitable x-axis limits. The output of this process is illustrated in Figure \ref{fig:plotCBText}.
-
-\begin{CodeChunk}
-\begin{CodeInput}
-R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) +
-+    ggplot2::theme(axis.text = ggplot2::element_text(size = 8),
-+    axis.title = ggplot2::element_text(size = 8)) +
-+    ggplot2::scale_x_continuous(expand = c(.1, .2)) +
-+    ggplot2::xlab("Graduation Year")
-\end{CodeInput}
-\end{CodeChunk}
-
 \begin{figure}[H]
     \centering
     \fbox{\includegraphics[width=\textwidth]{plotCBText}}
@@ -581,19 +565,28 @@ R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) +
     \label{fig:plotCBText}
 \end{figure}
 
+We can achieve this using the below code. After trial and error, we use a \code{bin} of size 200, and append \pkg{ggplot2} syntax to define suitable x-axis limits. The output of this process is illustrated in Figure \ref{fig:plotCBText}.
+
+\begin{CodeInput}
+R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200) +
++    ggplot2::theme(axis.text = ggplot2::element_text(size = 8),
++    axis.title = ggplot2::element_text(size = 8)) +
++    ggplot2::scale_x_continuous(expand = c(.1, .2)) +
++    ggplot2::xlab("Graduation Year")
+\end{CodeInput}
+
 We see from the resulting Figure \ref{fig:plotCBText} that almost all text labels for individuals who received their graduate-level statistics degrees between 1950 and 2015 are undecipherable. We also see that the year Sir \code{David Cox} acquired his statistics degree is somewhere in the later half of the variable year for this dataset, as the oldest dates for acquisition of statistics degrees in this dataset occur around 1860. However, the number of individuals who are documented as receiving their statistics degrees between 1860 and 1950 are few enough so that their text labels are somewhat readable.
 
 The text labels are so numerous in Figure \ref{fig:plotCBText} that simply trying different values for the input parameter \code{bin} will not solve the text overlapping problem. Instead, one approach we can try is to reconstruct the plot using the same \pkg{ggenealogy} function \code{plotPathOnAll()}, only now specifying variables to render the size (2.5) and color (default of black) of the text for nodes that are on the path of interest to be more noticeable than the size (0.5) and color (dark gray) of the text for nodes that are not on the path of interest. Moreover, we can make the edges that are not on the path of interest to be represented in a less noticeable color (light gray) than the edges that are on the path of interest (default of dark green). The variable names and options for these aesthetics is further detailed in the help manual of the function. We provide one example code that alters the defaults of the text color and sizes of nodes and edges below, which results in Figure \ref{fig:plotCBNoText}.
 
-\begin{CodeChunk}
 \begin{CodeInput}
 R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200,
 +    nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol =
-+    "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size = +    8), axis.title = ggplot2::element_text(size = 8)) +
++    "lightgray") + ggplot2::theme(axis.text = ggplot2::element_text(size =
++    8), axis.title = ggplot2::element_text(size = 8)) +
 +    ggplot2::scale_x_continuous(expand = c(.1, .2)) +
 +    ggplot2::xlab("Graduation Year")
 \end{CodeInput}
-\end{CodeChunk}
 
 In Figure \ref{fig:plotCBNoText}, we can now see each individual on the path of interest, and how their values for the variable year are overlaid on the entire genealogy structure. We can also more clearly see that, even though only ten years span between the youngest individual in the genealogy and \code{Petra Buzkova}, there are many individuals in that last decade. Indeed, the decade from 2005 to 2015 appears to be the densest in this dataset in terms of acquisition of statistics degrees.
 
@@ -609,22 +602,20 @@ We could still improve upon Figure \ref{fig:plotCBNoText}. Even though we may be
     \label{fig:plotCBNoText}
 \end{figure}
 
-\begin{CodeChunk}
 \begin{CodeInput}
 R> plotPathOnAll(pathCB, statGeneal, statIG, "gradYear", bin = 200,
 +    nodeSize = .5, pathNodeSize = 2.5, nodeCol = "darkgray", edgeCol =
 +    "lightgray", animate = TRUE)
 \end{CodeInput}
-\end{CodeChunk}
 
 We would like to state that users can still hard code one or two variables in the \code{plotPathOnAll()} function, even with the \code{animate} option set to a value of ``TRUE". The first call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis. When hovering over labels, the label name and yield value would be revealed. The second call to the \code{plotPathOnAll()} function below would produce an interactive plot with the yield on the horizontal axis and development year on the vertical axis. When hovering over labels, the label name, yield value, and development year would be revealed. We do not include the animated videos that the below code creates in this document, but readers can use the below code to create them on their own.
 
-\begin{Code}
+\begin{CodeInput}
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", pathEdgeCol = "orange",
 +    animate = TRUE)
 R> plotPathOnAll(pathCL, sbFilt, sbFiltIG, "yield", "devYear",
 +    pathEdgeCol = "orange", animate = TRUE)
-\end{Code}
+\end{CodeInput}
 
 \begin{figure}[H]
     \centering
